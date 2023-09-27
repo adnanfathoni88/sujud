@@ -1,17 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider and all of them will
-| be assigned to the "web" middleware group. Make something great!
-|
-*/
+use App\Http\Controllers\KategoriController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -40,3 +30,12 @@ Route::get('/location', function () {
 Route::get('/about', function () {
     return view('about');
 });
+
+
+Route::get('/kategori', [KategoriController::class, 'index']);
+Route::get('/add-kategori', [KategoriController::class, 'create']);
+Route::post('/add-kategori', [KategoriController::class, 'store']);
+Route::get('/edit-kategori/{id}', [KategoriController::class, 'edit']);
+Route::put('/update-kategori/{id}', [KategoriController::class, 'update']);
+Route::delete('/delete-kategori/{id}', [KategoriController::class, 'destroy']);
+Route::get('/cari-kategori', [KategoriController::class, 'cari']);

@@ -8,15 +8,19 @@ return new class extends Migration
 {
     /**
      * Run the migrations.
+     * 
+     * 
      */
+
     public function up(): void
     {
-        Schema::create('users', function (Blueprint $table) {
-            $table->id()->unsigned();
-            $table->string('nama');
-            $table->string('email')->unique();
-            $table->string('password');
-            $table->string('nomor');
+        Schema::create('pesanans', function (Blueprint $table) {
+            $table->id();
+            $table->string('kode');
+            $table->date('tgl_pesan');
+            $table->string('status_bayar');
+            $table->string('status_kirim');
+            $table->integer('total');
             $table->string('alamat');
             $table->timestamps();
         });
@@ -27,6 +31,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('users');
+        Schema::dropIfExists('pesanans');
     }
 };
