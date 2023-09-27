@@ -12,12 +12,12 @@
 <body>
     <div class="container mt-4">
         <h2>Edit Kategori</h2>
-        <form action="/update-kategori/{{ $data['id'] }}" method="post">
+        <form action="/update-kategori/{{ $kategori['id'] }}" method="post">
             @csrf
             @method('PUT')
             <div class="form-outline">
                 <input type="text" id="form12" class="form-control @error('nama') is-invalid @enderror" name="nama"
-                    value="{{ $data['nama'] }}" />
+                    value="{{ $kategori['nama'] }}" />
                 <label class="form-label" for="form12">Nama</label>
                 @error('nama')
                 <div class="invalid-feedback">

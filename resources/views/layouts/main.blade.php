@@ -32,6 +32,11 @@
             height: 100%;
             position: fixed;
         }
+
+        /* form */
+        .form-outline {
+            margin-bottom: 10px;
+        }
     </style>
 </head>
 

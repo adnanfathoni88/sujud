@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\KategoriController;
+use App\Http\Controllers\ProdukController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -39,3 +40,7 @@ Route::get('/edit-kategori/{id}', [KategoriController::class, 'edit']);
 Route::put('/update-kategori/{id}', [KategoriController::class, 'update']);
 Route::delete('/delete-kategori/{id}', [KategoriController::class, 'destroy']);
 Route::get('/cari-kategori', [KategoriController::class, 'cari']);
+
+Route::get('/produk', [ProdukController::class, 'index']);
+Route::get('/add-produk', [ProdukController::class, 'create']);
+Route::post('/add-produk', [ProdukController::class, 'store']);

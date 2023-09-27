@@ -40,18 +40,18 @@
             <th>Aksi</th>
         </thead>
         <tbody>
-            @foreach ($data as $item)
+            @foreach ($kategori as $k)
             <tr>
                 <td>{{ $loop->iteration }}</td>
-                <td>{{ $item['nama'] }}</td>
+                <td>{{ $k['nama'] }}</td>
                 <td class="d-flex">
-                    <a class="btn btn-warning mx-2" href="/edit-kategori/{{ $item['id'] }}"><i
+                    <a class="btn btn-warning mx-2" href="/edit-kategori/{{ $k['id'] }}"><i
                             class="far fa-pen-to-square"></i></a>
-                    <form action="/delete-kategori/{{ $item['id'] }}" method="post">
+                    <form action="/delete-kategori/{{ $k['id'] }}" method="post">
                         @csrf
                         @method('DELETE')
                         <button class="btn btn-danger" type="submit"
-                            onclick="return confirm('Hapus data {{ $item['nama'] }}')"><i
+                            onclick="return confirm('Hapus data {{ $k['nama'] }}')"><i
                                 class=" far fa-trash-can"></i></button>
                     </form>
 
