@@ -63,6 +63,21 @@ return new class extends Migration
                 $table->foreign('user_id')->references('id')->on('users')->onDelete('restrict')->onUpdate('cascade');
             });
         }
+        if (!Schema::hasColumn('ulasans', 'parent_id')) {
+            Schema::table('ulasans', function (Blueprint $table) {
+                $table->unsignedBigInteger('parent_id')->nullable();
+                $table->foreign('parent_id')->references('id')->on('ulasans')->onDelete('restrict')->onUpdate('cascade');
+            });
+        }
+
+
+        // gambar
+        if (!Schema::hasColumn('gambars', 'produk_id')) {
+            Schema::table('gambars', function (Blueprint $table) {
+                $table->unsignedBigInteger('produk_id');
+                $table->foreign('produk_id')->references('id')->on('produks')->onDelete('restrict')->onUpdate('cascade');
+            });
+        }
     }
 
     public function down(): void
@@ -92,6 +107,11 @@ return new class extends Migration
             $table->dropForeign(['produk_id']);
             $table->dropForeign(['user_id']);
             $table->dropColumn(['produk_id', 'user_id']);
+        });
+
+        Schema::table('gambars', function (Blueprint $table) {
+            $table->dropForeign(['produk_id']);
+            $table->dropColumn(['produk_id']);
         });
     }
 };

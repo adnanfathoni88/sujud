@@ -1,12 +1,7 @@
 @extends('layouts.main') @section('content')
 <div class="container-fluid">
-    <div class="row">
-        <div class="col-9">
-            <h2>Produk</h2>
-        </div>
-    </div>
+    <h2>Transaksi</h2>
 </div>
-
 <div class="container-fluid">
     <a class="btn btn-primary" href="/add-produk">Tambah </a>
     <div class="my-4">
@@ -31,36 +26,36 @@
     <table id="table" class="table table-bordered table-hover" style="width: 100%;">
         <thead>
             <th>no</th>
-            <th>Kode</th>
-            <th>Nama</th>
-            <th>Deskripsi</th>
-            <th>Harga</th>
-            <th>Stok</th>
-            <th>Gambar</th>
-            <th>Aksi</th>
+            <th>kode</th>
+            <th>Tanggal Bayar</th>
+            <th>Metode</th>
+            <th>Status</th>
+            <th>Total</th>
+            <th>Pesanan_id</th>
         </thead>
         <tbody>
-            @foreach ($produk as $p)
+            @foreach ($transaksi as $t)
             <tr>
                 <td>{{ $loop->iteration }}</td>
-                <td>{{ $p['kode'] }}</td>
-                <td>{{ $p['nama'] }}</td>
-                <td>{{ $p['deskripsi'] }}</td>
-                <td>{{ $p['harga'] }}</td>
-                <td>{{ $p['stok'] }}</td>
-                <td>
-                    @if($gambar->has($p['id']))
-                    @foreach($gambar[$p['id']] as $g)
+                <td>{{ $t['kode'] }}</td>
+                <td>{{ $t['tgl_bayar'] }}</td>
+                <td>{{ $t['metode'] }}</td>
+                <td>{{ $t['status'] }}</td>
+                <td>{{ $t['total'] }}</td>
+                <td>{{ $t['pesanan_id'] }}</td>
+                <!-- <td>
+                    @if($gambar->has($t['id']))
+                    @foreach($gambar[$t['id']] as $g)
                     <img src="{{ asset('storage/img/'.$g['nama']) }}" alt="" width="50px">
                     @endforeach
                     @endif
                 </td>
                 <td>
-                    <a class="btn btn-warning" href="/edit-produk/{{ $p['id'] }}"><i
+                    <a class="btn btn-warning" href="/edit-produk/{{ $t['id'] }}"><i
                             class="far fa-pen-to-square"></i></a>
-                    <a class="btn btn-danger" href="/hapus-produk/{{ $p['id'] }}"
-                        onclick="return confirm ('Hapus Data {{ $p['nama'] }}')"><i class="far fa-trash-can"></i></a>
-                </td>
+                    <a class="btn btn-danger" href="/hapus-produk/{{ $t['id'] }}"
+                        onclick="return confirm ('Hapus Data {{ $t['nama'] }}')"><i class="far fa-trash-can"></i></a>
+                </td> -->
             </tr>
             @endforeach
         </tbody>

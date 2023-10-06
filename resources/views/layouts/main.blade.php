@@ -10,6 +10,10 @@
     <!-- MDB -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/6.4.1/mdb.min.css" rel="stylesheet" />
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" />
+
+    <!-- data table -->
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/dataTables.bootstrap5.min.css">
+
     <link rel="stylesheet" href="{{ asset('css/style.css') }}" />
 
     <style>
@@ -34,8 +38,18 @@
         }
 
         /* form */
-        .form-outline {
+        .form-outline,
+        .form-file,
+        .form-kategori {
+            position: relative;
             margin-bottom: 10px;
+        }
+
+        .invalid-feedback {
+            font-size: 12px;
+            position: absolute;
+            right: 16px;
+            bottom: 8px;
         }
     </style>
 </head>
@@ -45,6 +59,18 @@
 
     <!-- MDB -->
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/6.4.0/mdb.min.js"></script>
+
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $('#table').DataTable();
+        });
+    </script>
+    <script type="text/javascript" charset="utf8"
+        src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.js"></script>
+
+    <script src="https://cdn.datatables.net/1.13.6/js/dataTables.bootstrap5.min.js"></script>
 </body>
 
 </html>

@@ -1,13 +1,13 @@
 @extends('layouts.main') @section('content')
 <div class="container-fluid">
-    <h2>Tambah Produk</h2>
+    <h2>Edit Produk</h2>
 </div>
 <div class="container-fluid ">
-    <form action="/add-produk" method="post" enctype="multipart/form-data">
+    <form action="/edit-produk/{{ $produk['id'] }}" method="post" enctype="multipart/form-data">
         @csrf
         <div class="form-outline">
             <input type="text" id="form12" class="form-control @error('kode') is-invalid @enderror" name="kode"
-                value="{{ old('kode') }}" />
+                value="{{ $produk['kode'] }}" />
             <label class="form-label" for="form12">kode</label>
             @error('kode')
             <div class="invalid-feedback">
@@ -17,7 +17,7 @@
         </div>
         <div class="form-outline">
             <input type="text" id="form12" class="form-control @error('nama') is-invalid @enderror" name="nama"
-                value="{{ old('nama') }}" />
+                value="{{ $produk['nama'] }}" />
             <label class=" form-label" for="form12">nama</label>
             @error('nama')
             <div class="invalid-feedback">
@@ -27,7 +27,7 @@
         </div>
         <div class="form-outline">
             <input type="text" id="form12" class="form-control @error('deskripsi') is-invalid @enderror"
-                name=" deskripsi" value="{{ old('deskripsi') }}" />
+                name=" deskripsi" value="{{ $produk['deskripsi'] }}" />
             <label class="form-label" for="form12">deskripsi</label>
             @error('deskripsi')
             <div class="invalid-feedback">
@@ -37,7 +37,7 @@
         </div>
         <div class="form-outline">
             <input type="text" id="form12" class="form-control @error('harga') is-invalid @enderror" name="harga"
-                value="{{ old('harga') }}" />
+                value="{{ $produk['harga'] }}" />
             <label class="form-label" for="form12">harga</label>
             @error('harga')
             <div class="invalid-feedback">
@@ -47,7 +47,7 @@
         </div>
         <div class="form-outline">
             <input type="text" id="form12" class="form-control @error('stok') is-invalid @enderror" name="stok"
-                value="{{ old('stok') }}" />
+                value="{{ $produk['stok'] }}" />
             <label class="form-label" for="form12">stok</label>
             @error('stok')
             <div class="invalid-feedback">
@@ -64,10 +64,19 @@
             </div>
             @enderror
         </div>
+        <p>Gambar Sebelumnya</p>
+        <div class="mb-3 d-flex">
+            @foreach ($gambar as $g)
+            <div class="mx-1 d-flex">
+                <img src="{{ asset('storage/img/'.$g['nama']) }}" alt="" width="100px">
+                <a href="/hapus-gambar/{{ $g['id'] }}" class="text-danger mx-1">x</a>
+            </div>
+            @endforeach
+        </div>
         <div class="form-kategori">
             <select name="kategori_id" id="kategori_id"
                 class="form-control form-control @error('kategori_id') is-invalid @enderror">
-                <option value="">-- kategori --</option>
+                <option value="{{ $produk->kategori->id }}">{{ $produk->kategori->nama}}</option>
                 @foreach ($kategori as $k)
                 <option value="{{$k->id}}">{{$k->nama}}</option>
                 @endforeach

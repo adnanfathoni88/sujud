@@ -19,6 +19,30 @@
         </div>
 
         <div class="list-group list-group-flush">
+            <a href="/ulasan"
+                class="side list-group-item list-group-item-action ripple {{ collect(explode('/', url()->current()))->pop() === 'ulasan' ? 'active' : ' ' }}"
+                aria-current="true">
+                <span>ulasan</span>
+            </a>
+        </div>
+
+        <div class="list-group list-group-flush">
+            <a href="/transaksi"
+                class="side list-group-item list-group-item-action ripple {{ collect(explode('/', url()->current()))->pop() === 'transaksi' ? 'active' : ' ' }}"
+                aria-current="true">
+                <span>Transaksi</span>
+            </a>
+        </div>
+
+        <div class="list-group list-group-flush">
+            <a href="/pesanan"
+                class="side list-group-item list-group-item-action ripple {{ collect(explode('/', url()->current()))->pop() === 'pesanan' ? 'active' : ' ' }}"
+                aria-current="true">
+                <span>Pesanan</span>
+            </a>
+        </div>
+
+        <div class="list-group list-group-flush">
             <a href="/logout" class="side list-group-item list-group-item-action ripple"
                 onclick="return confirm('Anda Ingin Logout? ')" aria-current="true">
                 <span>Logout</span>

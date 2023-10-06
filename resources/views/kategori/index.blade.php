@@ -5,16 +5,6 @@
         <div class="col-9">
             <h2>Kategori</h2>
         </div>
-        <div class="col-3">
-            <form action="/cari-kategori" method="get">
-                <div class="input-group mb-3">
-                    <input type="text" class="form-control" placeholder="Cari Kategori" name="cari"
-                        value="{{ request('search') }}">
-                    <button class="btn btn-primary"><i class="fa-solid fa-magnifying-glass"
-                            style="color: #ffffff;"></i></button>
-                </div>
-            </form>
-        </div>
     </div>
 </div>
 
@@ -32,8 +22,14 @@
             {{ session('success') }}
         </div>
         @endif
+
+        @if(session('delete'))
+        <div class="alert alert-danger">
+            {{ session('delete') }}
+        </div>
+        @endif
     </div>
-    <table class="table table-bordered table-hover">
+    <table id="table" class="table table-bordered table-hover" style="width: 100%;">
         <thead>
             <th>no</th>
             <th>Nama</th>
@@ -44,7 +40,7 @@
             <tr>
                 <td>{{ $loop->iteration }}</td>
                 <td>{{ $k['nama'] }}</td>
-                <td class="d-flex">
+                <td class=" d-flex">
                     <a class="btn btn-warning mx-2" href="/edit-kategori/{{ $k['id'] }}"><i
                             class="far fa-pen-to-square"></i></a>
                     <form action="/delete-kategori/{{ $k['id'] }}" method="post">

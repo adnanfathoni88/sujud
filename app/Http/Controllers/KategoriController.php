@@ -59,7 +59,7 @@ class KategoriController extends Controller
         }
         $kategori->delete();
 
-        return redirect()->to('kategori')->with('success', 'Data ' . $kategori->nama . ' berhasil dihapus');
+        return redirect()->to('kategori')->with('delete', 'Data ' . $kategori->nama . ' berhasil dihapus');
     }
 
     function cari(Request $request)

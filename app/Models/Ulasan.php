@@ -17,10 +17,21 @@ class Ulasan extends Model
         'rating',
         'produk_id',
         'user_id',
+        'parent_id'
     ];
 
-    function produk()
+    public function produk()
     {
         return $this->belongsTo(Produk::class);
+    }
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
+
+    public function balasan()
+    {
+        return $this->hasMany(Ulasan::class, 'parent_id');
     }
 }
