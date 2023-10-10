@@ -18,7 +18,22 @@
 
     <style>
         body {
-            background-color: #f5f5f5;
+            background-color: #5ec8d7;
+        }
+
+        .container {
+            width: 75%;
+            padding: 0 !important;
+            margin-left: 22%;
+            margin-top: 30px;
+            border-radius: 10px;
+        }
+
+        .container-sub {
+            background-color: #fff;
+            width: 100%;
+            padding: 30px;
+            border-radius: 10px;
         }
 
         .container-fluid {

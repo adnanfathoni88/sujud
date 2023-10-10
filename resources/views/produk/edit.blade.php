@@ -5,10 +5,10 @@
 <div class="container-fluid ">
     <form action="/edit-produk/{{ $produk['id'] }}" method="post" enctype="multipart/form-data">
         @csrf
-        <div class="form-outline">
-            <input type="text" id="form12" class="form-control @error('kode') is-invalid @enderror" name="kode"
-                value="{{ $produk['kode'] }}" />
-            <label class="form-label" for="form12">kode</label>
+        <div class="form-outline" display="none">
+            <input type="text" id="form12 formControlReadonly" class="form-control @error('kode') is-invalid @enderror"
+                name="kode" value="{{ $produk['kode'] }}" readonly />
+            <label class="form-label" for="form12" readonly>kode</label>
             @error('kode')
             <div class="invalid-feedback">
                 {{ $message }}

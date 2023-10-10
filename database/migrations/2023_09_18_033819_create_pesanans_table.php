@@ -18,17 +18,13 @@ return new class extends Migration
             $table->id();
             $table->string('kode');
             $table->date('tgl_pesan');
-            $table->string('status_bayar');
-            $table->string('status_kirim');
+            $table->string('status'); // pending, success, failed
             $table->integer('total');
             $table->string('alamat');
             $table->timestamps();
         });
     }
 
-    /**
-     * Reverse the migrations.
-     */
     public function down(): void
     {
         Schema::dropIfExists('pesanans');

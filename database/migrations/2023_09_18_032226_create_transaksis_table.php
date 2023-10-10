@@ -14,7 +14,7 @@ return new class extends Migration
             $table->string('kode');
             $table->date('tgl_bayar');
             $table->string('metode');
-            $table->string('status');
+            $table->string('status'); // pending, success, failed
             $table->string('total');
             $table->timestamps();
         });

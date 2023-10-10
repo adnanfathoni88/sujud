@@ -17,7 +17,17 @@ class Produk extends Model
     }
 
     public function gambar()
+
     {
         return $this->hasMany(Gambar::class);
+    }
+    public function ulasan()
+    {
+        return $this->hasMany(Ulasan::class);
+    }
+
+    public function pesanan()
+    {
+        return $this->hasMany(Pesanan::class);
     }
 }

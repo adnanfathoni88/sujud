@@ -1,5 +1,5 @@
 <nav id="sidebarMenu" class="collapse d-lg-block sidebar collapse bg-white">
-    <h3 class="mx-4">E-PERPUS</h3>
+    <h3 class="mx-4">SUJUD</h3>
     <div class="position-sticky">
 
         <div class="list-group list-group-flush">

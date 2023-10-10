@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Gambar;
+use App\Models\Ulasan;
 use App\Models\Produk;
 use App\Models\Kategori;
 use Illuminate\Support\Str;
@@ -14,7 +15,7 @@ class ProdukController extends Controller
 {
     function index()
     {
-        $produk = Produk::all();
+        $produk = Produk::with('kategori')->get();
         $gambar = Gambar::all()->groupBy('produk_id'); // group gambar 
         return view('produk.index', compact('produk', 'gambar'));
     }
@@ -26,8 +27,31 @@ class ProdukController extends Controller
 
     function store(Request $request)
     {
+        // kategori kode
+        $data = Kategori::all()->where('id', $request->kategori_id)->first();
+        $namaKategori = $data->nama;
+        $kategori = strtoupper(str_replace(['a', 'i', 'u', 'e', 'o', 'A', 'I', 'U', 'E', 'O'], '', $namaKategori));
+        $nama = strtoupper(str_replace(['a', 'i', 'u', 'e', 'o', 'A', 'I', 'U', 'E', 'O'], '', $request->nama));
+
+        // counter kode
+        $co = Produk::count() + 1;
+        if ($co < 10) {
+            $co = '00' . $co;
+        } elseif ($co < 100) {
+            $co = '0' . $co;
+        }
+
+        $kategori = substr($kategori, 0, 3);
+        $nama = substr($nama, 0, 3);
+        $kode = $kategori . '-' . $nama . '-' . $co;
+
+
+        if (Produk::where('kode', $kode)->first()) {
+            return redirect()->to('produk')->with('error', 'Kode ' . $kode . ' sudah ada');  // cek kode apakah sudah ada
+        }
+
         $data = $request->validate([
-            'kode' => 'required|unique:produks',
+            'kode' => 'unique:produks',
             'nama' => 'required|unique:produks',
             'deskripsi' => 'required',
             'harga' => 'required|int',
@@ -35,6 +59,7 @@ class ProdukController extends Controller
             'kategori_id' => 'required',
         ]);
 
+        $data['kode'] = $kode;
         Produk::create($data);
 
         // upload gambar
@@ -50,7 +75,6 @@ class ProdukController extends Controller
                 $co++;
             }
         }
-
         return redirect()->to('produk')->with('success', 'Data ' . $data['nama'] . ' berhasil ditambahkan');
     }
 
@@ -104,8 +128,14 @@ class ProdukController extends Controller
             Storage::delete('public/img/' . $g->nama); // hapus gambar di lokal
         }
 
-        $produk->delete();
-        $produk->gambar()->delete(); // hapus gambar di database
+        if ($produk->pesanan()->count() > 0) {
+            return redirect()->back()->with('error', 'Data ' . $produk->nama . ' tidak bisa dihapus karena masih ada pesanan');
+        }
+
+        $produk->ulasan()->delete(); // hapus ulasan 
+        $produk->gambar()->delete(); // hapus gambar 
+        $produk->delete(); // hapus produk 
+
 
         return redirect()->to('produk')->with('delete', 'Data ' . $produk->nama . ' berhasil dihapus');
     }
