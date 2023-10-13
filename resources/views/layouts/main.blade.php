@@ -10,15 +10,21 @@
     <!-- MDB -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/6.4.1/mdb.min.css" rel="stylesheet" />
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" />
+    <!-- css -->
+    <link rel="stylesheet" href="{{ asset('css/style.css') }}" />
 
     <!-- data table -->
     <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/dataTables.bootstrap5.min.css">
 
-    <link rel="stylesheet" href="{{ asset('css/style.css') }}" />
+    <!-- jquery -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+    <!-- ckeditor -->
+    <script src="https://cdn.ckeditor.com/ckeditor5/40.0.0/classic/ckeditor.js"></script>
 
     <style>
         body {
-            background-color: #5ec8d7;
+            background-color: #dadada;
         }
 
         .container {
@@ -82,10 +88,51 @@
             $('#table').DataTable();
         });
     </script>
-    <script type="text/javascript" charset="utf8"
-        src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.js"></script>
+    <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.js">
+    </script>
 
     <script src="https://cdn.datatables.net/1.13.6/js/dataTables.bootstrap5.min.js"></script>
+
+    <!-- ukuran -->
+    <script>
+        $(document).ready(function () {
+            let inputCount = 1;
+            $('#addUkuran').click(function () {
+                inputCount++;
+                $('#dynamic-inputs-ukuran').append('<div class="ukuran"><div class="header-input"><div class="d-flex my-2"><input type="text" class="form-control" name="ukuran[]" placeholder="nama variasi"><button class="btn btn-danger mx-1 removeInput">-</button></div></div></div>');
+            });
+
+            // Menghapus inputan dinamis
+            $(document).on('click', '.removeInput', function () {
+                $(this).closest('.ukuran').remove();
+            });
+        });
+    </script>
+
+    <!-- warna -->
+    <script>
+        $(document).ready(function () {
+            let inputCount = 1;
+            $('#addWarna').click(function () {
+                inputCount++;
+                $('#dynamic-inputs-warna').append('<div class="warna"><div class="header-input"><div class="d-flex my-2"><input type="text" class="form-control" name="warna[]" placeholder="nama variasi"><button class="btn btn-danger mx-1 removeInput">-</button></div></div></div>');
+            });
+
+            // Menghapus inputan dinamis
+            $(document).on('click', '.removeInput', function () {
+                $(this).closest('.warna').remove();
+            });
+        });
+    </script>
+
+    <script>
+        ClassicEditor
+            .create(document.querySelector('#deskripsi'))
+            .catch(error => {
+                console.error(error);
+            });
+    </script>
+
 </body>
 
 </html>

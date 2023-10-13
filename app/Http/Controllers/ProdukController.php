@@ -3,8 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\Gambar;
-use App\Models\Ulasan;
 use App\Models\Produk;
+use App\Models\Ulasan;
+use App\Models\Varian;
 use App\Models\Kategori;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
@@ -27,37 +28,66 @@ class ProdukController extends Controller
 
     function store(Request $request)
     {
-        // kategori kode
+
+        //upload ukuran, warna
+        $ukuran = $request->ukuran;
+        $warna = $request->warna;
+
+        foreach ($ukuran as $u) {
+            foreach ($warna as $w) {
+                $data = [
+                    'ukuran' => $u ? $u : null,
+                    'warna' => $w ? $w : null,
+                    'produk_id' => Produk::latest()->first()->id
+                ];
+                Varian::create($data);
+            }
+        }
+    }
+
+    function storee(Request $request)
+    {
+
         $data = Kategori::all()->where('id', $request->kategori_id)->first();
-        $namaKategori = $data->nama;
-        $kategori = strtoupper(str_replace(['a', 'i', 'u', 'e', 'o', 'A', 'I', 'U', 'E', 'O'], '', $namaKategori));
-        $nama = strtoupper(str_replace(['a', 'i', 'u', 'e', 'o', 'A', 'I', 'U', 'E', 'O'], '', $request->nama));
+        if (isset($data)) {
+            $namaKategori = $data->nama;
+            $kategori = strtoupper(str_replace(['a', 'i', 'u', 'e', 'o', 'A', 'I', 'U', 'E', 'O'], '', $namaKategori));
+            $nama = strtoupper(str_replace(['a', 'i', 'u', 'e', 'o', 'A', 'I', 'U', 'E', 'O'], '', $request->nama));
 
-        // counter kode
-        $co = Produk::count() + 1;
-        if ($co < 10) {
-            $co = '00' . $co;
-        } elseif ($co < 100) {
-            $co = '0' . $co;
+            // counter kode
+            $co = Produk::count() + 1;
+            if ($co < 10) {
+                $co = '00' . $co;
+            } elseif ($co < 100) {
+                $co = '0' . $co;
+            }
+
+            $kategori = substr($kategori, 0, 3);
+            $nama = substr($nama, 0, 3);
+            $kode = $kategori . '-' . $nama . '-' . $co;
+
+
+            if (Produk::where('kode', $kode)->first()) {
+                return redirect()->to('produk')->with('error', 'Kode ' . $kode . ' sudah ada');  // cek kode apakah sudah ada
+            }
         }
 
-        $kategori = substr($kategori, 0, 3);
-        $nama = substr($nama, 0, 3);
-        $kode = $kategori . '-' . $nama . '-' . $co;
-
-
-        if (Produk::where('kode', $kode)->first()) {
-            return redirect()->to('produk')->with('error', 'Kode ' . $kode . ' sudah ada');  // cek kode apakah sudah ada
-        }
-
-        $data = $request->validate([
-            'kode' => 'unique:produks',
-            'nama' => 'required|unique:produks',
-            'deskripsi' => 'required',
-            'harga' => 'required|int',
-            'stok' => 'required|int',
-            'kategori_id' => 'required',
-        ]);
+        $data = $request->validate(
+            [
+                'kode' => 'unique:produks',
+                'nama' => 'required|unique:produks',
+                'deskripsi' => 'nullable',
+                'harga_produk' => 'required|int',
+                'harga_diskon' => 'nullable|int',
+                'stok' => 'required|int',
+                'kategori_id' => 'required',
+            ],
+            [
+                'kode.unique' => 'Kode sudah ada',
+                'nama.unique' => 'Nama sudah ada',
+                'harga_produk.required' => 'Required',
+            ]
+        );
 
         $data['kode'] = $kode;
         Produk::create($data);
@@ -75,8 +105,37 @@ class ProdukController extends Controller
                 $co++;
             }
         }
+
+        //upload ukuran, warna
+        $ukuran = $request->ukuran;
+        $warna = $request->warna;
+
+        $ukruanCount = count($ukuran);
+        $warnaCount = count($warna);
+
+        if ($ukruanCount > $warnaCount) {
+            $biggerArray = $ukuran;
+            $smallerArray = $warna;
+        } else {
+            $biggerArray = $warna;
+            $smallerArray = $ukuran;
+        }
+
+        foreach ($biggerArray as $b) {
+            foreach ($smallerArray as $s) {
+                $data2 = [
+                    'ukuran' => $b ? $b : null,
+                    'warna' => $s ? $s : null,
+                    'produk_id' => Produk::latest()->first()->id
+                ];
+                Varian::create($data2);
+            }
+        }
+
+
         return redirect()->to('produk')->with('success', 'Data ' . $data['nama'] . ' berhasil ditambahkan');
     }
+
 
     function edit(Request $request, $id)
     {
@@ -148,5 +207,21 @@ class ProdukController extends Controller
         Storage::delete('public/img/' . $gambar->nama); // hapus gambar di lokal
 
         return redirect()->back()->with('delete', 'Gambar berhasil dihapus');
+    }
+
+    function addUkuran(Request $request)
+    {
+        if ($request->input('submit_type') == 'add-ukuran') {
+            dd('add ukuran');
+            // $data = $request->validate([
+            //     'ukuran' => 'required',
+            //     'stok' => 'required|int',
+            //     'produk_id' => 'required',
+            // ]);
+            // $data['stok'] = $request->stok;
+            // $data['produk_id'] = $request->produk_id;
+            // Ukuran::create($data);
+            // return redirect()->back()->with('success', 'Ukuran berhasil ditambahkan');
+        }
     }
 }

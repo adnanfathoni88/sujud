@@ -31,23 +31,18 @@
     <table id="table" class="table table-bordered table-hover" style="width: 100%;">
         <thead>
             <th>no</th>
+            <th>Gambar</th>
             <th>Kode</th>
             <th>Nama</th>
             <th>Deskripsi</th>
             <th>Harga</th>
             <th>Stok</th>
-            <th>Gambar</th>
             <th>Aksi</th>
         </thead>
         <tbody>
             @foreach ($produk as $p)
             <tr>
                 <td>{{ $loop->iteration }}</td>
-                <td>{{ $p['kode'] }}</td>
-                <td>{{ $p['nama'] }}</td>
-                <td>{{ $p['deskripsi'] }}</td>
-                <td>{{ $p['harga'] }}</td>
-                <td>{{ $p['stok'] }}</td>
                 <td>
                     @if($gambar->has($p['id']))
                     @foreach($gambar[$p['id']] as $g)
@@ -55,6 +50,11 @@
                     @endforeach
                     @endif
                 </td>
+                <td >{{ $p['kode'] }}</td>
+                <td>{{ $p['nama'] }}</td>
+                <td>{!! $p['deskripsi'] !!}</td>
+                <td><s>{{ $p['harga_produk'] }}</s> {{ $p['harga_diskon'] }}</td>
+                <td>{{ $p['stok'] }}</td>
                 <td>
                     <a class="btn btn-warning" href="/edit-produk/{{ $p['id'] }}"><i
                             class="far fa-pen-to-square"></i></a>

@@ -18,26 +18,16 @@
                         </div>
                         @enderror
                     </div>
-                    <!-- <div class="form-outline">
-            <input type="text" id="form12" class="form-control @error('deskripsi') is-invalid @enderror"
-                name=" deskripsi" value="{{ old('deskripsi') }}" />
-            <label class="form-label" for="form12">deskripsi</label>
-            @error('deskripsi')
-            <div class="invalid-feedback">
-                {{ $message }}
-            </div>
-            @enderror
-        </div> -->
 
                     <!-- harga -->
                     <div class="row">
-
                         <div class="col-6">
                             <div class="form-outline">
-                                <input type="text" id="form12" class="form-control @error('harga') is-invalid @enderror"
-                                    name="harga" value="{{ old('harga') }}" />
+                                <input type="text" id="form12"
+                                    class="form-control @error('harga_produk') is-invalid @enderror" name="harga_produk"
+                                    value="{{ old('harga_produk') }}" />
                                 <label class="form-label" for="form12">Harga Produk</label>
-                                @error('harga')
+                                @error('harga_produk')
                                 <div class="invalid-feedback">
                                     {{ $message }}
                                 </div>
@@ -47,10 +37,11 @@
 
                         <div class="col-6">
                             <div class="form-outline">
-                                <input type="text" id="form12" class="form-control @error('harga') is-invalid @enderror"
-                                    name="harga" value="{{ old('harga') }}" />
+                                <input type="text" id="form12"
+                                    class="form-control @error('harga_diskon') is-invalid @enderror" name="harga_diskon"
+                                    value="{{ old('harga_diskon') }}" />
                                 <label class="form-label" for="form12">Harga Diskon</label>
-                                @error('harga')
+                                @error('harga_diskon')
                                 <div class="invalid-feedback">
                                     {{ $message }}
                                 </div>
@@ -94,43 +85,52 @@
                             {{ $message }}
                         </div>
                         @enderror
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-6">
-                <div class="container-sub">
-                    <!-- ukuran -->
-                    <div class="ukuran">
-                        <div class="header-input">
-                            <label for="">Ukuran</label>
-                            <div class="d-flex">
-                                <input type="text" class="form-control">
-                                <button class="btn btn-success mx-1">+</button>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="warna">
-                        <div class="header-input">
-                            <label for="">Ukuran</label>
-                            <div class="d-flex">
-                                <input type="text" class="form-control">
-                                <button class="btn btn-success mx-1">+</button>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="deskripsi">
-                        <div class="header-input">
-                            <label for="">Deskripsi</label>
-                            <div class="d-flex">
-                                <textarea type="text" class="form-control"></textarea>
-                            </div>
-                        </div>
+                        <button class="btn btn-primary mt-4 w-100" type="submit" name="submit_type"
+                            value="add-produk">Simpan</button>
                     </div>
                 </div>
             </div>
 
+            <div class="col-md-6">
+                <div class="container-sub">
+                    <!-- ukuran -->
+                    <div class="ukuran">
+                        <label for="ukuran">Ukuran</label>
+                        <div class="d-flex">
+                            <input type="text" name="ukuran[]" class="form-control" placeholder="nama variasi">
+                            <button type="button" class="btn btn-success mx-1" id="addUkuran">+</button>
+                        </div>
+                    </div>
+
+                    <div id="dynamic-inputs-ukuran"></div>
+
+                    <!-- warna -->
+                    <div class="warna mt-4">
+                        <label for="warna">Warna</label>
+                        <div class="d-flex ">
+                            <input type="text" name="warna[]" class="form-control" placeholder="nama variasi">
+                            <button type="button" class="btn btn-success mx-1" id="addWarna">+</button>
+                        </div>
+                    </div>
+
+                    <div id="dynamic-inputs-warna"></div>
+
+                    <!-- deskripsi -->
+                    <div class="mt-4">
+                        <label for="">Deskripsi</label>
+                        <textarea class="form-control @error('deskripsi') is-invalid @enderror" name="deskripsi"
+                            id="deskripsi">{{ old('deskripsi') }}</textarea>
+                        @error('deskripsi')
+                        <div class="invalid-feedback">
+                            {{ $message }}
+                        </div>
+                        @enderror
+                    </div>
+                </div>
+            </div>
+
+            a 
         </div>
-        <button class="btn btn-primary mt-4" type="submit">Simpan</button>
     </form>
 </div>
 @endsection

@@ -13,8 +13,9 @@ return new class extends Migration
             $table->id();
             $table->string('kode');
             $table->string('nama');
-            $table->text('deskripsi');
-            $table->integer('harga');
+            $table->text('deskripsi')->nullable();
+            $table->integer('harga_produk');
+            $table->integer('harga_diskon')->nullable();
             $table->integer('stok');
             $table->timestamps();
         });

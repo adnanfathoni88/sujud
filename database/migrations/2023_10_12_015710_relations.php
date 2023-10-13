@@ -78,6 +78,15 @@ return new class extends Migration
                 $table->foreign('produk_id')->references('id')->on('produks')->onDelete('restrict')->onUpdate('cascade');
             });
         }
+
+
+        //variasi
+        if (!Schema::hasColumn('varians', 'produk_id')) {
+            Schema::table('varians', function (Blueprint $table) {
+                $table->unsignedBigInteger('produk_id');
+                $table->foreign('produk_id')->references('id')->on('produks')->onDelete('restrict')->onUpdate('cascade');
+            });
+        }
     }
 
     public function down(): void
@@ -110,6 +119,11 @@ return new class extends Migration
         });
 
         Schema::table('gambars', function (Blueprint $table) {
+            $table->dropForeign(['produk_id']);
+            $table->dropColumn(['produk_id']);
+        });
+
+        Schema::table('varians', function (Blueprint $table) {
             $table->dropForeign(['produk_id']);
             $table->dropColumn(['produk_id']);
         });

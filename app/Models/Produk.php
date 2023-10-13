@@ -9,10 +9,10 @@ class Produk extends Model
 {
     use HasFactory;
     protected $table = 'produks';
-    protected $fillable = ['kode', 'nama', 'deskripsi', 'harga', 'stok', 'kategori_id'];
+    protected $fillable = ['kode', 'nama', 'deskripsi', 'harga_produk', 'harga_diskon', 'stok', 'kategori_id'];
 
     public function kategori()
-    {
+    {   
         return $this->belongsTo(Kategori::class);
     }
 
