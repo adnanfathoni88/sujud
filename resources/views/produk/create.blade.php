@@ -48,18 +48,6 @@
                                 @enderror
                             </div>
                         </div>
-
-                    </div>
-
-                    <div class="form-outline">
-                        <input type="text" id="" class="form-control @error('stok') is-invalid @enderror" name="stok"
-                            value="{{ old('stok') }}" />
-                        <label class="form-label" for="form12">stok</label>
-                        @error('stok')
-                        <div class="invalid-feedback">
-                            {{ $message }}
-                        </div>
-                        @enderror
                     </div>
 
                     <div class="form-file">
@@ -85,36 +73,7 @@
                             {{ $message }}
                         </div>
                         @enderror
-                        <button class="btn btn-primary mt-4 w-100" type="submit" name="submit_type"
-                            value="add-produk">Simpan</button>
                     </div>
-                </div>
-            </div>
-
-            <div class="col-md-6">
-                <div class="container-sub">
-                    <!-- ukuran -->
-                    <div class="ukuran">
-                        <label for="ukuran">Ukuran</label>
-                        <div class="d-flex">
-                            <input type="text" name="ukuran[]" class="form-control" placeholder="nama variasi">
-                            <button type="button" class="btn btn-success mx-1" id="addUkuran">+</button>
-                        </div>
-                    </div>
-
-                    <div id="dynamic-inputs-ukuran"></div>
-
-                    <!-- warna -->
-                    <div class="warna mt-4">
-                        <label for="warna">Warna</label>
-                        <div class="d-flex ">
-                            <input type="text" name="warna[]" class="form-control" placeholder="nama variasi">
-                            <button type="button" class="btn btn-success mx-1" id="addWarna">+</button>
-                        </div>
-                    </div>
-
-                    <div id="dynamic-inputs-warna"></div>
-
                     <!-- deskripsi -->
                     <div class="mt-4">
                         <label for="">Deskripsi</label>
@@ -126,10 +85,45 @@
                         </div>
                         @enderror
                     </div>
+                    <button class="btn btn-primary mt-4 w-100" type="submit" name="submit_type"
+                        value="add-produk">Simpan</button>
                 </div>
             </div>
 
-            a 
+            <div class="col-md-6">
+                <div class="container-sub">
+                    <h6>Varian</h6>
+                    <div class="varian">
+                        <div class="d-flex">
+                            <!-- ukuran -->
+                            <select class="form-control" id="pilihan" onchange="handleDropdownChange(this.value)">
+                                <option value="input">-- ukuran--</option>
+                                <option value="input">Input</option>
+                                @foreach ($ukuran as $u)
+                                <option value="{{$u->id}}">{{$u['nama']}}</option>
+                                @endforeach
+                            </select>
+                            <!-- warna -->
+                            <select class="form-control mx-1" id="pilihan" onchange="handleDropdownChange(this.value)">
+                                <option value="input">-- warna --</option>
+                                <option value="input">Input</option>
+                                @foreach ($warna as $w)
+                                <option value="{{$w->id}}">{{$w->nama}}</option>
+                                @endforeach
+                            </select>
+                            <input type="text" name="stok[]" class="form-control" placeholder="stok">
+                            <button type="button" class="btn btn-success mx-1" id="addUkuran">+</button>
+                        </div>
+                    </div>
+
+                    <div id="dynamic-inputs-ukuran"></div>
+
+                    <div class="mt-2" id="inputField" style="display: none;">
+                        <label for="inputValue">Masukkan Nilai:</label>
+                        <input type="text" id="inputValue" class="form-control">
+                    </div>
+                </div>
+            </div>
         </div>
     </form>
 </div>

@@ -87,6 +87,22 @@ return new class extends Migration
                 $table->foreign('produk_id')->references('id')->on('produks')->onDelete('restrict')->onUpdate('cascade');
             });
         }
+
+        // ukuran
+        if (!Schema::hasColumn('varians', 'ukuran_id')) {
+            Schema::table('varians', function (Blueprint $table) {
+                $table->unsignedBigInteger('ukuran_id')->nullable();
+                $table->foreign('ukuran_id')->references('id')->on('ukurans')->onDelete('restrict')->onUpdate('cascade');
+            });
+        }
+
+        //warna 
+        if (!Schema::hasColumn('varians', 'warna_id')) {
+            Schema::table('varians', function (Blueprint $table) {
+                $table->unsignedBigInteger('warna_id')->nullable();
+                $table->foreign('warna_id')->references('id')->on('warnas')->onDelete('restrict')->onUpdate('cascade');
+            });
+        }
     }
 
     public function down(): void
@@ -126,6 +142,16 @@ return new class extends Migration
         Schema::table('varians', function (Blueprint $table) {
             $table->dropForeign(['produk_id']);
             $table->dropColumn(['produk_id']);
+        });
+
+        Schema::table('varians', function (Blueprint $table) {
+            $table->dropForeign(['ukuran_id']);
+            $table->dropColumn(['ukuran_id']);
+        });
+
+        Schema::table('varians', function (Blueprint $table) {
+            $table->dropForeign(['warna_id']);
+            $table->dropColumn(['warna_id']);
         });
     }
 };

@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Warna;
 use App\Models\Gambar;
 use App\Models\Produk;
+use App\Models\Ukuran;
 use App\Models\Ulasan;
 use App\Models\Varian;
 use App\Models\Kategori;
@@ -23,31 +25,14 @@ class ProdukController extends Controller
     function create()
     {
         $kategori = Kategori::all();
-        return view('produk.create', compact('kategori'));
+        $warna = Warna::all();
+        $ukuran = Ukuran::all();
+        return view('produk.create', compact('kategori', 'warna', 'ukuran'));
     }
 
     function store(Request $request)
     {
-
-        //upload ukuran, warna
-        $ukuran = $request->ukuran;
-        $warna = $request->warna;
-
-        foreach ($ukuran as $u) {
-            foreach ($warna as $w) {
-                $data = [
-                    'ukuran' => $u ? $u : null,
-                    'warna' => $w ? $w : null,
-                    'produk_id' => Produk::latest()->first()->id
-                ];
-                Varian::create($data);
-            }
-        }
-    }
-
-    function storee(Request $request)
-    {
-
+        // generate kode
         $data = Kategori::all()->where('id', $request->kategori_id)->first();
         if (isset($data)) {
             $namaKategori = $data->nama;
@@ -79,7 +64,7 @@ class ProdukController extends Controller
                 'deskripsi' => 'nullable',
                 'harga_produk' => 'required|int',
                 'harga_diskon' => 'nullable|int',
-                'stok' => 'required|int',
+                'stok' => 'nullable|int',
                 'kategori_id' => 'required',
             ],
             [
@@ -110,28 +95,16 @@ class ProdukController extends Controller
         $ukuran = $request->ukuran;
         $warna = $request->warna;
 
-        $ukruanCount = count($ukuran);
-        $warnaCount = count($warna);
-
-        if ($ukruanCount > $warnaCount) {
-            $biggerArray = $ukuran;
-            $smallerArray = $warna;
-        } else {
-            $biggerArray = $warna;
-            $smallerArray = $ukuran;
-        }
-
-        foreach ($biggerArray as $b) {
-            foreach ($smallerArray as $s) {
+        foreach ($ukuran as $u) {
+            foreach ($warna as $w) {
                 $data2 = [
-                    'ukuran' => $b ? $b : null,
-                    'warna' => $s ? $s : null,
+                    'ukuran' => $u ? $u : null,
+                    'warna' => $w ? $w : null,
                     'produk_id' => Produk::latest()->first()->id
                 ];
                 Varian::create($data2);
             }
         }
-
 
         return redirect()->to('produk')->with('success', 'Data ' . $data['nama'] . ' berhasil ditambahkan');
     }
@@ -142,8 +115,8 @@ class ProdukController extends Controller
         $produk = Produk::findOrFail($id);
         $kategori = Kategori::all();
         $gambar = Gambar::where('produk_id', $id)->get(); // gambar dari produk yang dipilih
-
-        return view('produk.edit', compact('produk', 'kategori', 'gambar'));
+        $variasi = Varian::where('produk_id', $id)->get();
+        return view('produk.edit', compact('produk', 'kategori', 'gambar', 'variasi'));
     }
 
     function update(Request $request, $id)

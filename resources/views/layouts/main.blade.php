@@ -93,34 +93,20 @@
 
     <script src="https://cdn.datatables.net/1.13.6/js/dataTables.bootstrap5.min.js"></script>
 
+
     <!-- ukuran -->
     <script>
         $(document).ready(function () {
             let inputCount = 1;
             $('#addUkuran').click(function () {
                 inputCount++;
-                $('#dynamic-inputs-ukuran').append('<div class="ukuran"><div class="header-input"><div class="d-flex my-2"><input type="text" class="form-control" name="ukuran[]" placeholder="nama variasi"><button class="btn btn-danger mx-1 removeInput">-</button></div></div></div>');
+                $('#dynamic-inputs-ukuran').append(
+                    '<div class="ukuran mt-2"><div class="d-flex"><select class="form-control" id="pilihan" onchange="handleDropdownChange(this.value)"><option value="input">-- ukuran--</option><option value="input">Input</option>@foreach ($ukuran as $u)<option value="{{$u->id}}">{{$u['nama']}}</option>@endforeach</select><select class="form-control mx-1" id="pilihan" onchange="handleDropdownChange(this.value)"><option value="input">-- warna --</option><option value="input">Input</option>@foreach ($warna as $w)<option value="{{$w->id}}">{{$w->nama}}</option>@endforeach</select><input type="text" name="stok[]" class="form-control" placeholder="stok"><button type="button" class="btn btn-danger mx-1 removeInput">-</button></div></div>');
             });
 
             // Menghapus inputan dinamis
             $(document).on('click', '.removeInput', function () {
                 $(this).closest('.ukuran').remove();
-            });
-        });
-    </script>
-
-    <!-- warna -->
-    <script>
-        $(document).ready(function () {
-            let inputCount = 1;
-            $('#addWarna').click(function () {
-                inputCount++;
-                $('#dynamic-inputs-warna').append('<div class="warna"><div class="header-input"><div class="d-flex my-2"><input type="text" class="form-control" name="warna[]" placeholder="nama variasi"><button class="btn btn-danger mx-1 removeInput">-</button></div></div></div>');
-            });
-
-            // Menghapus inputan dinamis
-            $(document).on('click', '.removeInput', function () {
-                $(this).closest('.warna').remove();
             });
         });
     </script>
@@ -131,6 +117,34 @@
             .catch(error => {
                 console.error(error);
             });
+    </script>
+
+    <!-- add input in option -->
+    <script>
+        function handleDropdownChange(selectedValue) {
+            if (selectedValue === "input") {
+                document.getElementById("inputField").style.display = "block";
+            } else {
+                document.getElementById("inputField").style.display = "none";
+            }
+        }
+    </script>
+
+    <script>
+        $(document).ready(function () {
+            let inputCount = 1;
+            $('#addUkuran').click(function () {
+                inputCount++;
+                // Salin templat ukuran dan tambahkan ke varian
+                let ukuranTemplate = $('#ukuranTemplate').html();
+                $('#varian').append(ukuranTemplate);
+            });
+
+            // Menghapus inputan dinamis
+            $(document).on('click', '.removeInput', function () {
+                $(this).closest('.ukuran').remove();
+            });
+        });
     </script>
 
 </body>
