@@ -7,12 +7,8 @@ use App\Http\Controllers\KategoriController;
 use App\Http\Controllers\ProdukController;
 use App\Http\Controllers\UlasanController;
 
+
 Route::get('/', function () {
-    return view('welcome');
-});
-
-
-Route::get('/home', function () {
     return view('home');
 });
 

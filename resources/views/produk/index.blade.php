@@ -50,7 +50,7 @@
                     @endforeach
                     @endif
                 </td>
-                <td >{{ $p['kode'] }}</td>
+                <td>{{ $p['kode'] }}</td>
                 <td>{{ $p['nama'] }}</td>
                 <td>{!! $p['deskripsi'] !!}</td>
                 <td><s>{{ $p['harga_produk'] }}</s> {{ $p['harga_diskon'] }}</td>

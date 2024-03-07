@@ -17,7 +17,6 @@ class Produk extends Model
     }
 
     public function gambar()
-
     {
         return $this->hasMany(Gambar::class);
     }

@@ -20,6 +20,7 @@ class ProdukController extends Controller
     {
         $produk = Produk::with('kategori')->get();
         $gambar = Gambar::all()->groupBy('produk_id'); // group gambar 
+        $ukuran = Ukuran::all();
         return view('produk.index', compact('produk', 'gambar'));
     }
     function create()
@@ -29,8 +30,24 @@ class ProdukController extends Controller
         $ukuran = Ukuran::all();
         return view('produk.create', compact('kategori', 'warna', 'ukuran'));
     }
-
     function store(Request $request)
+    {
+        $ukuran = $request->ukuran_id;
+        $warna = $request->warna_id;
+
+        foreach ($ukuran as $u) {
+            foreach ($warna as $w) {
+                $data = [
+                    'ukuran' => $u ? $u : null,
+                    'warna' => $w ? $w : null,
+                    'produk_id' => 1
+                ];
+            }
+            Varian::create($data);
+        }
+    }
+
+    function storee(Request $request)
     {
         // generate kode
         $data = Kategori::all()->where('id', $request->kategori_id)->first();

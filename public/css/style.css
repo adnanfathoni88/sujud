@@ -8,16 +8,6 @@
 }
 
 /* header */
-header {
-    background-color: #fff;
-    padding: 8px 0;
-    border: 1px solid #eee;
-    width: 100%;
-    position: fixed;
-    z-index: 999;
-    top: 0;
-}
-
 .button-list a {
     font-family: "Inter", sans-serif;
     font-size: 16px;
@@ -58,10 +48,10 @@ header {
 /* hero */
 #hero {
     background-color: #5ec8d7;
+    padding-top: 50px;
 }
 
 #hero .container .row {
-    height: 100vh;
     align-items: center;
 }
 #hero h2 {
@@ -78,14 +68,14 @@ header {
     opacity: 0.6;
     line-height: 1.5;
 }
-.hero-img {
-    height: 100%;
+.hero-img img {
+    width: 300px;
 }
 #hero button {
     font-family: "Inter", sans-serif;
     font-weight: 600;
     border-radius: 24px;
-    background: #ffc93c;
+    background-color: #ffc93c;
     width: 177px;
     padding: 16px 32px;
     align-items: center;
@@ -93,83 +83,8 @@ header {
     color: #fff;
 }
 
-/* about */
-#about .container {
-    width: 60%;
-    padding-top: 100px;
-    padding-bottom: 100px;
-}
-
-#about h2 {
-    font-family: "oswald", sans-serif;
-    font-size: 40px;
-    font-weight: 400;
-}
-
-#about p {
-    font-family: "Inter", sans-serif;
-    font-size: 18px;
-    font-weight: 400;
-    opacity: 0.8;
-    line-height: 1.5;
-}
-#about img {
-    margin-left: 100px;
-}
-
-/* explore */
-#explore {
-    position: relative;
-    background-image: url("../img/sujud-store.png");
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-    width: 100%;
-    z-index: -1;
-}
-#explore .container {
-    position: relative;
-    padding-top: 100px;
-    padding-bottom: 100px;
-    color: #fff;
-    z-index: 1;
-}
-
-#explore h2 {
-    font-family: "oswald", sans-serif;
-    font-size: 48px;
-    font-weight: 400;
-    margin-bottom: 8px;
-}
-
-#explore p {
-    font-family: "Inter", sans-serif;
-    font-size: 18px;
-    font-weight: 400;
-    opacity: 0.6;
-    line-height: 1.5;
-    margin-bottom: 24px;
-}
-
-.background {
-    content: "";
-    position: absolute;
-    top: 0;
-    left: 0;
-    height: 100%;
-    width: 100%;
-    background-color: rgba(0, 0, 0, 0.8);
-    z-index: 0;
-}
-
-#explore .container button {
-    background-color: transparent;
-    color: #fff;
-    border: 1px solid #fff;
-    padding: 8px 32px;
-    border-radius: 24px;
-    font-family: "Inter", sans-serif;
-    font-weight: 600;
+#hero button:hover {
+    background-color: #dfac29;
 }
 
 /* collection */
@@ -181,21 +96,44 @@ header {
 #collection img {
     width: 100%;
 }
-#collection h2 {
+
+.collection-header h2 {
     font-family: "oswald", sans-serif;
-    font-size: 32px;
-    margin-bottom: 32px;
-    font-weight: 400;
 }
-#collection p {
-    font-family: "Inter", sans-serif;
-    font-size: 18px;
-    line-height: 1.5;
-    font-weight: 400;
-    line-height: 1.5;
-    margin: 32px 0;
+.collection-header a {
+    font-weight: normal;
+    color: black;
+}
+.collection-header a:hover {
+    font-weight: bold;
+    color: black;
 }
 
+.collection-body p {
+    margin: 0px !important;
+    padding: 8px 0px;
+    font-size: 16px !important;
+    font-weight: 400;
+    opacity: 0.8;
+    line-height: 1.5;
+}
+
+.btn-collection {
+    background-color: #5ec8d7;
+    color: #fff;
+    border: none;
+    padding: 8px 32px;
+    border-radius: 8px;
+}
+.btn-collection:hover {
+    background-color: #38acbc;
+}
+
+.collection-list h5 {
+    font-size: 20px;
+    font-weight: 600;
+    margin-top: 16px;
+}
 /* #testimony */
 #testimony {
     background-color: #5ec8d7;
@@ -243,43 +181,6 @@ header {
     margin: 16px 4px;
 }
 
-.collection-header h4 {
-    margin: 0 !important;
-    padding: 0 !important;
-    font-size: 28px;
-    font-weight: 600;
-}
-.collection-header p {
-    margin: 0 !important;
-    padding: 0 !important;
-    font-size: 16px;
-    font-weight: 400;
-    opacity: 0.8;
-}
-.collection-body p {
-    margin: 0px !important;
-    padding: 8px 0px;
-    font-size: 16px !important;
-    font-weight: 400;
-    opacity: 0.8;
-    line-height: 1.5;
-    text-align: justify;
-}
-.collection-group {
-    margin-top: 32px;
-}
-.collection-body button {
-    background-color: #5ec8d7;
-    color: #fff;
-    border: none;
-    margin-top: 16px;
-    padding: 8px 32px;
-}
-.collection-list h5 {
-    font-size: 20px;
-    font-weight: 600;
-    margin-top: 16px;
-}
 #subscribe {
     background-color: #5ec8d7;
     padding: 100px 0;
@@ -858,68 +759,66 @@ th {
     margin-bottom: 16px;
 }
 
-.checkout-produk-list{
+.checkout-produk-list {
     margin-left: 16px;
 }
-.checkout-produk-list h4{
+.checkout-produk-list h4 {
     font-family: "inter", sans-serif;
     font-size: 16px;
     font-weight: 600;
     margin: 0;
 }
 
-.chechout-produk-list p{
+.chechout-produk-list p {
     font-family: "inter", sans-serif;
     font-size: 16px;
     font-weight: 400;
     opacity: 0.8;
     line-height: 1.5;
-
 }
 
-.chechout-detail{
+.chechout-detail {
     margin-top: 32px;
-
 }
 
-.chechout-detail p{
+.chechout-detail p {
     font-family: "inter", sans-serif;
     margin: 0;
     padding-bottom: 4px;
 }
 
-.chechout-detail h4{
+.chechout-detail h4 {
     padding-top: 4px;
     font-weight: 600;
 }
 
-#location{
+#location {
     margin-top: 64px;
     padding-bottom: 100px;
 }
-.location-header{
+.location-header {
     padding: 50px 0px;
 }
-.location-header h2{
+.location-header h2 {
     font-family: "oswald", sans-serif;
     font-size: 32px;
     font-weight: 400;
     margin-bottom: 32px;
 }
 
-.location-body iframe{
+.location-body iframe {
     width: 100%;
     height: 400px;
     border: none;
 }
-.location-footer h4{
+.location-footer h4 {
     font-family: "inter", sans-serif;
     font-size: 24px;
     font-weight: 600;
     margin-bottom: 8px;
 }
 
-.location-footer p{
+.location-footer p {
     font-family: "inter", sans-serif;
     font-size: 16px;
     font-weight: 400;
@@ -929,28 +828,28 @@ th {
 }
 
 /* about */
-#about-us{
+#about-us {
     margin-top: 64px;
     margin-bottom: 100px;
 }
 
-.about-us-header{
+.about-us-header {
     padding: 50px 0px;
 }
-.about-us-header h3{
+.about-us-header h3 {
     font-family: "oswald", sans-serif;
     font-size: 32px;
     font-weight: 400;
     margin-bottom: 32px;
 }
 
-.about-us-body h4{
+.about-us-body h4 {
     font-family: "inter", sans-serif;
     font-size: 24px;
     font-weight: 600;
     margin-bottom: 8px;
 }
-.about-us-body p{
+.about-us-body p {
     font-family: "inter", sans-serif;
     font-size: 16px;
     font-weight: 400;
@@ -961,70 +860,87 @@ th {
 }
 
 /* value */
-.value-header h4{
+.value-header h4 {
     font-family: "inter", sans-serif;
     font-size: 32px;
     font-weight: 600;
     margin-bottom: 8px;
-
 }
-.value-list{
+.value-list {
     background-color: #fff;
     margin: 16px 24px;
     padding: 16px 32px;
     border-radius: 8px;
     box-shadow: 0px 1px 10px 0px rgba(0, 0, 0, 0.09);
 }
-.value-list h4{
+.value-list h4 {
     font-family: "inter", sans-serif;
     font-size: 24px;
     font-weight: 600;
     margin-bottom: 8px;
 }
-.value-list i{
+.value-list i {
     padding: 16px 0px;
     font-size: 30px;
-    color:#5ec8d7;
+    color: #5ec8d7;
     border-radius: 100%;
-
 }
-.overview-visi-misi{
-    background-color:#5ec8d7;
+.overview-visi-misi {
+    background-color: #5ec8d7;
 }
-.overview-visi-misi .container{
+.overview-visi-misi .container {
     padding: 50px 0px;
     color: #fff;
 }
 
-
-.value{
+.value {
     padding: 100px 0px;
 }
 
-.about-us-footer .container{
+.about-us-footer .container {
     padding: 50px 0px;
     color: black;
 }
 
-.about-us-footer h4{
+.about-us-footer h4 {
     font-family: "inter", sans-serif;
     font-size: 32px;
     font-weight: 600;
     margin-bottom: 8px;
 }
 
-table div{
+table div {
     color: black;
     width: 100%;
 }
 table {
     margin: 0 auto;
-
 }
-table th{
+table th {
     font-family: "inter", sans-serif;
     font-size: 18px;
     font-weight: 600;
     padding: 0;
     margin: 0;
+}
+
+/* mobil screen */
+
+@media screen and (max-width: 600px) {
+    /* hero */
+    #hero .hero-img img {
+        display: none;
+    }
+    #hero .container {
+        padding-bottom: 50px;
+    }
+
+    #hero h2 {
+        font-size: 42px;
+        font-weight: 400;
+    }
+    #hero p {
+        font-size: 16px;
+        font-weight: 400;
+    }
 }

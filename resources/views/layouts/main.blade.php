@@ -98,15 +98,36 @@
     <script>
         $(document).ready(function () {
             let inputCount = 1;
-            $('#addUkuran').click(function () {
+            let ukuran = <?php echo isset($ukuran) ? json_encode($ukuran) : '[]'; ?>; // Mengambil data $ukuran dari PHP jika tersedia
+            let warna = <?php echo isset($warna) ? json_encode($warna) : '[]'; ?>; // Mengambil data $warna dari PHP jika tersedia
+
+            $('#addUkuran').click(function(){
                 inputCount++;
-                $('#dynamic-inputs-ukuran').append(
-                    '<div class="ukuran mt-2"><div class="d-flex"><select class="form-control" id="pilihan" onchange="handleDropdownChange(this.value)"><option value="input">-- ukuran--</option><option value="input">Input</option>@foreach ($ukuran as $u)<option value="{{$u->id}}">{{$u['nama']}}</option>@endforeach</select><select class="form-control mx-1" id="pilihan" onchange="handleDropdownChange(this.value)"><option value="input">-- warna --</option><option value="input">Input</option>@foreach ($warna as $w)<option value="{{$w->id}}">{{$w->nama}}</option>@endforeach</select><input type="text" name="stok[]" class="form-control" placeholder="stok"><button type="button" class="btn btn-danger mx-1 removeInput">-</button></div></div>');
-            });
+               $('#dynamic-inputs-ukuran').append(
+               ' <div class="varian mt-2">' +
+                    '<div class="d-flex">' +
+                        '<select class="form-control" name="ukuran_id[]" id="pilihan" onchange="handleDropdownChange(this.value)">' +
+                            '<option value="input">-- ukuran--</option>' +
+                            '<option value="input">Input</option>' +
+                            ukuran.map(u => '<option value="'+u.id+'">'+u.nama+'</option>').join('') +
+                        '</select>' +
+                        '<select class="form-control mx-1" name="warna_id[]" id="pilihan" onchange="handleDropdownChange(this.value)">' + 
+                            '<option value="input">-- warna --</option>' +
+                            '<option value="input">Input</option>' +
+                            warna.map(w => '<option value="'+w.id+'">'+w.nama+'</option>').join('') +
+                        '</select>' +
+                        '<input type="text" name="stok[]" class="form-control" placeholder="stok">' +
+                        '<button type="button" class="btn btn-danger mx-1 removeInput">-</button>' +
+                    '</div>' +
+                '</div>'
+               );
+            })
+
+       
 
             // Menghapus inputan dinamis
             $(document).on('click', '.removeInput', function () {
-                $(this).closest('.ukuran').remove();
+                $(this).closest('.varian').remove();
             });
         });
     </script>

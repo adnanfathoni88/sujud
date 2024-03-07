@@ -1,5 +1,5 @@
 <footer>
-    <div class="container">
+    <!-- <div class="container">
         <div class="row">
             <div class="col-3 text-center">
                 <img src="{{ asset('img/logo/sujud.png') }}" alt="" />
@@ -43,5 +43,5 @@
                 <p>© 2021 Sujud Company. All Rights Reserved</p>
             </div>
         </div>
-    </div>
+    </div> -->
 </footer>

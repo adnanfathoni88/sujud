@@ -96,7 +96,8 @@
                     <div class="varian">
                         <div class="d-flex">
                             <!-- ukuran -->
-                            <select class="form-control" id="pilihan" onchange="handleDropdownChange(this.value)">
+                            <select class="form-control" name="ukuran_id[]" id="pilihan"
+                                onchange="handleDropdownChange(this.value)">
                                 <option value="input">-- ukuran--</option>
                                 <option value="input">Input</option>
                                 @foreach ($ukuran as $u)
@@ -104,7 +105,8 @@
                                 @endforeach
                             </select>
                             <!-- warna -->
-                            <select class="form-control mx-1" id="pilihan" onchange="handleDropdownChange(this.value)">
+                            <select class="form-control mx-1" name="warna_id[]" id="pilihan"
+                                onchange="handleDropdownChange(this.value)">
                                 <option value="input">-- warna --</option>
                                 <option value="input">Input</option>
                                 @foreach ($warna as $w)
