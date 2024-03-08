@@ -9,7 +9,7 @@ use App\Http\Controllers\UlasanController;
 
 
 Route::get('/', function () {
-    return view('home');
+    return view('user.home');
 });
 
 Route::get('/shop', function () {
