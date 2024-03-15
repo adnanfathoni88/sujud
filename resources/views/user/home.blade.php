@@ -2,7 +2,7 @@
 <section id="hero">
     <div class="container">
         <div class="row">
-            <div class="col-lg-6 col-sm-12 text-center">
+            <div class="col-lg-6 col-sm-12 d-flex flex-column justify-content-center text-center align-items-center">
                 <h2 class="mb-3">Sujud Company</h2>
                 <p> Lorem Ipsum is simply dummy text of the printing and
                     typesetting industry. Lorem Ipsum is simply dummy
@@ -12,6 +12,44 @@
             <div class="col-lg-6 col-sm-12">
                 <div class="d-flex justify-content-center align-itesm-end hero-img">
                     <img src="{{ asset('img/person_1.png') }}" alt="" class="img-fluid" />
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<section id="top-sale">
+    <div class="container">
+        <div class="row d-flex justify-content-center">
+            <div class="col-lg-10 col-sm-12">
+                <div class="top-sale-content text-center py-4">
+                    <h4 class="text-center mb-4">Top Sale</h4>
+                    <div class="top-sale-group d-flex justify-content-center mb-4">
+                        <div class="item-top-sale mx-2">
+                            <div class="d-flex justify-content-center">
+                                <figure>
+                                    <img src="{{ asset('img/produk/cordoba.png') }}" alt="" height="200px">
+                                </figure>
+                                <div class="top-sale-body d-flex flex-column justify-content-center text-start">
+                                    <span>Sajadah</span>
+                                    <h6>Cordoba</h6>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="item-top-sale mx-2">
+                            <div class="d-flex justify-content-center">
+                                <figure>
+                                    <img src="{{ asset('img/produk/cordoba.png') }}" alt="" height="200px">
+                                </figure>
+                                <div class="top-sale-body d-flex flex-column justify-content-center text-start">
+                                    <span>Sajadah</span>
+                                    <h6>Cordoba</h6>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div>
+                        <button class="btn-top-sale text-center mb-3">More</button>
+                    </div>
                 </div>
             </div>
         </div>
@@ -185,7 +223,7 @@
 
 </section>
 
-<footer>
+{{-- <footer>
     <div class="container">
         <div class="row">
             <div class="col-3 text-center">
@@ -231,4 +269,4 @@
             </div>
         </div>
     </div>
-</footer>
+</footer> --}}
