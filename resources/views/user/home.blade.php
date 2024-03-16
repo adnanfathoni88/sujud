@@ -1,4 +1,6 @@
 @include('user.layouts.main')
+
+{{-- hero --}}
 <section id="hero">
     <div class="container">
         <div class="row">
@@ -17,6 +19,8 @@
         </div>
     </div>
 </section>
+
+{{-- top sale --}}
 <section id="top-sale">
     <div class="container">
         <div class="row d-flex justify-content-center">
@@ -56,67 +60,86 @@
     </div>
 </section>
 
-<section id="favorite">
+{{-- why should us --}}
+<section id="why-should-we">
     <div class="container">
+        <div class="ship-group">
+            <h4 class="ship-judul text-center">Why Should We?</h4>
+            <div class="row mt-4">
+                <div class="col-6">
+                    <div class="ship-item">
+                        <div class="ship-item-header">
+                            <i class="fa-solid fa-person-praying icon"></i>
+                            <span class="mx-3">Spiritual</span>
+                        </div>
+                        <div class="ship-item-body mt-2">
+                            <span>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Quod minus, veritatis nam,
+                                assumenda soluta ipsa, ea ut laudantium sit eos velit animi atque dolorum eligendi harum
+                                inventore placeat dolore consequatur.</span>
+                        </div>
 
-        {{-- header --}}
-        <div class="favorite-header" style="padding: 0px 20px">
-            <div class="row">
-                <div class="col-12">
-                    <div class="text-center">
-                        <h2>Favorite Item</h3>
+                    </div>
+                </div>
+                <div class="col-6">
+                    <div class="ship-item">
+                        <div class="ship-item-header">
+                            <i class="fa-solid fa-person-praying icon"></i>
+                            <span class="mx-3">Spiritual</span>
+                        </div>
+                        <div class="ship-item-body mt-2">
+                            <span>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Quod minus, veritatis nam,
+                                assumenda soluta ipsa, ea ut laudantium sit eos velit animi atque dolorum eligendi harum
+                                inventore placeat dolore consequatur.</span>
+                        </div>
+
                     </div>
                 </div>
             </div>
-        </div>
+            <div class="row mt-4">
+                <div class="col-6">
+                    <div class="ship-item">
+                        <div class="ship-item-header">
+                            <i class="fa-solid fa-person-praying icon"></i>
+                            <span class="mx-3">Spiritual</span>
+                        </div>
+                        <div class="ship-item-body mt-2">
+                            <span>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Quod minus, veritatis nam,
+                                assumenda soluta ipsa, ea ut laudantium sit eos velit animi atque dolorum eligendi harum
+                                inventore placeat dolore consequatur.</span>
+                        </div>
 
-        <div class="favorite-group mt-2">
-            <div class="row">
-                <div class="col-sm-12 col-lg-4">
-                    <div class="favorite-list mb-2">
-                        <img src="{{ asset('img/sajadah.png') }}" alt="" class="img-fluid" />
-                        <h5 class="mt-2">Sajadah</h5>
-                        <h6 class="mt-1">IDR 199.000</h6>
                     </div>
                 </div>
-                <div class="col-sm-12 col-lg-4">
-                    <div class="favorite-list mb-2">
+                <div class="col-6">
+                    <div class="ship-item">
+                        <div class="ship-item-header">
+                            <i class="fa-solid fa-person-praying icon"></i>
+                            <span class="mx-3">Spiritual</span>
+                        </div>
+                        <div class="ship-item-body mt-2">
+                            <span>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Quod minus, veritatis nam,
+                                assumenda soluta ipsa, ea ut laudantium sit eos velit animi atque dolorum eligendi harum
+                                inventore placeat dolore consequatur.</span>
+                        </div>
 
-                        <img src="{{ asset('img/sajadah-travel.png') }}" alt="" class="img-fluid" />
-                        <h5 class="mt-2">Sajadah</h5>
-                        <h6 class="mt-1">IDR 199.000</h6>
-                    </div>
-                </div>
-                <div class="col-sm-12 col-lg-4">
-                    <div class="favorite-list mb-2">
-
-                        <img src="{{ asset('img/mukena.png') }}" alt="" class="img-fluid" />
-                        <h5 class="mt-2">Sajadah</h5>
-                        <h6 class="mt-1">IDR 199.000</h6>
                     </div>
                 </div>
             </div>
+
         </div>
     </div>
 </section>
 
-
-<section id="subscribe">
-    <div class="container text-center">
-        <div class="subscribe-header">
-            <i class="bi bi-envelope"></i>
-            <h4>Join Our Journey</h4>
-            <p class="opacity-75">
-                Inspired by traditional Sambas weaving, we've pushed
-                boundaries to create something never seen before. Join
-                us in this launch and feel the spirit of our inspiring
-                community.
-            </p>
+{{-- active traveler--}}
+<section id="active-traveler">
+    <div class="active-traveler-content text-center">
+        <div class="">
+            <h4>Muslim Active Traveler</h4>
+            <span>"Muslim Active Traveler is a travel community that combines worldly exploration with profound
+                spiritual
+                experiences."</span>
         </div>
-        <div class="subscribe-body d-flex justify-content-center">
-            <input class="form-control mx-1 w-40" type="text" placeholder="Enter Your Email" />
-            <button class="btn btn-warning">Subscribe</button>
-        </div>
+        <button class="btn-active-traveler">Explore</button>
     </div>
 </section>
 
@@ -194,6 +217,24 @@
     </div>
 </section>
 
+<section id="subscribe">
+    <div class="container text-center">
+        <div class="subscribe-header">
+            <h4 class="mb-4">Join Our Journey</h4>
+            <p class="opacity-75" style="font-style: italic">
+                Inspired by traditional Sambas weaving, we've pushed
+                boundaries to create something never seen before. Join
+                us in this launch and feel the spirit of our inspiring
+                community.
+            </p>
+        </div>
+        <div class="subscribe-body d-flex justify-content-center">
+            <input class="form-control mx-1 w-40" type="text" placeholder="Enter Your Email" />
+            <button class="btn btn-warning">Subscribe</button>
+        </div>
+    </div>
+</section>
+
 <section id="seen">
     <div class="container text-center">
         <h4>A Seen On</h4>
@@ -222,6 +263,57 @@
     </div>
 
 </section>
+
+<!-- <section id="favorite">
+    <div class="container">
+
+        {{-- header --}}
+        <div class="favorite-header" style="padding: 0px 20px">
+            <div class="row">
+                <div class="col-12">
+                    <div class="text-center">
+                        <h2>Favorite Item</h3>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="favorite-group mt-2">
+            <div class="row">
+                <div class="col-sm-12 col-lg-4">
+                    <div class="favorite-list mb-2">
+                        <img src="{{ asset('img/sajadah.png') }}" alt="" class="img-fluid" />
+                        <h5 class="mt-2">Sajadah</h5>
+                        <h6 class="mt-1">IDR 199.000</h6>
+                    </div>
+                </div>
+                <div class="col-sm-12 col-lg-4">
+                    <div class="favorite-list mb-2">
+
+                        <img src="{{ asset('img/sajadah-travel.png') }}" alt="" class="img-fluid" />
+                        <h5 class="mt-2">Sajadah</h5>
+                        <h6 class="mt-1">IDR 199.000</h6>
+                    </div>
+                </div>
+                <div class="col-sm-12 col-lg-4">
+                    <div class="favorite-list mb-2">
+
+                        <img src="{{ asset('img/mukena.png') }}" alt="" class="img-fluid" />
+                        <h5 class="mt-2">Sajadah</h5>
+                        <h6 class="mt-1">IDR 199.000</h6>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section> -->
+
+<!-- 
+
+
+
+
+
 
 {{-- <footer>
     <div class="container">
@@ -269,4 +361,4 @@
             </div>
         </div>
     </div>
-</footer> --}}
+</footer> --}} -->

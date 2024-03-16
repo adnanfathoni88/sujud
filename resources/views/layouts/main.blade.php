@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Sujud Company</title>
     <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet" />
     <!-- MDB -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/6.4.1/mdb.min.css" rel="stylesheet" />
@@ -98,32 +99,32 @@
     <script>
         $(document).ready(function () {
             let inputCount = 1;
-            let ukuran = <?php echo isset($ukuran) ? json_encode($ukuran) : '[]'; ?>; // Mengambil data $ukuran dari PHP jika tersedia
-            let warna = <?php echo isset($warna) ? json_encode($warna) : '[]'; ?>; // Mengambil data $warna dari PHP jika tersedia
+            let ukuran = <? php echo isset($ukuran) ? json_encode($ukuran) : '[]'; ?>; // Mengambil data $ukuran dari PHP jika tersedia
+            let warna = <? php echo isset($warna) ? json_encode($warna) : '[]'; ?>; // Mengambil data $warna dari PHP jika tersedia
 
-            $('#addUkuran').click(function(){
+            $('#addUkuran').click(function () {
                 inputCount++;
-               $('#dynamic-inputs-ukuran').append(
-               ' <div class="varian mt-2">' +
+                $('#dynamic-inputs-ukuran').append(
+                    ' <div class="varian mt-2">' +
                     '<div class="d-flex">' +
-                        '<select class="form-control" name="ukuran_id[]" id="pilihan" onchange="handleDropdownChange(this.value)">' +
-                            '<option value="input">-- ukuran--</option>' +
-                            '<option value="input">Input</option>' +
-                            ukuran.map(u => '<option value="'+u.id+'">'+u.nama+'</option>').join('') +
-                        '</select>' +
-                        '<select class="form-control mx-1" name="warna_id[]" id="pilihan" onchange="handleDropdownChange(this.value)">' + 
-                            '<option value="input">-- warna --</option>' +
-                            '<option value="input">Input</option>' +
-                            warna.map(w => '<option value="'+w.id+'">'+w.nama+'</option>').join('') +
-                        '</select>' +
-                        '<input type="text" name="stok[]" class="form-control" placeholder="stok">' +
-                        '<button type="button" class="btn btn-danger mx-1 removeInput">-</button>' +
+                    '<select class="form-control" name="ukuran_id[]" id="pilihan" onchange="handleDropdownChange(this.value)">' +
+                    '<option value="input">-- ukuran--</option>' +
+                    '<option value="input">Input</option>' +
+                    ukuran.map(u => '<option value="' + u.id + '">' + u.nama + '</option>').join('') +
+                    '</select>' +
+                    '<select class="form-control mx-1" name="warna_id[]" id="pilihan" onchange="handleDropdownChange(this.value)">' +
+                    '<option value="input">-- warna --</option>' +
+                    '<option value="input">Input</option>' +
+                    warna.map(w => '<option value="' + w.id + '">' + w.nama + '</option>').join('') +
+                    '</select>' +
+                    '<input type="text" name="stok[]" class="form-control" placeholder="stok">' +
+                    '<button type="button" class="btn btn-danger mx-1 removeInput">-</button>' +
                     '</div>' +
-                '</div>'
-               );
+                    '</div>'
+                );
             })
 
-       
+
 
             // Menghapus inputan dinamis
             $(document).on('click', '.removeInput', function () {
