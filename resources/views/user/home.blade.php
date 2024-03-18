@@ -26,7 +26,7 @@
         <div class="row d-flex justify-content-center">
             <div class="col-lg-10 col-sm-12">
                 <div class="top-sale-content text-center py-4">
-                    <h4 class="text-center mb-4">Top Sale</h4>
+                    <h4 class="text-center my-4">Top Sale</h4>
                     <div class="top-sale-group d-flex justify-content-center mb-4">
                         <div class="item-top-sale mx-2">
                             <div class="d-flex justify-content-center">
@@ -52,7 +52,7 @@
                         </div>
                     </div>
                     <div>
-                        <button class="btn-top-sale text-center mb-3">More</button>
+                        <button class="btn-top-sale text-center mb-4 mt-2">More</button>
                     </div>
                 </div>
             </div>
@@ -264,101 +264,4 @@
 
 </section>
 
-<!-- <section id="favorite">
-    <div class="container">
-
-        {{-- header --}}
-        <div class="favorite-header" style="padding: 0px 20px">
-            <div class="row">
-                <div class="col-12">
-                    <div class="text-center">
-                        <h2>Favorite Item</h3>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="favorite-group mt-2">
-            <div class="row">
-                <div class="col-sm-12 col-lg-4">
-                    <div class="favorite-list mb-2">
-                        <img src="{{ asset('img/sajadah.png') }}" alt="" class="img-fluid" />
-                        <h5 class="mt-2">Sajadah</h5>
-                        <h6 class="mt-1">IDR 199.000</h6>
-                    </div>
-                </div>
-                <div class="col-sm-12 col-lg-4">
-                    <div class="favorite-list mb-2">
-
-                        <img src="{{ asset('img/sajadah-travel.png') }}" alt="" class="img-fluid" />
-                        <h5 class="mt-2">Sajadah</h5>
-                        <h6 class="mt-1">IDR 199.000</h6>
-                    </div>
-                </div>
-                <div class="col-sm-12 col-lg-4">
-                    <div class="favorite-list mb-2">
-
-                        <img src="{{ asset('img/mukena.png') }}" alt="" class="img-fluid" />
-                        <h5 class="mt-2">Sajadah</h5>
-                        <h6 class="mt-1">IDR 199.000</h6>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</section> -->
-
-<!-- 
-
-
-
-
-
-
-{{-- <footer>
-    <div class="container">
-        <div class="row">
-            <div class="col-3 text-center">
-                <img src="{{ asset('img/logo/sujud.png') }}" alt="" />
-            </div>
-            <div class="col-3 text-start">
-                <h5>Contact Us</h5>
-                <div class="mt-4 footer-body">
-                    <p>lorem@gmail.com</p>
-                    <p>
-                        Kec. Tegalrejo, Kota Yogyakarta, Daerah Istimewa
-                        Yogyakarta
-                    </p>
-                    <p>0813 9371 9073</p>
-                </div>
-            </div>
-            <div class="col-3 text-center">
-                <h5>Collection</h5>
-                <div class="mt-4 footer-body">
-                    <p>Jaket Sport</p>
-                    <p>Sajadah</p>
-                    <p>Mukena</p>
-                    <p>Khimar</p>
-                </div>
-            </div>
-            <div class="col-3 text-center">
-                <h5>Follow Us</h5>
-                <div class="d-flex justify-content-center mt-4">
-                    <div class="medsos-list">
-                        <i class="bi bi-instagram"></i>
-                    </div>
-                    <div class="medsos-list">
-                        <i class="bi bi-youtube"></i>
-                    </div>
-                    <div class="medsos-list">
-                        <i class="bi bi-tiktok"></i>
-                    </div>
-                </div>
-            </div>
-            <hr />
-            <div class="col-12 text-end copyright">
-                <p>© 2021 Sujud Company. All Rights Reserved</p>
-            </div>
-        </div>
-    </div>
-</footer> --}} -->
+@include('user.layouts.footer')
