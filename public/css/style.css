@@ -719,6 +719,110 @@ table th {
     background-color: #dfac29;
 }
 
+/* top product */
+#top-product {
+    margin-bottom: 50px;
+}
+
+#top-product h4 {
+    color: #0081c9;
+    font-size: 32px;
+    font-weight: bold;
+}
+
+/* new product */
+#new-product h4 {
+    color: #0081c9;
+    font-size: 32px;
+    font-weight: bold;
+}
+
+#new-product {
+    padding-bottom: 100px;
+}
+
+.new-product-item:hover {
+    background-color: #eeeeeeaf;
+}
+
+.new-product-group {
+    margin: -4;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: start; /* Menambahkan properti untuk meratakan item di dalam kontainer */
+}
+
+.new-product-item {
+    position: relative;
+    padding: 16px 24px;
+    margin: 8px; /* Menambahkan margin antar item */
+    width: calc(25% - 16px); /* Mengurangi 16px untuk mengkompensasi margin */
+    box-sizing: border-box;
+    border: none;
+    box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+}
+
+.new-product-item figure {
+    position: relative;
+    padding: 16px 0px;
+}
+
+.new-product-item img {
+    position: relative;
+    z-index: 2;
+}
+
+.new-product-overlay {
+    position: absolute;
+    background-color: #f6f6f6;
+    height: 100%;
+    width: 100%;
+    top: 0;
+    left: 0;
+    z-index: 1;
+}
+.new-product-star i {
+    font-size: 12px;
+    color: #ffc93c;
+}
+
+.new-product-sold span {
+    color: #0081c9;
+    opacity: 0.8;
+}
+
+.new-product-name h5 {
+    margin: 0px;
+    color: #0081c9;
+    font-size: 20px;
+    font-weight: 600;
+}
+.new-product-price span {
+    color: #5bc0f8;
+    font-size: 16px;
+    font-weight: 400;
+    border: none;
+}
+
+.btn-new-product {
+    background-color: #ffc93c;
+    color: white;
+    padding: 8px 32px;
+    border-radius: 16px;
+    border: none;
+    font-size: 20px;
+}
+.btn-new-product:hover {
+    background-color: #dfac29;
+    border: none;
+}
+
+/* detail product */
+#detail {
+    background-color: white;
+}
+
 /* mobil screen */
 
 @media screen and (max-width: 600px) {

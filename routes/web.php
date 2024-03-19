@@ -1,7 +1,6 @@
 <?php
 
 use App\Http\Controllers\PesananController;
-use App\Http\Controllers\TransaksiController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\KategoriController;
 use App\Http\Controllers\ProdukController;
@@ -16,7 +15,7 @@ Route::get('/shop', function () {
     return view('user.shop');
 });
 Route::get('/detail', function () {
-    return view('detailProduk');
+    return view('user.detail-produk');
 });
 Route::get('/cart', function () {
     return view('cart');

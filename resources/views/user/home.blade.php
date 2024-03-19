@@ -143,6 +143,7 @@
     </div>
 </section>
 
+{{-- collection --}}
 <section id="collection">
     <div class="container">
 
@@ -217,6 +218,7 @@
     </div>
 </section>
 
+{{-- subscribe --}}
 <section id="subscribe">
     <div class="container text-center">
         <div class="subscribe-header">
@@ -235,6 +237,7 @@
     </div>
 </section>
 
+{{-- seen --}}
 <section id="seen">
     <div class="container text-center">
         <h4>A Seen On</h4>
