@@ -11,10 +11,11 @@ return new class extends Migration
     {
         Schema::create('varians', function (Blueprint $table) {
             $table->id();
-            $table->string('ukuran');
             $table->string('warna');
+            $table->string('ukuran');
+            $table->integer('harga');
             $table->integer('stok')->nullable();
-            $table->integer('harga')->nullable();
+            $table->integer('harga_diskon')->nullable();
             $table->timestamps();
         });
     }

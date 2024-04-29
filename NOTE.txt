@@ -1,0 +1,10 @@
+stok di table produk tidak diperlukan karena ada di variasi
+harga di table produk tidak diperlukan karena ada di variasi
+harga diskon di table produk tidak diperlukan karena ada di variasi
+relasi gambar di pindah ke tabel variasi, karena tabel produk menjadi tidak relevan
+
+relasi pesanan di pindah ke tabel variasi, karena tabel produk menjadi tidak relevan
+relasi ulasan di pindah ke tabel variasi, karena tabel produk menjadi tidak relevan
+
+tabel ukuran dihapus
+tabel warna dihapus

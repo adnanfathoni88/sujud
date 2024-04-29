@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\api\ApiProductController;
 use App\Http\Controllers\api\KategoriController;
 use App\Http\Controllers\PesananController;
 use App\Http\Controllers\ProdukController;
@@ -21,12 +22,14 @@ Route::post('/kategori', [KategoriController::class, 'store']);
 Route::put('/kategori/{id}', [KategoriController::class, 'update']);
 Route::delete('/kategori/{id}', [KategoriController::class, 'destroy']);
 
+Route::prefix("/produk")->group(function () {
+	Route::get('/', [ApiProductController::class, 'index']);
+	Route::post('/', [ApiProductController::class, 'store']);
+	Route::get('/{id}', [ApiProductController::class, 'show']);
+	Route::put('/{id}', [ApiProductController::class, 'update']);
+	Route::delete('/{id}', [ApiProductController::class, 'destroy']);
+});
 
-Route::get('/produk', [ProdukController::class, 'index']);
-Route::get('/produk/{id}', [ProdukController::class, 'show']);
-Route::post('/produk', [ProdukController::class, 'store']);
-Route::put('/produk/{id}', [ProdukController::class, 'update']);
-Route::delete('/produk/{id}', [ProdukController::class, 'destroy']);
 
 Route::get('/pesanan', [PesananController::class, 'index']);
 Route::get('/pesanan', [PesananController::class, 'index']);

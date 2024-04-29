@@ -36,10 +36,10 @@ return new class extends Migration
         }
 
         // pesanan
-        if (!Schema::hasColumn('pesanans', 'produk_id')) {
+        if (!Schema::hasColumn('pesanans', 'varian_id')) {
             Schema::table('pesanans', function (Blueprint $table) {
-                $table->unsignedBigInteger('produk_id');
-                $table->foreign('produk_id')->references('id')->on('produks')->onDelete('restrict')->onUpdate('cascade');
+                $table->unsignedBigInteger('varian_id');
+                $table->foreign('varian_id')->references('id')->on('varians')->onDelete('restrict')->onUpdate('cascade');
             });
         }
 
@@ -51,10 +51,10 @@ return new class extends Migration
         }
 
         // ulasan
-        if (!Schema::hasColumn('ulasans', 'produk_id')) {
+        if (!Schema::hasColumn('ulasans', 'varian_id')) {
             Schema::table('ulasans', function (Blueprint $table) {
-                $table->unsignedBigInteger('produk_id');
-                $table->foreign('produk_id')->references('id')->on('produks')->onDelete('restrict')->onUpdate('cascade');
+                $table->unsignedBigInteger('varian_id');
+                $table->foreign('varian_id')->references('id')->on('varians')->onDelete('restrict')->onUpdate('cascade');
             });
         }
         if (!Schema::hasColumn('ulasans', 'user_id')) {
@@ -72,10 +72,10 @@ return new class extends Migration
 
 
         // gambar
-        if (!Schema::hasColumn('gambars', 'produk_id')) {
+        if (!Schema::hasColumn('gambars', 'varian_id')) {
             Schema::table('gambars', function (Blueprint $table) {
-                $table->unsignedBigInteger('produk_id');
-                $table->foreign('produk_id')->references('id')->on('produks')->onDelete('restrict')->onUpdate('cascade');
+                $table->unsignedBigInteger('varian_id');
+                $table->foreign('varian_id')->references('id')->on('varians')->onDelete('restrict')->onUpdate('cascade');
             });
         }
 
@@ -85,22 +85,6 @@ return new class extends Migration
             Schema::table('varians', function (Blueprint $table) {
                 $table->unsignedBigInteger('produk_id');
                 $table->foreign('produk_id')->references('id')->on('produks')->onDelete('restrict')->onUpdate('cascade');
-            });
-        }
-
-        // ukuran
-        if (!Schema::hasColumn('varians', 'ukuran_id')) {
-            Schema::table('varians', function (Blueprint $table) {
-                $table->unsignedBigInteger('ukuran_id')->nullable();
-                $table->foreign('ukuran_id')->references('id')->on('ukurans')->onDelete('restrict')->onUpdate('cascade');
-            });
-        }
-
-        //warna 
-        if (!Schema::hasColumn('varians', 'warna_id')) {
-            Schema::table('varians', function (Blueprint $table) {
-                $table->unsignedBigInteger('warna_id')->nullable();
-                $table->foreign('warna_id')->references('id')->on('warnas')->onDelete('restrict')->onUpdate('cascade');
             });
         }
     }
@@ -123,20 +107,20 @@ return new class extends Migration
         });
 
         Schema::table('pesanans', function (Blueprint $table) {
-            $table->dropForeign(['produk_id']);
+            $table->dropForeign(['varian_id']);
             $table->dropForeign(['user_id']);
-            $table->dropColumn(['produk_id', 'user_id']);
+            $table->dropColumn(['varian_id', 'user_id']);
         });
 
         Schema::table('ulasans', function (Blueprint $table) {
-            $table->dropForeign(['produk_id']);
+            $table->dropForeign(['varian_id']);
             $table->dropForeign(['user_id']);
-            $table->dropColumn(['produk_id', 'user_id']);
+            $table->dropColumn(['varian_id', 'user_id']);
         });
 
         Schema::table('gambars', function (Blueprint $table) {
-            $table->dropForeign(['produk_id']);
-            $table->dropColumn(['produk_id']);
+            $table->dropForeign(['varian_id']);
+            $table->dropColumn(['varian_id']);
         });
 
         Schema::table('varians', function (Blueprint $table) {

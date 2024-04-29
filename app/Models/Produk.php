@@ -9,7 +9,7 @@ class Produk extends Model
 {
     use HasFactory;
     protected $table = 'produks';
-    protected $fillable = ['kode', 'nama', 'deskripsi', 'harga_produk', 'harga_diskon', 'stok', 'kategori_id'];
+    protected $fillable = ['kode', 'nama', 'deskripsi'];
 
     public function kategori()
     {
@@ -20,15 +20,15 @@ class Produk extends Model
     {
         return $this->hasMany(Gambar::class);
     }
-    public function ulasan()
-    {
-        return $this->hasMany(Ulasan::class);
-    }
+    // public function ulasan()
+    // {
+    //     return $this->hasMany(Ulasan::class);
+    // }
 
-    public function pesanan()
-    {
-        return $this->hasMany(Pesanan::class);
-    }
+    // public function pesanan()
+    // {
+    //     return $this->hasMany(Pesanan::class);
+    // }
     function varian()
     {
         return $this->hasMany(Varian::class);

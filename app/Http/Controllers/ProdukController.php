@@ -23,6 +23,7 @@ class ProdukController extends Controller
         $ukuran = Ukuran::all();
         return view('produk.index', compact('produk', 'gambar'));
     }
+
     function create()
     {
         $kategori = Kategori::all();
@@ -30,11 +31,12 @@ class ProdukController extends Controller
         $ukuran = Ukuran::all();
         return view('produk.create', compact('kategori', 'warna', 'ukuran'));
     }
+
     function store(Request $request)
     {
         $ukuran = $request->ukuran_id;
         $warna = $request->warna_id;
-
+		
         foreach ($ukuran as $u) {
             foreach ($warna as $w) {
                 $data = [

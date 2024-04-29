@@ -18,18 +18,17 @@ Route::get('/detail', function () {
     return view('user.detail-produk');
 });
 Route::get('/cart', function () {
-    return view('cart');
+    return view('user.cart');
 });
 Route::get('/checkout', function () {
-    return view('checkout');
+    return view('user.checkout');
 });
 Route::get('/location', function () {
-    return view('location');
+    return view('user.location');
 });
 Route::get('/about', function () {
-    return view('about');
+    return view('user.about');
 });
-
 
 Route::get('/kategori', [KategoriController::class, 'index']);
 Route::get('/add-kategori', [KategoriController::class, 'create']);
