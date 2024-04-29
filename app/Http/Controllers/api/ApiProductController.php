@@ -7,7 +7,6 @@ namespace App\Http\Controllers\api;
 use App\Models\Produk;
 use App\Models\Varian;
 use App\Traits\ResponseFormat;
-use Error;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\DB;
