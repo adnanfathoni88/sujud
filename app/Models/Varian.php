@@ -18,4 +18,14 @@ class Varian extends Model
         'stok',
         'produk_id',
     ];
+
+	public function produk()
+	{
+		return $this->belongsTo(Produk::class);
+	}
+
+	public function gambar()
+	{
+		return $this->hasOne(Gambar::class);
+	}
 }
