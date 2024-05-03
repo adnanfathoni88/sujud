@@ -2,7 +2,11 @@
 
 use App\Http\Controllers\api\ApiAuthController;
 use App\Http\Controllers\api\ApiKategoriController;
+use App\Http\Controllers\api\ApiPesananController;
 use App\Http\Controllers\api\ApiProductController;
+use App\Http\Controllers\api\ApiTransaksiController;
+use App\Http\Controllers\api\ApiUlasanController;
+use App\Http\Controllers\api\ApiUlasanReplyController;
 use App\Http\Controllers\api\ApiVarianController;
 use App\Http\Controllers\api\KategoriController;
 use App\Http\Controllers\PesananController;
@@ -59,8 +63,43 @@ Route::prefix("/produk")->middleware('auth.stateless')->group(function () {
 		Route::get('/{id}', [ApiVarianController::class, 'show']);
 		Route::post('/update/{id}', [ApiVarianController::class, 'update']);
 		Route::delete('/{id}', [ApiVarianController::class, 'destroy']);
+
+		Route::prefix("/{id_varian}/ulasan")->group(function () {
+			Route::get('/', [ApiUlasanController::class, 'index']);
+			Route::post('/', [ApiUlasanController::class, 'store']);
+			Route::get('/{id}', [ApiUlasanController::class, 'show']);
+			Route::put('/{id}', [ApiUlasanController::class, 'update']);
+			Route::delete('/{id}', [ApiUlasanController::class, 'destroy']);
+
+			Route::prefix("/{id_ulasan_parent}/reply")->middleware('guard.admin')->group(function () {
+				Route::get('/', [ApiUlasanReplyController::class, 'index']);
+				Route::post('/', [ApiUlasanReplyController::class, 'store']);
+				Route::get('/{id}', [ApiUlasanReplyController::class, 'show']);
+				Route::put('/{id}', [ApiUlasanReplyController::class, 'update']);
+				Route::delete('/{id}', [ApiUlasanReplyController::class, 'destroy']);
+			});
+		});
 	});
 });
+
+
+Route::prefix("/pesanan")->group(function () {
+	Route::get('/', [ApiPesananController::class, 'index']);
+	Route::post('/', [ApiPesananController::class, 'store']);
+	Route::get('/{id}', [ApiPesananController::class, 'show']);
+	Route::put('/{id}', [ApiPesananController::class, 'update']);
+	Route::delete('/{id}', [ApiPesananController::class, 'destroy']);
+
+	Route::prefix("/{pesanan_group}/transaksi")->group(function () {
+		Route::get('/metode-bayar', [ApiTransaksiController::class, 'paymentMethod']);
+		Route::get('/metode-bayar/{payment_method}', [ApiTransaksiController::class, 'transaction']);
+		Route::post('/callback', [ApiTransaksiController::class, 'callbackAction']);
+		// Route::get('/{id}', [ApiPesananController::class, 'show']);
+		// Route::put('/{id}', [ApiPesananController::class, 'update']);
+		// Route::delete('/{id}', [ApiPesananController::class, 'destroy']);
+	});	
+});
+
 
 // Route::get('/pesanan', [PesananController::class, 'index']);
 // Route::get('/pesanan', [PesananController::class, 'index']);

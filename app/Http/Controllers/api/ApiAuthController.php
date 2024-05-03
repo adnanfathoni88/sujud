@@ -4,6 +4,7 @@ namespace App\Http\Controllers\api;
 
 use App\Models\User;
 use App\Traits\ResponseFormat;
+use App\Traits\UserCookie;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\Crypt;
@@ -12,7 +13,7 @@ use Illuminate\Support\Facades\Validator;
 
 class ApiAuthController extends Controller
 {
-	use ResponseFormat;
+	use ResponseFormat, UserCookie;
 
 	public function register(Request $req) {
 		$validator = Validator::make($req->all(), [
@@ -48,7 +49,7 @@ class ApiAuthController extends Controller
 		if (!$m) return $this->res("invalid credentials", 401);
 		if (!Hash::check($req->password, $m->password)) return $this->res("invalid credentials", 401);
 
-		$encrypted = Crypt::encrypt($m->id);
+		$encrypted = $this->setUserCookie($m->id);
 
 		return $this->res("Success", 201)->withCookie('token', $encrypted, 24 * 60, '/', null, false, true, 'strict');
 	}

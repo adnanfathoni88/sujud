@@ -13,7 +13,6 @@ return new class extends Migration
     {
         Schema::create('ulasans', function (Blueprint $table) {
             $table->id();
-            $table->date('tgl_ulasan');
             $table->text('konten');
             $table->integer('rating');
             $table->timestamps();

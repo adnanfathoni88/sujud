@@ -103,6 +103,8 @@ class ApiVarianController extends Controller
 		if (!$request->hasFile('image')) {
 			$m = Varian::where('produk_id', $id_produk)
 				->find($id);
+			if(!$m) return $this->res("Not Found", 404);
+			
 			$m->stok = $request->stok;
 			$m->harga = $request->harga;
 			$m->warna = $request->warna;

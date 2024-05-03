@@ -7,10 +7,9 @@ use App\Traits\ResponseFormat;
 use App\Traits\UserCookie;
 use Closure;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Crypt;
 use Symfony\Component\HttpFoundation\Response;
 
-class StatelessAuthMiddleware
+class AdminGuardMiddleware
 {
 	use ResponseFormat, UserCookie;
     /**
@@ -26,8 +25,10 @@ class StatelessAuthMiddleware
 		$decrypted = $this->getUserCookie($token);
 		if(!is_numeric($decrypted)) return $this->res("unauthenticated", 401);
 
-		$user = User::find($decrypted);
+		$user = User::find($decrypted)->first();
 		if(!$user) return $this->res("unauthenticated", 401);
+		
+		if($user->role->nama !== 'admin') return $this->res("unauthorized", 403);
 
         return $next($request);
     }

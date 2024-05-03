@@ -16,11 +16,13 @@ return new class extends Migration
     {
         Schema::create('pesanans', function (Blueprint $table) {
             $table->id();
-            $table->string('kode');
-            $table->date('tgl_pesan');
-            $table->string('status'); // pending, success, failed
-            $table->integer('total');
             $table->string('alamat');
+            $table->string('pesanan_grup');
+            $table->integer('qty');
+            $table->integer('total');
+            $table->integer('diskon');
+            $table->date('tgl_pesan')->default(now());
+            $table->enum('status', ["belum-bayar", "dibayar", "failed"]);
             $table->timestamps();
         });
     }

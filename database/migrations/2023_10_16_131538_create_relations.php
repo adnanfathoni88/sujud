@@ -26,15 +26,6 @@ return new class extends Migration
             });
         }
 
-
-        // transaksi
-        if (!Schema::hasColumn('transaksis', 'pesanan_id')) {
-            Schema::table('transaksis', function (Blueprint $table) {
-                $table->unsignedBigInteger('pesanan_id');
-                $table->foreign('pesanan_id')->references('id')->on('pesanans')->onDelete('restrict')->onUpdate('cascade');
-            });
-        }
-
         // pesanan
         if (!Schema::hasColumn('pesanans', 'varian_id')) {
             Schema::table('pesanans', function (Blueprint $table) {
@@ -99,11 +90,6 @@ return new class extends Migration
         Schema::table('produks', function (Blueprint $table) {
             $table->dropForeign(['kategori_id']);
             $table->dropColumn(['kategori_id']);
-        });
-
-        Schema::table('transaksis', function (Blueprint $table) {
-            $table->dropForeign(['pesanan_id']);
-            $table->dropColumn(['pesanan_id']);
         });
 
         Schema::table('pesanans', function (Blueprint $table) {

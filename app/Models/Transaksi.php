@@ -16,6 +16,10 @@ class Transaksi extends Model
         'status',
         'total',
         'pesanan_id',
+		'reference',
+		'publisher_order_id',
+		'signature',
+		'order_id',
     ];
 
     function pesanan()

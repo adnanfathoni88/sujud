@@ -11,11 +11,15 @@ return new class extends Migration
     {
         Schema::create('transaksis', function (Blueprint $table) {
             $table->id();
-            $table->string('kode');
             $table->date('tgl_bayar');
             $table->string('metode');
             $table->string('status'); // pending, success, failed
             $table->string('total');
+			$table->string('pesanan_grup');
+			$table->string('reference');
+			$table->string('publisher_order_id');
+			$table->string('signature');
+			$table->string('order_id');
             $table->timestamps();
         });
     }

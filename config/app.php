@@ -185,4 +185,6 @@ return [
         // 'Example' => App\Facades\Example::class,
     ])->toArray(),
 
+	'payment_merchant' => 'DS18909',
+	'payment_api_key' => env("DUITKU_API_KEY"),
 ];

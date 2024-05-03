@@ -21,9 +21,9 @@ class Pesanan extends Model
         'user_id',
     ];
 
-    function produk()
+    function varian()
     {
-        return $this->belongsTo(Produk::class);
+        return $this->belongsTo(Varian::class);
     }
 
     function user()
