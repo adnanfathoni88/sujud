@@ -50,8 +50,8 @@ class ApiPesananController extends Controller
 				'user_id' => $userId,
 				'qty' => $qty,
 				"diskon" => $diskon * $qty,
-				'varian_id' => $variant_id,
 				"total" => ($total * $qty) - ($diskon * $qty),
+				'varian_id' => $variant_id,
 			];
 		}
 
@@ -86,7 +86,7 @@ class ApiPesananController extends Controller
 			
 			if(isset($response['responseMessage']) && $response['responseMessage'] === 'SUCCESS') {
 				Pesanan::insert($mVarians->toArray());
-				return $this->res(['payments' => $response['paymentFee']], 201);	
+				return $this->res(['payments' => $response['paymentFee'], 'pesanan_grup' => $pesananGroup], 201);	
 			} else {
 				$message = isset($response['responseMessage']) ? $response['responseMessage'] : $response['Message'];
 				return $this->res($message, 400);
