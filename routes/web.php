@@ -7,9 +7,7 @@ use App\Http\Controllers\ProdukController;
 use App\Http\Controllers\UlasanController;
 
 
-Route::get('/', function () {
-    return view('user.home');
-});
+Route::any('{all}', fn () => view('index'))->where('all','^((?!api).)*?');
 
 Route::get('/shop', function () {
     return view('user.shop');
