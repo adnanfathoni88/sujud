@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\api;
 
+use App\Models\Ongkir;
 use App\Models\Pesanan;
 use App\Models\Varian;
 use App\Traits\Payment;
@@ -10,6 +11,7 @@ use App\Traits\UserCookie;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use Illuminate\Support\Collection;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Str;
@@ -70,7 +72,7 @@ class ApiPesananController extends Controller
 		$alamat = $request->alamat;
 		$userId = $this->getUserCookie($request->cookie('token'));
 		$pesananCollection = collect($request->pesanan);
-		$pesananGroup = Str::uuid()->toString();
+		$pesananGroup = "INV-".strtoupper(Str::uuid()->toString());
 		$varians = getVariant($pesananCollection);
 		$mVarians = Varian::whereIn('id', $varians)
 			->get()
@@ -79,21 +81,15 @@ class ApiPesananController extends Controller
 				return createPesanan($v->id, $pesanan['qty'], $pesananGroup, $alamat, $userId, $v->harga_diskon, $v->harga);
 			});
 			
-			
-		
-		try {
-			$response = $this->apiPaymentMethod($mVarians->sum('total'));
-			
-			if(isset($response['responseMessage']) && $response['responseMessage'] === 'SUCCESS') {
-				Pesanan::insert($mVarians->toArray());
-				return $this->res(['payments' => $response['paymentFee'], 'pesanan_grup' => $pesananGroup], 201);	
-			} else {
-				$message = isset($response['responseMessage']) ? $response['responseMessage'] : $response['Message'];
-				return $this->res($message, 400);
-			}
-		} catch (\Throwable $th) {
-			return $this->res($th->getMessage(), 201);
-		}
+		DB::transaction(function() use($mVarians, $pesananGroup, $userId) {
+			Pesanan::insert($mVarians->toArray());
+			Ongkir::create([
+				'pelanggan_user_id' => $userId,
+				'pesanan_grup' => $pesananGroup, 
+			]);
+		});
+
+		return $this->res("Success", 201);
     }
 
     /**

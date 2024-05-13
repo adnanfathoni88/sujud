@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\api\ApiAuthController;
 use App\Http\Controllers\api\ApiKategoriController;
+use App\Http\Controllers\api\ApiOngkirController;
 use App\Http\Controllers\api\ApiPesananController;
 use App\Http\Controllers\api\ApiProductController;
 use App\Http\Controllers\api\ApiTransaksiController;
@@ -100,6 +101,13 @@ Route::prefix("/pesanan")->group(function () {
 	});	
 });
 
+Route::prefix("/ongkir")->group(function() {
+	Route::get('/', [ApiOngkirController::class, 'index']);
+	// Route::post('/', [ApiOngkirController::class, 'store']);
+	Route::get('/{id}', [ApiOngkirController::class, 'show']);
+	Route::put('/{id}', [ApiOngkirController::class, 'update']);
+	Route::delete('/{id}', [ApiOngkirController::class, 'destroy']);
+});
 
 // Route::get('/pesanan', [PesananController::class, 'index']);
 // Route::get('/pesanan', [PesananController::class, 'index']);

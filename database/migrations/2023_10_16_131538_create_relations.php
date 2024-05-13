@@ -78,6 +78,15 @@ return new class extends Migration
                 $table->foreign('produk_id')->references('id')->on('produks')->onDelete('restrict')->onUpdate('cascade');
             });
         }
+
+		// ongkir
+		if (!Schema::hasColumn('ongkirs', 'pelanggan_user_id')) {
+            Schema::table('ongkirs', function (Blueprint $table) {
+                $table->unsignedBigInteger('pelanggan_user_id');
+                $table->foreign('pelanggan_user_id')->references('id')->on('users')->onDelete('restrict')->onUpdate('cascade');
+            });
+        }
+
     }
 
     public function down(): void
@@ -122,6 +131,11 @@ return new class extends Migration
         Schema::table('varians', function (Blueprint $table) {
             $table->dropForeign(['warna_id']);
             $table->dropColumn(['warna_id']);
+        });
+
+        Schema::table('ongkirs', function (Blueprint $table) {
+            $table->dropForeign(['pelanggan_user_id']);
+            $table->dropColumn(['pelanggan_user_id']);
         });
     }
 };
