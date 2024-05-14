@@ -33,8 +33,11 @@ class ApiAuthController extends Controller
 		$m->email = $toSave['email'];
 		$m->password = $toSave['password'];
 		$m->save();
+		$m->id;
 
-		return $this->res("Success", 201);
+		$encrypted = $this->setUserCookie($m->id);
+
+		return $this->res("Success", 201)->withCookie('token', $encrypted, 24 * 60, '/', null, false, true, 'strict');
 	}
 
 	public function login(Request $req) {

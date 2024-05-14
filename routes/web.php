@@ -4,10 +4,13 @@ use App\Http\Controllers\PesananController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\KategoriController;
 use App\Http\Controllers\ProdukController;
+use App\Http\Controllers\ReactHandlerController;
 use App\Http\Controllers\UlasanController;
 
 
-Route::any('{all}', fn () => view('index'))->where('all','^((?!api).)*?');
+Route::get("/login", [ReactHandlerController::class, "login"]);
+Route::get("/register", [ReactHandlerController::class, "register"]);
+Route::any('{all}', [ReactHandlerController::class, "index"])->where('all','^((?!api).)*?');
 
 Route::get('/shop', function () {
     return view('user.shop');

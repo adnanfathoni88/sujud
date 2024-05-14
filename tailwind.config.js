@@ -1,12 +1,17 @@
 /** @type {import('tailwindcss').Config} */
-export default {
+module.exports = {
+	darkMode: ["class"],
 	content: [
-		"./resources/**/*.ts",
-		"./resources/**/*.tsx",
+		'./resources/js/**/*.{ts,tsx}',
+		"./node_modules/flowbite/**/*.js"
 	],
+	prefix: "",
 	theme: {
-		extend: {},
+		extend: {
+			colors: {
+				first: "#4f46e5"
+			},
+		},
 	},
-	plugins: [],
+	plugins: [require('flowbite/plugin')],
 }
-
