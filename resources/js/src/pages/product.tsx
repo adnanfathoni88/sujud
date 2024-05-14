@@ -1,5 +1,5 @@
-import ProductModule from "../modules/product"
+import ProductModule from "../modules/product";
 
 export default function ProductPage() {
-	return <ProductModule />
+    return <ProductModule />;
 }

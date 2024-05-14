@@ -30,7 +30,7 @@ use Illuminate\Support\Facades\Route;
 // Route::put('/kategori/{id}', [KategoriController::class, 'update']);
 // Route::delete('/kategori/{id}', [KategoriController::class, 'destroy']);
 
-Route::get("/uploaded/{filename}", function($filename) {
+Route::get("/uploaded/{filename}", function ($filename) {
 	try {
 		return response()->file(storage_path("app/public/uploaded/$filename"));
 	} catch (\Throwable $th) {
@@ -38,7 +38,7 @@ Route::get("/uploaded/{filename}", function($filename) {
 	}
 });
 
-Route::prefix("/auth")->group(function() {
+Route::prefix("/auth")->group(function () {
 	Route::post("/register", [ApiAuthController::class, 'register']);
 	Route::post("/login", [ApiAuthController::class, 'login']);
 });
@@ -98,10 +98,10 @@ Route::prefix("/pesanan")->group(function () {
 		// Route::get('/{id}', [ApiPesananController::class, 'show']);
 		// Route::put('/{id}', [ApiPesananController::class, 'update']);
 		// Route::delete('/{id}', [ApiPesananController::class, 'destroy']);
-	});	
+	});
 });
 
-Route::prefix("/ongkir")->group(function() {
+Route::prefix("/ongkir")->group(function () {
 	Route::get('/', [ApiOngkirController::class, 'index']);
 	// Route::post('/', [ApiOngkirController::class, 'store']);
 	Route::get('/{id}', [ApiOngkirController::class, 'show']);

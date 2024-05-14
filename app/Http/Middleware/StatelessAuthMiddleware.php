@@ -12,7 +12,7 @@ use Symfony\Component\HttpFoundation\Response;
 
 class StatelessAuthMiddleware
 {
-	use ResponseFormat, UserCookie;
+    use ResponseFormat, UserCookie;
     /**
      * Handle an incoming request.
      *
@@ -20,14 +20,14 @@ class StatelessAuthMiddleware
      */
     public function handle(Request $request, Closure $next): Response
     {
-		$token = $request->cookie('token');
-		if(!$token) return $this->res("unauthenticated", 401);
-		
-		$decrypted = $this->getUserCookie($token);
-		if(!is_numeric($decrypted)) return $this->res("unauthenticated", 401);
+        // $token = $request->cookie('token');
+        // if(!$token) return $this->res("unauthenticated", 401);
 
-		$user = User::find($decrypted);
-		if(!$user) return $this->res("unauthenticated", 401);
+        // $decrypted = $this->getUserCookie($token);
+        // if(!is_numeric($decrypted)) return $this->res("unauthenticated", 401);
+
+        // $user = User::find($decrypted);
+        // if(!$user) return $this->res("unauthenticated", 401);
 
         return $next($request);
     }
