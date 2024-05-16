@@ -6,6 +6,7 @@ import {
     getProductList,
 } from "../api/products";
 import { queryClient } from "../../main";
+import { TAddProductSchema } from "../../modules/product/product-add/schema";
 
 // show all
 export function useGetProductList() {
@@ -32,41 +33,10 @@ export function useGetProductList() {
 // }
 
 // Update hook to accept additional inputs
-export function useAddProduct({
-    kode,
-    nama,
-    deskripsi,
-    harga,
-    warna,
-    stok,
-    image,
-    ukuran,
-    kategoriId,
-}: {
-    kode: string;
-    nama: string;
-    deskripsi: string;
-    harga: number;
-    warna: string;
-    stok: number;
-    image: File;
-    ukuran: string;
-    kategoriId: number;
-}) {
+export function useAddProduct() {
     return useMutation({
-        mutationKey: ["AddCategory", nama],
-        mutationFn: () =>
-            addProduct({
-                kode,
-                nama,
-                deskripsi,
-                harga,
-                warna,
-                stok,
-                image,
-                ukuran,
-                kategoriId,
-            }), // Pass additional inputs
+        mutationKey: ["useAddCategory"],
+        mutationFn: (param: TAddProductSchema) => addProduct(param),
         onSuccess: () => {
             queryClient.prefetchQuery({
                 queryKey: ["useGetProductList"],

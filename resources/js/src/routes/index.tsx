@@ -10,6 +10,7 @@ import { categoryEditRoute } from "./category/category-edit";
 import { categoryDeleteRoute } from "./category/category-delete";
 import { loginRoute } from "./login";
 import { registerRoute } from "./register";
+import { productUpdateRoute } from "./product/product-update";
 
 export const rootRoute = createRootRoute({
     component: () => (
@@ -23,6 +24,7 @@ export const rootRoute = createRootRoute({
 export const routeTree = rootRoute.addChildren([
     productRoute,
     productAddRoute,
+	productUpdateRoute,
     productDetailRoute,
     categoryRoute,
     categoryDetailRoute,

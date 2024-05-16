@@ -44,6 +44,7 @@ class ApiProductController extends Controller
 			'warna' => 'required|max:255',
 			'ukuran' => 'required|max:255',
 			'harga' => 'required|numeric|min:0',
+			'stok' => 'required|numeric|min:1',
 			// image
 			'image' => 'required|image|mimes:jpeg,png|max:3072'
 		]);
@@ -68,6 +69,7 @@ class ApiProductController extends Controller
 			$m2->warna = $request->warna;
 			$m2->ukuran = $request->ukuran;
 			$m2->produk_id = $m->id;
+			$m2->stok = $m->stok;
 			$m2->save();	
 
 			$m3 = new Gambar();

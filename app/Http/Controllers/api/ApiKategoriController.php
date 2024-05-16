@@ -26,7 +26,7 @@ class ApiKategoriController extends Controller
   public function store(Request $request)
   {
     $validator = Validator::make($request->all(), [
-      'nama' => 'required|max:255',
+      'nama' => 'required|max:255|unique:kategoris,nama',
     ]);
     if ($validator->fails()) return $this->res($validator->messages(), 400);
 

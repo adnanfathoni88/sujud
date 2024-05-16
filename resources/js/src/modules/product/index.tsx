@@ -6,11 +6,9 @@ import { Link } from "@tanstack/react-router";
 const ProductModule: React.FC = () => {
     const { data } = useGetProductList();
 
-    if (!data || !Array.isArray(data.response.data)) {
+    if (!Array.isArray(data?.response?.data)) {
         return <div>Data is not available or not in expected format</div>;
     }
-
-    console.log(data.response.data);
 
     return (
         <>
@@ -52,9 +50,9 @@ const ProductModule: React.FC = () => {
                                         {item.kategori_id}
                                     </td>
                                     <td>
-                                        <button className="bg-yellow-300 text-white px-6 py-2 rounded-md hover:bg-yellow-400">
+                                        <Link to={`/product/update/${item.id}`} className="bg-yellow-300 text-white px-6 py-[10.5px] rounded-md hover:bg-yellow-400">
                                             Edit
-                                        </button>
+                                        </Link>
                                         <button className="bg-rose-500 text-white px-6 py-2 rounded-md hover:bg-rose-600 mx-1">
                                             Hapus
                                         </button>
