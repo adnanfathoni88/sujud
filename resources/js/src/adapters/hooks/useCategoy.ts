@@ -25,10 +25,10 @@ export function useGetCategoryById({ id }: { id: number }) {
 }
 
 // create
-export function useAddCategory({ nama }: { nama: string }) {
+export function useAddCategory() {
     return useMutation({
-        mutationKey: ["AddCategory", nama],
-        mutationFn: () => addCategory(nama),
+        mutationKey: ["AddCategory"],
+        mutationFn: (nama: string) => addCategory(nama),
         onSuccess: () => {
             queryClient.prefetchQuery({
                 queryKey: ["useGetCategoryList"],
@@ -39,27 +39,19 @@ export function useAddCategory({ nama }: { nama: string }) {
 }
 
 // edit
-export function useEditCategory(
-    { id }: { id: number },
-    { nama }: { nama: string }
-) {
+export function useEditCategory() {
     return useMutation({
-        mutationKey: ["EditCategory", id, nama],
-        mutationFn: () => editCategoryById(id, nama),
-        onSuccess: () => {
-            queryClient.prefetchQuery({
-                queryKey: ["useGetCategoryList"],
-                queryFn: () => getCategoryList(),
-            });
-        },
+        mutationKey: ["useEditCategory"],
+        mutationFn: ({id, nama}: { id: number, nama: string }) => editCategoryById(id, nama),
+        onSuccess: () => {},
     });
 }
 
 // delete
-export function useDeleteCategoryById({ id }: { id: number }) {
+export function useDeleteCategoryById() {
     return useMutation({
-        mutationKey: ["useDeleteCategoryById", id],
-        mutationFn: () => deleteCategoryById(id),
+        mutationKey: ["useDeleteCategoryById"],
+        mutationFn: ({ id }: { id: number }) => deleteCategoryById(id),
         onSuccess: () => {
             queryClient.prefetchQuery({
                 queryKey: ["useGetCategoryList"],

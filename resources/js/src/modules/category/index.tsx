@@ -1,11 +1,12 @@
 import { useGetCategoryList } from "../../adapters/hooks/useCategoy";
 import { Link } from "@tanstack/react-router";
 import SideBar from "../../components/sidebar";
+import CategoryDeleteModule from "./category-delete";
 
 const CategoryModul: React.FC = () => {
     const { data } = useGetCategoryList();
 
-    if (!data || !Array.isArray(data.response)) {
+    if (!Array.isArray(data?.response)) {
         return <div>Data is not available or not in expected format</div>;
     }
 
@@ -46,13 +47,7 @@ const CategoryModul: React.FC = () => {
                                                 Edit
                                             </button>
                                         </Link>
-                                        <Link
-                                            to={"/category/delete/" + item.id}
-                                        >
-                                            <button className="bg-rose-500 text-white px-6 py-2 rounded-md hover:bg-rose-600 mx-1">
-                                                Hapus
-                                            </button>
-                                        </Link>
+										<CategoryDeleteModule item={item} />
                                     </td>
                                 </tr>
                             ))}
@@ -63,4 +58,5 @@ const CategoryModul: React.FC = () => {
         </>
     );
 };
+
 export default CategoryModul;
