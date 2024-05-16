@@ -22,7 +22,7 @@ type TAddProduct = {
     image: File;
     ukuran: string;
     kategoriId: number;
-}
+};
 
 export async function addProduct({
     kode,
@@ -45,7 +45,7 @@ export async function addProduct({
     formData.append("image", image);
     formData.append("ukuran", ukuran);
     formData.append("kategori_id", kategoriId.toString());
-    
+
     const res = await api.post(`/produk`, formData);
 
     return res.data;
