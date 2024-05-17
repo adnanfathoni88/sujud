@@ -87,6 +87,20 @@ return new class extends Migration
             });
         }
 
+		// ongkir
+		if (!Schema::hasColumn('carts', 'user_id')) {
+            Schema::table('carts', function (Blueprint $table) {
+                $table->unsignedBigInteger('user_id');
+                $table->foreign('user_id')->references('id')->on('users')->onDelete('restrict')->onUpdate('cascade');
+            });
+        }
+		
+		if (!Schema::hasColumn('carts', 'varian_id')) {
+            Schema::table('carts', function (Blueprint $table) {
+                $table->unsignedBigInteger('varian_id');
+                $table->foreign('varian_id')->references('id')->on('varians')->onDelete('restrict')->onUpdate('cascade');
+            });
+        }
     }
 
     public function down(): void
@@ -136,6 +150,13 @@ return new class extends Migration
         Schema::table('ongkirs', function (Blueprint $table) {
             $table->dropForeign(['pelanggan_user_id']);
             $table->dropColumn(['pelanggan_user_id']);
+        });
+		
+        Schema::table('carts', function (Blueprint $table) {
+            $table->dropForeign(['user_id']);
+            $table->dropColumn(['user_id']);
+			$table->dropForeign(['varian_id']);
+            $table->dropColumn(['varian_id']);
         });
     }
 };

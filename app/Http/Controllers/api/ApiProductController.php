@@ -55,7 +55,7 @@ class ApiProductController extends Controller
 		$file = $request->file('image');
 		$filename = Str::uuid() . '.' . $file->getClientOriginalExtension();
 		$file->storeAs('uploaded', $filename, 'public');
-
+		
 		DB::transaction(function () use($request, $filename) {
 			$m = new Produk();
 			$m->nama = $request->nama;
@@ -65,11 +65,11 @@ class ApiProductController extends Controller
 			$m->save();
 			
 			$m2 = new Varian();
+			$m2->stok = $request->stok;
 			$m2->harga = $request->harga;
 			$m2->warna = $request->warna;
 			$m2->ukuran = $request->ukuran;
 			$m2->produk_id = $m->id;
-			$m2->stok = $m->stok;
 			$m2->save();	
 
 			$m3 = new Gambar();

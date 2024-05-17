@@ -114,7 +114,7 @@ class ApiTransaksiController extends Controller
 			Transaksi::insert([
 				'tgl_bayar' => $date,
 				'metode' => $paymentMethod,
-				'status' => 'SUCCESS',
+				'status' => 'FAILED',
 				'total' => $amount,
 				'pesanan_grup' => $pesanan_group,
 				'reference' => $reference,

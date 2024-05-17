@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\api\ApiAuthController;
+use App\Http\Controllers\api\ApiCartController;
 use App\Http\Controllers\api\ApiKategoriController;
 use App\Http\Controllers\api\ApiOngkirController;
 use App\Http\Controllers\api\ApiPesananController;
@@ -79,6 +80,14 @@ Route::prefix("/produk")->middleware('auth.stateless')->group(function () {
 				Route::put('/{id}', [ApiUlasanReplyController::class, 'update']);
 				Route::delete('/{id}', [ApiUlasanReplyController::class, 'destroy']);
 			});
+		});
+
+		Route::prefix("/{id_varian}/cart")->group(function () {
+			Route::get('/', [ApiCartController::class, 'index']);
+			Route::post('/', [ApiCartController::class, 'store']);
+			Route::get('/{id}', [ApiCartController::class, 'show']);
+			Route::put('/{id}', [ApiCartController::class, 'update']);
+			Route::delete('/{id}', [ApiCartController::class, 'destroy']);
 		});
 	});
 });

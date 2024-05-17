@@ -6,13 +6,15 @@ use App\Models\Ongkir;
 use App\Models\Pesanan;
 use App\Models\Transaksi;
 use App\Traits\ResponseFormat;
+use App\Traits\UserCookie;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
 
 class ApiOngkirController extends Controller
 {
-	use ResponseFormat;
+	use ResponseFormat, UserCookie;
 
     /**
      * Display a listing of the resource.
@@ -60,14 +62,31 @@ class ApiOngkirController extends Controller
 		]);
 		if ($validator->fails()) return $this->res($validator->messages(), 400);
 		
-		$ongkir = Ongkir::find($id);
+		$ongkir = Ongkir::with('pesanan.varian')
+			->where('id', $id)
+			->where('is_confirmed_by_admin', false)
+			->first();
+
+		if(!$ongkir) return $this->res("Pesanan sudah dibayar", 404);
+		foreach($ongkir->pesanan as $pesanan) {
+			if($pesanan->varian->stok < $pesanan->qty) {
+				return $this->res("Out of stock", 400);
+			}
+		}
+		
 		$transaksi = Transaksi::where('pesanan_grup', $ongkir->pesanan_grup)->first();
 		if(!$transaksi) {
-			$ongkir->ongkir = $request->ongkir;
-			$ongkir->is_confirmed_by_admin = true;
-			if($request->berat) $ongkir->berat = $request->berat;
-			if($request->ekspedisi) $ongkir->ekspedisi = $request->ekspedisi;
-			$ongkir->save();
+			DB::transaction(function() use($request, $ongkir) {
+				$ongkir->ongkir = $request->ongkir;
+				$ongkir->is_confirmed_by_admin = true;
+				if($request->berat) $ongkir->berat = $request->berat;
+				if($request->ekspedisi) $ongkir->ekspedisi = $request->ekspedisi;
+				$ongkir->save();
+				foreach($ongkir->pesanan as $pesanan) {
+					$pesanan->varian->stok = $pesanan->varian->stok - $pesanan->qty;
+					$pesanan->varian->save();
+				}
+			});
 			return $this->res("Success", 200);
 		}
 
