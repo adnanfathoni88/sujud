@@ -16,6 +16,16 @@ const Icon = ({ nama }: IconProps) => {
             {nama === "category" && <i className="mr-3 fa-solid fa-list"></i>}
             {nama === "minus" && <i className="mr-3 fa-solid fa-minus"></i>}
             {nama === "edit" && <i className="fa-solid fa-pencil"></i>}
+            {nama === "admin" && <i className="mr-3 fa-solid fa-user"></i>}
+            {nama === "user" && <i className="fa-solid fa-user"></i>}
+            {nama === "pray" && <i className="fa-solid fa-person-praying"></i>}
+            {nama === "happy" && (
+                <i className="fa-solid fa-face-laugh-squint"></i>
+            )}
+            {nama === "up" && <i className="fa-solid fa-arrow-up"></i>}
+            {nama === "professional" && (
+                <i className="fa-solid fa-user-tie"></i>
+            )}
         </div>
     );
 };

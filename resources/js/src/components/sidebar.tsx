@@ -20,7 +20,13 @@ function SideBar() {
                     <Link to={"/product"}>
                         <div className=" mb-2 text-slate-400 p-4 px-6 mx-6 rounded-md hover:bg-gray-600/50 flex">
                             <Icon nama="Product"></Icon>
-                            Product
+                            Produk
+                        </div>
+                    </Link>
+                    <Link to={"/admin"}>
+                        <div className=" mb-2 text-slate-400 p-4 px-6 mx-6 rounded-md hover:bg-gray-600/50 flex">
+                            <Icon nama="admin"></Icon>
+                            Admin
                         </div>
                     </Link>
                 </div>

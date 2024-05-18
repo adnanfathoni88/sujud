@@ -11,6 +11,9 @@ import { categoryDeleteRoute } from "./category/category-delete";
 import { loginRoute } from "./login";
 import { registerRoute } from "./register";
 import { productUpdateRoute } from "./product/product-update";
+import { adminRoute } from "./admin/index";
+import { adminAddRoute } from "./admin/admin-add";
+import { LandingPageRoute } from "./user";
 
 export const rootRoute = createRootRoute({
     component: () => (
@@ -22,9 +25,12 @@ export const rootRoute = createRootRoute({
 });
 
 export const routeTree = rootRoute.addChildren([
+    LandingPageRoute,
+    adminRoute,
+    adminAddRoute,
     productRoute,
     productAddRoute,
-	productUpdateRoute,
+    productUpdateRoute,
     productDetailRoute,
     categoryRoute,
     categoryDetailRoute,
