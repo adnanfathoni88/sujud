@@ -18,7 +18,6 @@ const CategoryListModule: React.FC = () => {
 
 	return (
 		<>
-
 			<div className="rounded-sm border border-stroke bg-white px-5 pt-6 pb-2.5 shadow-default dark:border-strokedark dark:bg-boxdark sm:px-7.5 xl:pb-1">
 				<div className="flex items-center justify-between mb-6 flex-col sm:flex-row">
 					<h4 className="text-xl font-semibold text-black dark:text-white me-auto sm:me-0">Daftar Kategori</h4>
@@ -55,10 +54,10 @@ const CategoryListModule: React.FC = () => {
 									<p className="text-black dark:text-white">{ c.nama }</p>
 								</div>
 								<div className="flex items-center justify-center space-x-3.5 p-2.5 xl:p-5">
+									<UpdateCategory nama={c.nama} id={c.id} />
 									<button className="hover:text-primary" onClick={ handleDelete(c.id) }>
 										<CiTrash size={ 20 } />
 									</button>
-									<UpdateCategory nama={c.nama} id={c.id} />
 								</div>
 							</div>
 						)))

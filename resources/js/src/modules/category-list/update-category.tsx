@@ -1,12 +1,10 @@
-{/*  */ }
-
 import { Button, DialogPanel, DialogTitle } from '@headlessui/react'
 import CategoryModal from "../../components/modal";
 import TextGroup from '../../components/text-group';
 import { FormEvent, useRef, useState } from 'react';
-import { useAddCategory, useEditCategory } from '../../adapters/hooks/useCategoy';
+import { useEditCategory } from '../../adapters/hooks/useCategoy';
 import { toastSuccess } from '../../utils/toast';
-import { HiOutlinePencil } from 'react-icons/hi';
+import { PiNotePencilLight } from "react-icons/pi";
 
 export default function UpdateCategory({ id, nama }: { nama: string, id: number }) {
 	const update = useEditCategory()
@@ -36,7 +34,7 @@ export default function UpdateCategory({ id, nama }: { nama: string, id: number 
 			onClose={ () => setOpen(false) }
 			Trigger={(
 				<button className="hover:text-primary" onClick={() => setOpen(true)}>
-					<HiOutlinePencil size={ 20 } />
+					<PiNotePencilLight size={ 20 } />
 				</button>
 			)}
 		>

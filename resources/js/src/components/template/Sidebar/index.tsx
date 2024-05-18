@@ -107,13 +107,19 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }: SidebarProps) => {
 						</h3>
 
 						<ul className="mb-6 flex flex-col gap-1.5">
-							<SidebarLinkGroup locationId={ 'category' }>
+							<li>
+								<Link to="/category" className={ `group relative flex items-center gap-2.5 rounded-sm py-2 px-4 font-medium text-bodydark1 duration-300 ease-in-out hover:bg-graydark dark:hover:bg-meta-4 ${locationId === 'category' && 'bg-graydark dark:bg-meta-4'}` }>
+									<BiCategoryAlt className="fill-current" />
+									Kategori
+								</Link>
+							</li>
+							<SidebarLinkGroup locationId={ 'product' }>
 								{ (handleClick, open) => {
 									return (
 										<>
 											<Link
 												to="#"
-												className={ `group relative flex items-center gap-2.5 rounded-sm px-4 py-2 font-medium text-bodydark1 duration-300 ease-in-out hover:bg-graydark dark:hover:bg-meta-4 ${(locationId.includes('category')) && 'bg-graydark dark:bg-meta-4'}` }
+												className={ `group relative flex items-center gap-2.5 rounded-sm px-4 py-2 font-medium text-bodydark1 duration-300 ease-in-out hover:bg-graydark dark:hover:bg-meta-4 ${(locationId.includes('product')) && 'bg-graydark dark:bg-meta-4'}` }
 												onClick={ (e) => {
 													e.preventDefault();
 													sidebarExpanded
@@ -122,7 +128,7 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }: SidebarProps) => {
 												} }
 											>
 												<BiCategoryAlt className="fill-current" />
-												Kategori
+												Produk
 												<MdExpandMore className={ `absolute right-4 top-1/2 -translate-y-1/2 fill-current ${open && 'rotate-180'}` } />
 											</Link>
 											<div
@@ -131,18 +137,18 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }: SidebarProps) => {
 												<ul className="mt-4 mb-5.5 flex flex-col gap-2.5 pl-6">
 													<li>
 														<Link
-															to="/category"
-															className={ twMerge('group relative flex items-center gap-2.5 rounded-md px-4 font-medium text-bodydark2 duration-300 ease-in-out hover:text-white', locationId === 'category' && "!text-white") }
+															to="/produk"
+															className={ twMerge('group relative flex items-center gap-2.5 rounded-md px-4 font-medium text-bodydark2 duration-300 ease-in-out hover:text-white', locationId === 'product' && "!text-white") }
 														>
-															Daftar Kategori
+															Daftar Produk
 														</Link>
 													</li>
 													<li>
 														<Link
-															to="/category/create"
-															className={ twMerge('group relative flex items-center gap-2.5 rounded-md px-4 font-medium text-bodydark2 duration-300 ease-in-out hover:text-white', locationId === 'category-create' && "!text-white") }
+															to="/produk/add"
+															className={ twMerge('group relative flex items-center gap-2.5 rounded-md px-4 font-medium text-bodydark2 duration-300 ease-in-out hover:text-white', locationId === 'product-create' && "!text-white") }
 														>
-															Buat Kategori
+															Buat Produk
 														</Link>
 													</li>
 												</ul>
@@ -152,12 +158,6 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }: SidebarProps) => {
 									);
 								} }
 							</SidebarLinkGroup>
-							<li>
-								<Link to="/category" className={ `group relative flex items-center gap-2.5 rounded-sm py-2 px-4 font-medium text-bodydark1 duration-300 ease-in-out hover:bg-graydark dark:hover:bg-meta-4 ${locationId === 'category' && 'bg-graydark dark:bg-meta-4'}` }>
-									<BiCategoryAlt className="fill-current" />
-									Kategori
-								</Link>
-							</li>
 						</ul>
 					</div>
 				</nav>

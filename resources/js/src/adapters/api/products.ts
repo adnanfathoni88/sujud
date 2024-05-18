@@ -1,26 +1,13 @@
 import { ErrorComponent } from "@tanstack/react-router";
 import { apiJSONPlaceholder, api } from "../../services/api";
 import { TAddProductSchema } from "../../modules/product/product-add/schema";
-
-export type TProduct = {
-	kode: string,
-	nama: string,
-	deskripsi: string,
-}
-
-export type TProductList = TProduct[]
+import { IProduct, IProductList } from "../../interfaces/product";
+import { TUpdateProductSchema } from "../../modules/product-list/schema";
 
 export async function getProductList() {
 	const res = await api.get("/produk");
-	return res.data as { response: { data: TProductList } };
+	return res.data as { response: { data: IProductList } };
 }
-
-// export async function addProduct() {
-//     const res = await api.post("/produk");
-//     return res.data;
-// }
-
-// Update API function to accept additional inputs
 
 export async function addProduct({
 	kode,
@@ -49,12 +36,19 @@ export async function addProduct({
 	return res.data;
 }
 
+
+export async function updateProduct(p: TUpdateProductSchema & { id: number }) {
+	const res = await api.put(`/produk/${p.id}`, p);
+	return res.data;
+}
+
+
 export async function getProductById(id: number) {
 	const res = await api.get(`/produk/${id}`);
-	return res.data as { response: TProduct };
+	return res.data as { response: IProduct };
 }
 
 export async function deleteProductById(id: number) {
-	const res = await apiJSONPlaceholder.delete(`/posts/${id}`);
+	const res = await api.delete(`/produk/${id}`);
 	return res.data;
 }

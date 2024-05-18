@@ -17,15 +17,22 @@ class Varian extends Model
         'harga',
         'stok',
         'produk_id',
+		'gambar_id',
     ];
 
 	public function produk()
 	{
-		return $this->belongsTo(Produk::class);
+		// return $this->belongsTo(Produk::class, );
+		return $this->hasOne(Produk::class, 'id', 'product_id');
 	}
 
 	public function gambar()
 	{
-		return $this->hasOne(Gambar::class);
+		return $this->hasOne(Gambar::class, 'id', 'gambar_id');
+	}
+
+	public function ulasan()
+	{
+		return $this->hasMany(Ulasan::class, 'id', 'ulasan_id');
 	}
 }

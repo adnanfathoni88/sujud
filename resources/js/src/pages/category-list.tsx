@@ -9,7 +9,7 @@ export default function CategoryListPage() {
 	useEffect(() => { set('category') }, [])
 
     return (
-		<AdminLayout withSearch={true}>
+		<AdminLayout withSearch={false}>
 			<CategoryListModule />
 		</AdminLayout>
 	);

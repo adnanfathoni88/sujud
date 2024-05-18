@@ -11,9 +11,4 @@ class Gambar extends Model
 
     protected $table = 'gambars';
     protected $fillable = ['nama', 'produk_id'];
-
-    function gambar()
-    {
-        return $this->hasMany(Gambar::class, 'produk_id', 'id');
-    }
 }

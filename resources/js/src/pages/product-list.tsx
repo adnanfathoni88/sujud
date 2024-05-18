@@ -1,16 +1,16 @@
 import { useEffect } from "react";
 import AdminLayout from "../layout/admin-layout";
-import ProductAddModule from "../modules/product-add";
 import { useLocationUrlId } from "../store/useLocationUrlId";
+import ProductListModule from "../modules/product-list";
 
-export default function ProductAddPage() {
+export default function ProductListPage() {
 	const set = useLocationUrlId(s => s.setValue)
 
-	useEffect(() => { set('product-create') }, [])
+	useEffect(() => { set('product') }, [])
 
     return (
 		<AdminLayout withSearch={false}>
-			<ProductAddModule />
+			<ProductListModule />
 		</AdminLayout>
 	);
 }
