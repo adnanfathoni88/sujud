@@ -1,16 +1,14 @@
+import { ICategory, ICategoryList } from "../../interfaces/category";
 import { api } from "../../services/api";
-
-export type TCategory = { id: string, nama: string }
-export type TCategoryList = TCategory[]
 
 export async function getCategoryList() {
 	const res = await api.get("/kategori");
-	return res.data as { response: TCategoryList };
+	return res.data as { response: ICategoryList };
 }
 
 export async function getCategoryById(id: number) {
 	const res = await api.get(`/kategori/${id}`);
-	return res.data as { response: TCategory };
+	return res.data as { response: ICategory };
 }
 export async function editCategoryById(id: number, nama: string) {
 	const res = await api.put(`/kategori/${id}`, { nama });

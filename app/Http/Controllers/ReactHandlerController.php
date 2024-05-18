@@ -12,7 +12,6 @@ class ReactHandlerController extends Controller
 	use AuthWeb, Payment;
 
     public function index(Request $request) {
-		$this->apiPaymentMethod(5000);
 		$token = $request->cookie('token');
 		if(!$this->webAuthenticate($token)) return redirect('/login');
 		return view('index');
