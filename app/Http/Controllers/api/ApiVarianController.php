@@ -50,18 +50,18 @@ class ApiVarianController extends Controller
 		$file->storeAs('uploaded', $filename, 'public');
 
 		DB::transaction(function () use($request, $filename, $id_produk) {
+			$m3 = new Gambar();
+			$m3->nama = $filename;
+			$m3->save();
+			
 			$m2 = new Varian();
+			$m2->gambar_id = $m3->id;
 			$m2->harga = $request->harga;
 			$m2->warna = $request->warna;
 			$m2->ukuran = $request->ukuran;
 			$m2->produk_id = $id_produk;
 			$m2->stok = $request->stok;
 			$m2->save();	
-
-			$m3 = new Gambar();
-			$m3->nama = $filename;
-			$m3->varian_id = $m2->id;
-			$m3->save();
 		});
 
 		return $this->res("Inserted", 201);
@@ -124,8 +124,7 @@ class ApiVarianController extends Controller
 		} catch (\Throwable $th) { }
 
 		DB::transaction(function () use($request, $filename, $id_produk, $id, $imgSuccess) {
-			$m = Varian::where('produk_id', $id_produk)
-				->find($id);			
+			$m = Varian::where('produk_id', $id_produk)->find($id);			
 			$m->stok = $request->stok;
 			$m->harga = $request->harga;
 			$m->warna = $request->warna;
@@ -133,7 +132,7 @@ class ApiVarianController extends Controller
 			$m->save();
 
 			if($imgSuccess) {
-				$m2 = Gambar::where('varian_id', $m->id)->first();
+				$m2 = Gambar::where('id', $m->gambar_id)->first();
 				$oldImage = storage_path("app/public/uploaded/".$m2->nama);
 				$m2->nama = $filename;
 				
@@ -152,13 +151,14 @@ class ApiVarianController extends Controller
     {
 
 		DB::transaction(function () use($id) {
-			$m = Gambar::where('varian_id', $id)->first();
+			$m2 = Varian::find($id);
+			$m = Gambar::where('id', $m2->gambar_id)->first();
 			
 			$oldImage = storage_path("app/public/uploaded/".$m->nama);
 			if (file_exists($oldImage)) unlink($oldImage);
 
+			$m2->delete();
 			$m->delete();
-			Varian::destroy($id);
 		});
 		
     }

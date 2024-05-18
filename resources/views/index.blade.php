@@ -8,10 +8,9 @@
 	<link rel="shortcut icon" href="{{ asset('favicon.ico') }}" />
 	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat">
 	<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
-	<script src="/node_modules/flowbite/dist/flowbite.min.js"></script>
-
+	<link rel="stylesheet" href="{{ asset('css/satoshi.css') }}">
 	@viteReactRefresh
-	@vite('resources/css/app.css')
+	@vite('resources/css/style.css')
 	@vite('resources/js/app.tsx')
 </head>
 

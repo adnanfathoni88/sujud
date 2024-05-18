@@ -3,16 +3,16 @@ import { apiJSONPlaceholder, api } from "../../services/api";
 import { TAddProductSchema } from "../../modules/product/product-add/schema";
 
 export type TProduct = {
-    kode: string;
-    nama: string;
-    deskripsi: string;
-};
+	kode: string,
+	nama: string,
+	deskripsi: string,
+}
 
-export type TProductList = TProduct[];
+export type TProductList = TProduct[]
 
 export async function getProductList() {
-    const res = await api.get("/produk");
-    return res.data as { response: { data: TProductList } };
+	const res = await api.get("/produk");
+	return res.data as { response: { data: TProductList } };
 }
 
 // export async function addProduct() {
@@ -21,17 +21,6 @@ export async function getProductList() {
 // }
 
 // Update API function to accept additional inputs
-type TAddProduct = {
-    kode: string;
-    nama: string;
-    deskripsi: string;
-    harga: number;
-    warna: string;
-    stok: number;
-    image: File;
-    ukuran: string;
-    kategoriId: number;
-};
 
 export async function addProduct({
     kode,
@@ -60,12 +49,19 @@ export async function addProduct({
     return res.data;
 }
 
+
+export async function updateProduct(p: TUpdateProductSchema & { id: number }) {
+	const res = await api.put(`/produk/${p.id}`, p);
+	return res.data;
+}
+
+
 export async function getProductById(id: number) {
-    const res = await api.get(`/produk/${id}`);
-    return res.data as { response: TProduct };
+	const res = await api.get(`/produk/${id}`);
+	return res.data as { response: TProduct };
 }
 
 export async function deleteProductById(id: number) {
-    const res = await apiJSONPlaceholder.delete(`/posts/${id}`);
-    return res.data;
+	const res = await apiJSONPlaceholder.delete(`/posts/${id}`);
+	return res.data;
 }

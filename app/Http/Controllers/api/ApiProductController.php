@@ -22,10 +22,11 @@ class ApiProductController extends Controller
      */
     public function index()
     {
-		$subselect = DB::raw("(SELECT gambars.nama FROM varians JOIN gambars ON gambars.varian_id = varians.id WHERE produk_id = produks.id LIMIT 1) as thumbnail");
-		$m = Produk::select("*", $subselect)
-			->paginate(15);
+		// $subselect = DB::raw("(SELECT gambars.nama FROM varians JOIN gambars ON gambars.varian_id = varians.id WHERE produk_id = produks.id LIMIT 1) as thumbnail");
+		// $m = Produk::select("*", $subselect)
+		// 	->paginate(15);
 
+		$m = Produk::with('kategori')->with('varian.gambar')->paginate(15);
 		return $this->res($m, 200);
     }
 
@@ -55,7 +56,7 @@ class ApiProductController extends Controller
 		$file = $request->file('image');
 		$filename = Str::uuid() . '.' . $file->getClientOriginalExtension();
 		$file->storeAs('uploaded', $filename, 'public');
-
+		
 		DB::transaction(function () use($request, $filename) {
 			$m = new Produk();
 			$m->nama = $request->nama;
@@ -64,18 +65,18 @@ class ApiProductController extends Controller
 			$m->kategori_id = $request->kategori_id;
 			$m->save();
 			
+			$m3 = new Gambar();
+			$m3->nama = $filename;
+			$m3->save();
+			
 			$m2 = new Varian();
+			$m2->stok = $request->stok;
 			$m2->harga = $request->harga;
 			$m2->warna = $request->warna;
 			$m2->ukuran = $request->ukuran;
+			$m2->gambar_id = $m3->id;
 			$m2->produk_id = $m->id;
-			$m2->stok = $m->stok;
 			$m2->save();	
-
-			$m3 = new Gambar();
-			$m3->nama = $filename;
-			$m3->varian_id = $m2->id;
-			$m3->save();
 		});
 
 		return $this->res("Inserted", 201);
@@ -86,9 +87,8 @@ class ApiProductController extends Controller
      */
     public function show(string $id)
     {
-		$m = Produk::find($id);
+		$m = Produk::with('kategori')->with('varians.gambar')->find($id);
 		if(!$m) return $this->res("Produk not found", 404);
-
 		return $this->res($m, 201);
     }
 
@@ -123,7 +123,13 @@ class ApiProductController extends Controller
      */
     public function destroy(string $id)
     {
-        Produk::destroy($id);
+		$variant = Varian::where('produk_id', $id)->get();
+		DB::transaction(function () use($id, $variant) {
+			$gambar_id = $variant->pluck('gambar_id');
+			Varian::where('produk_id', $id)->delete();
+			Gambar::whereIn('id', $gambar_id->toArray())->delete();
+			Produk::destroy($id);
+		});
 		return $this->res("Success Delete", 201);
     }
 }

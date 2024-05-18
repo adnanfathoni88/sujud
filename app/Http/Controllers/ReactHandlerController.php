@@ -3,12 +3,13 @@
 namespace App\Http\Controllers;
 
 use App\Traits\AuthWeb;
+use App\Traits\Payment;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 
 class ReactHandlerController extends Controller
 {
-	use AuthWeb;
+	use AuthWeb, Payment;
 
     public function index(Request $request) {
 		$token = $request->cookie('token');

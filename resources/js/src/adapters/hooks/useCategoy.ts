@@ -43,7 +43,12 @@ export function useEditCategory() {
     return useMutation({
         mutationKey: ["useEditCategory"],
         mutationFn: ({id, nama}: { id: number, nama: string }) => editCategoryById(id, nama),
-        onSuccess: () => {},
+        onSuccess: () => {
+			queryClient.prefetchQuery({
+                queryKey: ["useGetCategoryList"],
+                queryFn: () => getCategoryList(),
+            });
+		},
     });
 }
 

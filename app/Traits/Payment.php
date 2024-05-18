@@ -10,7 +10,7 @@ trait Payment {
 		$datetime = now()->format('Y-m-d H:i:s');
 		$apikey = config('app.payment_api_key');
 		$url = "https://sandbox.duitku.com/webapi/api/merchant/paymentmethod/getpaymentmethod";
-		
+
 		$response = Http::post($url, [
 			'amount' => $amount,
 			'datetime' => $datetime,

@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Ongkir extends Model
 {
     use HasFactory;
-	protected $fillable = ['pesanan_grup', 'ekspedisi', 'ongkir', 'is_confirmed_by_admin', 'user_id', 'berat'];
+	protected $fillable = ['pesanan_grup', 'ekspedisi', 'ongkir', 'is_confirmed_by_admin', 'pelanggan_user_id', 'berat'];
 
 	public function pesanan() {
 		return $this->hasMany(Pesanan::class, 'pesanan_grup', 'pesanan_grup');

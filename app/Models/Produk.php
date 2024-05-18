@@ -16,10 +16,6 @@ class Produk extends Model
         return $this->belongsTo(Kategori::class);
     }
 
-    public function gambar()
-    {
-        return $this->hasMany(Gambar::class);
-    }
     // public function ulasan()
     // {
     //     return $this->hasMany(Ulasan::class);
@@ -29,8 +25,13 @@ class Produk extends Model
     // {
     //     return $this->hasMany(Pesanan::class);
     // }
-    function varian()
+    public function varians()
     {
         return $this->hasMany(Varian::class);
     }
+
+	function varian()
+	{
+		return $this->hasOne(Varian::class);
+	}
 }
