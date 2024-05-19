@@ -8,11 +8,7 @@ function Navbar() {
                     href="#"
                     className="flex items-center space-x-3 rtl:space-x-reverse"
                 >
-                    <img
-                        src="img/logo/sujud.png"
-                        className="h-8"
-                        alt="Flowbite Logo"
-                    />
+                    <img src="/img/logo/sujud.png" className="h-8" />
                 </a>
                 <button
                     data-collapse-toggle="navbar-default"

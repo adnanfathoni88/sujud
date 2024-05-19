@@ -1,26 +1,13 @@
 import { ErrorComponent } from "@tanstack/react-router";
 import { apiJSONPlaceholder, api } from "../../services/api";
 import { TAddProductSchema } from "../../modules/product/product-add/schema";
-
-export type TProduct = {
-	kode: string,
-	nama: string,
-	deskripsi: string,
-}
-
-export type TProductList = TProduct[]
+import { IProduct, IProductList } from "../../interfaces/product";
+import { TUpdateProductSchema } from "../../modules/product-list/schema";
 
 export async function getProductList() {
-	const res = await api.get("/produk");
-	return res.data as { response: { data: TProductList } };
+    const res = await api.get("/produk");
+    return res.data as { response: { data: IProductList } };
 }
-
-// export async function addProduct() {
-//     const res = await api.post("/produk");
-//     return res.data;
-// }
-
-// Update API function to accept additional inputs
 
 export async function addProduct({
     kode,
@@ -28,11 +15,11 @@ export async function addProduct({
     deskripsi,
     harga,
     warna,
-    stok,
     image,
+    stok,
     ukuran,
-    kategoriId,
-}: TAddProduct) {
+    kategori_id,
+}: TAddProductSchema) {
     const formData = new FormData();
     formData.append("kode", kode);
     formData.append("nama", nama);
@@ -40,28 +27,26 @@ export async function addProduct({
     formData.append("harga", harga.toString());
     formData.append("warna", warna);
     formData.append("stok", stok.toString());
-    formData.append("image", image);
+    formData.append("image", image[0]);
     formData.append("ukuran", ukuran);
-    formData.append("kategori_id", kategoriId.toString());
+    formData.append("kategori_id", kategori_id.toString());
 
     const res = await api.post(`/produk`, formData);
 
     return res.data;
 }
 
-
 export async function updateProduct(p: TUpdateProductSchema & { id: number }) {
-	const res = await api.put(`/produk/${p.id}`, p);
-	return res.data;
+    const res = await api.put(`/produk/${p.id}`, p);
+    return res.data;
 }
 
-
 export async function getProductById(id: number) {
-	const res = await api.get(`/produk/${id}`);
-	return res.data as { response: TProduct };
+    const res = await api.get(`/produk/${id}`);
+    return res.data as { response: IProduct };
 }
 
 export async function deleteProductById(id: number) {
-	const res = await apiJSONPlaceholder.delete(`/posts/${id}`);
-	return res.data;
+    const res = await api.delete(`/produk/${id}`);
+    return res.data;
 }

@@ -1,3 +1,4 @@
+import Footer from "../../components/footer";
 import Icon from "../../components/icon";
 import Navbar from "../../components/navbar";
 
@@ -31,7 +32,7 @@ const LandingPageModule: React.FC = () => {
                         />
                     </div>
                 </div>
-                <div className="flex-col relative">
+                <div className="flex-col relative bg-white">
                     <div className="absolute w-full flex justify-center top-[-100px]">
                         <div className="bg-white w-[90%] lg:w-[80%] p-4 rounded-xl h-fit shadow-md lg:py-8">
                             <h2 className="font-bold text-center text-sky-600 text-2xl mb-6 lg:text-4xl">
@@ -152,7 +153,7 @@ const LandingPageModule: React.FC = () => {
                         </div>
                     </div>
                 </div>
-                <div className="relative py-6">
+                <div className="relative py-6 bg-white">
                     <img
                         className="w-full md:h-96 md:object-cover"
                         src="/img/background/sujud-1.jpg"
@@ -169,7 +170,7 @@ const LandingPageModule: React.FC = () => {
                         </p>
                     </div>
                 </div>
-                <div className="mx-4 my-10 md:px-2 md:mx-10">
+                <div className="py-10 md:px-12 bg-white">
                     <div className="flex justify-between text-center">
                         <h2 className="text-sky-600 text-2xl font-semibold md:text-3xl">
                             Koleksi Produk
@@ -220,7 +221,7 @@ const LandingPageModule: React.FC = () => {
                         </div>
                     </div>
                 </div>
-                <div className="px-4 mx-4 lg:mx-40">
+                <div className="px-8 py-10 lg:px-40 bg-white">
                     <h2 className="font-bold text-center text-sky-600 text-2xl mb-4 lg:text-3xl">
                         Telah diliput oleh:
                     </h2>
@@ -269,6 +270,9 @@ const LandingPageModule: React.FC = () => {
                         </div>
                     </div>
                 </div>
+
+                {/* footer */}
+                <Footer />
             </div>
         </div>
     );

@@ -26,6 +26,16 @@ const Icon = ({ nama }: IconProps) => {
             {nama === "professional" && (
                 <i className="fa-solid fa-user-tie"></i>
             )}
+            {nama === "instagram" && <i className="fa-brands fa-instagram"></i>}
+            {nama === "tiktok" && <i className="fa-brands fa-tiktok"></i>}
+            {nama === "facebook" && <i className="fa-brands fa-facebook"></i>}
+            {nama === "panah-kanan" && (
+                <i className="fa-solid fa-arrow-right"></i>
+            )}
+            {nama === "panah-kiri" && (
+                <i className="fa-solid fa-arrow-left"></i>
+            )}
+            {nama === "star" && <i className="fa-solid fa-star"></i>}
         </div>
     );
 };

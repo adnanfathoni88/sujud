@@ -2,7 +2,19 @@ import { Outlet, createRootRoute, createRouter } from "@tanstack/react-router";
 import { TanStackRouterDevtools } from "@tanstack/router-devtools";
 import { loginRoute } from "./login";
 import { registerRoute } from "./register";
-import { productUpdateRoute } from "./product/product-update";
+import { categoryListRoute } from "./category-route";
+import {
+    productAddRoute,
+    productDetailRoute,
+    productRoute,
+    productUpdateRoute,
+} from "./product-route";
+import {
+    LandingPageRoute,
+    cartRoute,
+    detailShopRoute,
+    shopRoute,
+} from "./user";
 
 export const rootRoute = createRootRoute({
     component: () => (
@@ -14,16 +26,15 @@ export const rootRoute = createRootRoute({
 });
 
 export const routeTree = rootRoute.addChildren([
+    cartRoute,
+    detailShopRoute,
     LandingPageRoute,
-    adminRoute,
-    adminAddRoute,
+    shopRoute,
     productRoute,
     productAddRoute,
     productUpdateRoute,
     productDetailRoute,
-    
     categoryListRoute,
-
     loginRoute,
     registerRoute,
 ]);
