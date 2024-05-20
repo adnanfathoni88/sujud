@@ -23,7 +23,7 @@ const ProductListModule: React.FC = () => {
 				<div className="flex items-center justify-between mb-6 flex-col sm:flex-row">
 					<h4 className="text-xl font-semibold text-black dark:text-white me-auto sm:me-0">Daftar Produk</h4>
 					<Link
-						to="/produk/add"
+						to="/admin/produk/add"
 						className="rounded-md bg-first py-2 px-4 text-sm font-medium text-white"
 					>
 						Buat Produk
@@ -76,7 +76,7 @@ const ProductListModule: React.FC = () => {
 									<p className="text-black dark:text-white">{ c.kategori.nama }</p>
 								</div>
 								<div className="flex items-start justify-center space-x-3.5 p-2.5 xl:p-5">
-									<Link to={`/produk/${c.id}`} className="hover:text-primary">
+									<Link to={`/admin/produk/${c.id}`} className="hover:text-primary">
 										<IoIosInformationCircleOutline size={20} />
 									</Link>
 									<UpdateProduct product={ c } />

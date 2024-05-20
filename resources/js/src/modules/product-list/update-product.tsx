@@ -10,7 +10,7 @@ import { TUpdateProductSchema, UpdateProductSchema } from './schema';
 import Textarea from '../../components/textarea';
 import Select from '../../components/select';
 import { useEditProduct } from '../../adapters/hooks/useProducts';
-import { useGetCategoryList } from '../../adapters/hooks/useCategoy';
+import { useGetCategoryList } from '../../adapters/hooks/useCategory';
 import { PiNotePencilLight } from "react-icons/pi";
 
 export default function UpdateProduct({ product }: { product: IBaseProduct }) {

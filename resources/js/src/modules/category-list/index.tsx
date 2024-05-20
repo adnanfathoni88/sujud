@@ -1,4 +1,4 @@
-import { useDeleteCategoryById, useGetCategoryList } from "../../adapters/hooks/useCategoy";
+import { useDeleteCategoryById, useGetCategoryList } from "../../adapters/hooks/useCategory";
 import { twMerge } from "tailwind-merge";
 import { match } from "ts-pattern";
 import { CiTrash } from "react-icons/ci";

@@ -10,6 +10,7 @@ use App\Http\Controllers\UlasanController;
 
 Route::get("/login", [ReactHandlerController::class, "login"]);
 Route::get("/register", [ReactHandlerController::class, "register"]);
+Route::any('/admin/{all}', [ReactHandlerController::class, "admin"])->where('all', '^((?!api).)*?');
 Route::any('{all}', [ReactHandlerController::class, "index"])->where('all', '^((?!api).)*?');
 
 Route::get('/shop', function () {

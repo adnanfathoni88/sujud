@@ -2,7 +2,7 @@ import { Button, DialogPanel, DialogTitle } from '@headlessui/react'
 import CategoryModal from "../../components/modal";
 import TextGroup from '../../components/text-group';
 import { FormEvent, useRef, useState } from 'react';
-import { useAddCategory } from '../../adapters/hooks/useCategoy';
+import { useAddCategory } from '../../adapters/hooks/useCategory';
 import { toastSuccess } from '../../utils/toast';
 
 export default function NewCategory() {

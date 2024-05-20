@@ -17,6 +17,13 @@ class ReactHandlerController extends Controller
 		return view('index');
 	}
 
+	public function admin(Request $request) {
+		$token = $request->cookie('token');
+		if(!$this->webAuthenticate($token)) return redirect('/login');
+		if(!$this->webAuthorization($token, 'admin')) return "Unauthorized Access";
+		return view('index');
+	}
+
 	public function login(Request $request) {
 		$token = $request->cookie('token');
 		if($this->webAuthenticate($token)) return redirect('/');

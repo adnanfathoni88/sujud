@@ -38,6 +38,7 @@ class ApiVarianController extends Controller
 			'stok' => 'numeric|min:0',
 			'warna' => 'required|max:255',
 			'ukuran' => 'required|max:255',
+			'harga_diskon' => 'numeric|min:0',
 			'harga' => 'required|numeric|min:0',
 			// image
 			'image' => 'required|image|mimes:jpeg,png|max:3072'
@@ -59,6 +60,7 @@ class ApiVarianController extends Controller
 			$m2->harga = $request->harga;
 			$m2->warna = $request->warna;
 			$m2->ukuran = $request->ukuran;
+			$m2->harga_diskon = $request->harga_diskon;
 			$m2->produk_id = $id_produk;
 			$m2->stok = $request->stok;
 			$m2->save();	
@@ -94,6 +96,7 @@ class ApiVarianController extends Controller
 			'warna' => 'required|max:255',
 			'ukuran' => 'required|max:255',
 			'harga' => 'required|numeric|min:0',
+			'harga_diskon' => 'numeric|min:0',
 			// image
 			'image' => 'image|mimes:jpeg,png|max:3072'
 		]);
@@ -109,6 +112,7 @@ class ApiVarianController extends Controller
 			$m->harga = $request->harga;
 			$m->warna = $request->warna;
 			$m->ukuran = $request->ukuran;
+			$m->harga_diskon = $request->harga_diskon;
 			$m->save();
 
 			return $this->res("Updated", 201);
@@ -129,6 +133,7 @@ class ApiVarianController extends Controller
 			$m->harga = $request->harga;
 			$m->warna = $request->warna;
 			$m->ukuran = $request->ukuran;
+			$m->harga_diskon = $request->harga_diskon;
 			$m->save();
 
 			if($imgSuccess) {

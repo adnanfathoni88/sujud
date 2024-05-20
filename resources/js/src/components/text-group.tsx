@@ -15,6 +15,7 @@ export type TPropsTextGroup = {
 
 const TextGroup = forwardRef(({ type, title, name, onChange, onBlur, defaultValue, required, errorMessage, placeholder, ...rest }: TPropsTextGroup, ref: React.LegacyRef<HTMLInputElement>) => {
 	const id = useId()
+	
 	return (
 		<div>
 			<label htmlFor={ id } className="block text-sm font-medium leading-6 text-gray-900">
