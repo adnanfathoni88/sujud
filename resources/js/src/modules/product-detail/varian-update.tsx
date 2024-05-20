@@ -90,7 +90,7 @@ export default function VarianUpdate({ productId, varian }: { productId: number,
 					<div className="mt-4">
 						<ImageInput
 							label="Gambar"
-							defaultImage={ `/api/uploaded/${varian.gambar.nama}` }
+							defaultImage={ `/api/uploaded/${varian?.gambar?.nama}` }
 							error={ errors.image?.message as string }
 							{ ...register('image') }
 						/>

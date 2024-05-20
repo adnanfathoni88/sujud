@@ -4,9 +4,10 @@ import SidebarLinkGroup from './SidebarLinkGroup';
 // @ts-ignore
 import Logo from '../../../images/logo/logo.svg';
 import { MdExpandMore } from "react-icons/md";
-import { BiCategoryAlt } from "react-icons/bi";
 import { useLocationUrlId } from '../../../store/useLocationUrlId';
 import { twMerge } from 'tailwind-merge';
+import { AiOutlineProduct } from "react-icons/ai";
+import { LiaProductHunt } from "react-icons/lia";
 
 interface SidebarProps {
 	sidebarOpen: boolean;
@@ -109,7 +110,7 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }: SidebarProps) => {
 						<ul className="mb-6 flex flex-col gap-1.5">
 							<li>
 								<Link to="/admin/category" className={ `group relative flex items-center gap-2.5 rounded-sm py-2 px-4 font-medium text-bodydark1 duration-300 ease-in-out hover:bg-graydark dark:hover:bg-meta-4 ${locationId === 'category' && 'bg-graydark dark:bg-meta-4'}` }>
-									<BiCategoryAlt className="fill-current" />
+									<AiOutlineProduct className="fill-current" />
 									Kategori
 								</Link>
 							</li>
@@ -127,7 +128,7 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }: SidebarProps) => {
 														: setSidebarExpanded(true);
 												} }
 											>
-												<BiCategoryAlt className="fill-current" />
+												<LiaProductHunt className="fill-current" />
 												Produk
 												<MdExpandMore className={ `absolute right-4 top-1/2 -translate-y-1/2 fill-current ${open && 'rotate-180'}` } />
 											</Link>

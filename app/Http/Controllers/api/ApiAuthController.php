@@ -20,6 +20,7 @@ class ApiAuthController extends Controller
 			"nama" => "required|max:255",
 			"password" => "required|max:255",
 			"email" => "required|email|unique:users,email|max:255",
+			"nomor" => "required|string|unique:users,nomor|max:255",
 		]);
 		
 		if ($validator->fails()) return $this->res($validator->messages(), 401);
@@ -31,6 +32,7 @@ class ApiAuthController extends Controller
 		$m->role_id = 2;
 		$m->nama = $toSave['nama'];
 		$m->email = $toSave['email'];
+		$m->nomor = $toSave['nomor'];
 		$m->password = $toSave['password'];
 		$m->save();
 		$m->id;

@@ -6,6 +6,7 @@ use App\Http\Controllers\api\ApiKategoriController;
 use App\Http\Controllers\api\ApiOngkirController;
 use App\Http\Controllers\api\ApiPesananController;
 use App\Http\Controllers\api\ApiProductController;
+use App\Http\Controllers\api\ApiProfileController;
 use App\Http\Controllers\api\ApiTransaksiController;
 use App\Http\Controllers\api\ApiUlasanController;
 use App\Http\Controllers\api\ApiUlasanReplyController;
@@ -42,6 +43,12 @@ Route::get("/uploaded/{filename}", function ($filename) {
 Route::prefix("/auth")->group(function () {
 	Route::post("/register", [ApiAuthController::class, 'register']);
 	Route::post("/login", [ApiAuthController::class, 'login']);
+});
+
+Route::prefix("/profile")->group(function() {
+	Route::get('/', [ApiProfileController::class, 'show']);
+	Route::put('/', [ApiProfileController::class, 'update']);
+
 });
 
 Route::prefix("/kategori")->middleware('auth.stateless')->group(function () {

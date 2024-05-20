@@ -78,7 +78,7 @@ export default function ProductDetailModule() {
 						.with(true, () => varians.data.response.map(varian => (
 							<div key={ varian.id } className="overflow-hidden bg-black rounded-md bg-body/5 border border-body/15 shadow-sm shadow-body/5">
 								<img
-									src={ `/api/uploaded/${varian.gambar.nama}` }
+									src={ `/api/uploaded/${varian?.gambar?.nama}` }
 									className="object-cover w-full h-80"
 								/>
 								<div className="p-4">
