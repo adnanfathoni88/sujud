@@ -2,7 +2,7 @@ import { Button, DialogPanel, DialogTitle } from '@headlessui/react'
 import CategoryModal from "../../components/modal";
 import TextGroup from '../../components/text-group';
 import { FormEvent, useRef, useState } from 'react';
-import { useEditCategory } from '../../adapters/hooks/useCategoy';
+import { useEditCategory } from '../../adapters/hooks/useCategory';
 import { toastSuccess } from '../../utils/toast';
 import { PiNotePencilLight } from "react-icons/pi";
 

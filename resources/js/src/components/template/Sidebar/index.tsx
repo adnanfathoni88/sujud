@@ -108,7 +108,7 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }: SidebarProps) => {
 
 						<ul className="mb-6 flex flex-col gap-1.5">
 							<li>
-								<Link to="/category" className={ `group relative flex items-center gap-2.5 rounded-sm py-2 px-4 font-medium text-bodydark1 duration-300 ease-in-out hover:bg-graydark dark:hover:bg-meta-4 ${locationId === 'category' && 'bg-graydark dark:bg-meta-4'}` }>
+								<Link to="/admin/category" className={ `group relative flex items-center gap-2.5 rounded-sm py-2 px-4 font-medium text-bodydark1 duration-300 ease-in-out hover:bg-graydark dark:hover:bg-meta-4 ${locationId === 'category' && 'bg-graydark dark:bg-meta-4'}` }>
 									<BiCategoryAlt className="fill-current" />
 									Kategori
 								</Link>
@@ -137,7 +137,7 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }: SidebarProps) => {
 												<ul className="mt-4 mb-5.5 flex flex-col gap-2.5 pl-6">
 													<li>
 														<Link
-															to="/produk"
+															to="/admin/produk"
 															className={ twMerge('group relative flex items-center gap-2.5 rounded-md px-4 font-medium text-bodydark2 duration-300 ease-in-out hover:text-white', locationId === 'product' && "!text-white") }
 														>
 															Daftar Produk
@@ -145,7 +145,7 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }: SidebarProps) => {
 													</li>
 													<li>
 														<Link
-															to="/produk/add"
+															to="/admin/produk/add"
 															className={ twMerge('group relative flex items-center gap-2.5 rounded-md px-4 font-medium text-bodydark2 duration-300 ease-in-out hover:text-white', locationId === 'product-create' && "!text-white") }
 														>
 															Buat Produk

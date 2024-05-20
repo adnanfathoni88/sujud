@@ -6,25 +6,25 @@ import ProductDetailPage from "../pages/product-detail";
 import ProductUpdatePage from "../pages/product-update";
 
 export const productAddRoute = createRoute({
-    path: "/produk/add",
+    path: "/admin/produk/add",
     component: ProductAddPage,
     getParentRoute: () => rootRoute,
 });
 
 export const productDetailRoute = createRoute({
-    path: "/produk/$productId",
+    path: "/admin/produk/$productId",
     component: ProductDetailPage,
     getParentRoute: () => rootRoute,
 });
 
 export const productUpdateRoute = createRoute({
-    path: "/produk/update/$id",
+    path: "/admin/produk/update/$id",
     component: ProductUpdatePage,
     getParentRoute: () => rootRoute,
 });
 
 export const productRoute = createRoute({
-    path: "/produk",
+    path: "/admin/produk",
     component: ProductPage,
     getParentRoute: () => rootRoute,
 });

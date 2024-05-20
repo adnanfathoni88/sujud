@@ -22,7 +22,7 @@ function ImageInput({ label, error, name, defaultImage, ...rest }: { label: stri
 				{ label }
 			</p>
 			<div className={twMerge("flex items-center justify-center relative text-blue-600 w-full h-[150px] overflow-hidden p-3 border-dashed border rounded-md", error ? "border-red-600" : ' border-blue-400')}>
-				<label htmlFor={ name } className={twMerge('dark:bg-white/10 transition-all inset-0 absolute bg-black/50 text-white flex items-center justify-center font-semibold hover:opacity-100 cursor-pointer', file ? 'opacity-0' : 'opacity-100')}>
+				<label htmlFor={ name } className={twMerge('dark:bg-white/10 transition-all inset-0 absolute bg-black/50 text-white flex items-center justify-center font-semibold hover:opacity-100 cursor-pointer', (file || defaultImage) ? 'opacity-0' : 'opacity-100')}>
 					Upload an Image
 				</label>
 				{ (file || defaultImage) && (

@@ -1,5 +1,5 @@
 import SideBar from "../../../components/sidebar";
-import { useGetCategoryList } from "../../../adapters/hooks/useCategoy";
+import { useGetCategoryList } from "../../../adapters/hooks/useCategory";
 import FormAddProduct from "./form";
 
 export default function ProductAddModule() {

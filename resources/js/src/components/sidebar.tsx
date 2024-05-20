@@ -11,7 +11,7 @@ function SideBar() {
                         <Icon nama="Dashboard"></Icon>
                         Dashboard
                     </div>
-                    <Link to={"/category"}>
+                    <Link to={"/admin/category"}>
                         <div className=" mb-2 text-slate-400 p-4 px-6 mx-6 rounded-md hover:bg-gray-600/50 flex">
                             <Icon nama="category"></Icon>
                             Kategori

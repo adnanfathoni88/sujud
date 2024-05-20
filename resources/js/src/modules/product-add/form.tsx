@@ -38,7 +38,7 @@ export default function FormAddProduct({ category }: { category: ICategoryList }
 		productAdd.mutate(data as TAddProductSchema, {
 			onSuccess: () => {
 				toastSuccess("Success add new product")
-				navigate({ to: "/produk" })
+				navigate({ to: "/admin/produk" })
 			},
 			onError: () => toastError("Failed add new product")
 		});

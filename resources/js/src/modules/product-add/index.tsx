@@ -1,4 +1,4 @@
-import { useGetCategoryList } from "../../adapters/hooks/useCategoy";
+import { useGetCategoryList } from "../../adapters/hooks/useCategory";
 import NewCategory from "../category-list/new-category";
 import FormAddProduct from "./form";
 
