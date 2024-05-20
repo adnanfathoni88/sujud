@@ -9,7 +9,7 @@ const CartShopPageModule: React.FC = () => {
             <div className="pt-[72px] md:px-10 lg:px-20 mb-16 h-full">
                 <div className="lg:grid lg:grid-cols-3 px-4 py-10 gap-4 h-full">
                     <div className="col-span-2 mb-4">
-                        <h2 className="font-semibold text-3xl py-4 md:mb-4">
+                        <h2 className="font-semibold text-3xl md:py-4 md:mb-4">
                             Keranjang
                         </h2>
                         <div className="rounded-sm border border-stroke bg-white px-5 pb-2.5 pt-6 shadow-default dark:border-strokedark dark:bg-boxdark sm:px-7.5 xl:pb-1">

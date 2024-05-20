@@ -13,6 +13,7 @@ import {
     LandingPageRoute,
     cartRoute,
     detailShopRoute,
+    paymentRoute,
     shopRoute,
 } from "./user";
 
@@ -26,6 +27,7 @@ export const rootRoute = createRootRoute({
 });
 
 export const routeTree = rootRoute.addChildren([
+    paymentRoute,
     cartRoute,
     detailShopRoute,
     LandingPageRoute,
