@@ -15,6 +15,7 @@ import {
     detailShopRoute,
     shopRoute,
 } from "./user";
+import { profileRoute } from "./profile";
 
 export const rootRoute = createRootRoute({
     component: () => (
@@ -37,5 +38,6 @@ export const routeTree = rootRoute.addChildren([
     categoryListRoute,
     loginRoute,
     registerRoute,
+	profileRoute,
 ]);
 export const router = createRouter({ routeTree });

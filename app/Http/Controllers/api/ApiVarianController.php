@@ -119,7 +119,8 @@ class ApiVarianController extends Controller
 		}
 
 		$imgSuccess = false;
-
+		$filename = "";
+		
 		try {
 			$file = $request->file('image');
 			$filename = Str::uuid() . '.' . $file->getClientOriginalExtension();

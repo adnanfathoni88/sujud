@@ -10,8 +10,8 @@ import { Component } from 'react'
 import { match } from 'ts-pattern'
 
 export type TCategoryModal = {
-	title: string
 	children: JSX.Element
+	title?: string
 	open: boolean
 	onOpen: () => void
 	onClose: () => void
@@ -28,7 +28,7 @@ export default function Modal({ title, open, children, onOpen, onClose, Trigger 
 						onClick={ onOpen }
 						className="rounded-md bg-first py-2 px-4 text-sm font-medium text-white"
 					>
-						{ title }
+						{ title ?? 'Open Modal'}
 					</Button>
 				))}
 
