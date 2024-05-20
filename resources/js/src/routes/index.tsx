@@ -3,7 +3,18 @@ import { TanStackRouterDevtools } from "@tanstack/router-devtools";
 import { loginRoute } from "./login";
 import { registerRoute } from "./register";
 import { categoryListRoute } from "./category-route";
-import { productAddRoute, productDetailRoute, productRoute, productUpdateRoute } from "./product-route";
+import {
+    productAddRoute,
+    productDetailRoute,
+    productRoute,
+    productUpdateRoute,
+} from "./product-route";
+import {
+    LandingPageRoute,
+    cartRoute,
+    detailShopRoute,
+    shopRoute,
+} from "./user";
 
 export const rootRoute = createRootRoute({
     component: () => (
@@ -15,13 +26,15 @@ export const rootRoute = createRootRoute({
 });
 
 export const routeTree = rootRoute.addChildren([
+    cartRoute,
+    detailShopRoute,
+    LandingPageRoute,
+    shopRoute,
     productRoute,
     productAddRoute,
-	productUpdateRoute,
+    productUpdateRoute,
     productDetailRoute,
-    
     categoryListRoute,
-
     loginRoute,
     registerRoute,
 ]);
