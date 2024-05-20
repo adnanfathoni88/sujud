@@ -67,7 +67,7 @@ const ProductListModule: React.FC = () => {
 									<p className="text-black dark:text-white">{ c.kode }</p>
 								</div>
 								<div className="flex items-start justify-center p-2.5 xl:p-5">
-									<img src={ `/api/uploaded/${c.varian.gambar.nama}` } alt="" />
+									<img src={ `/api/uploaded/${c?.varian?.gambar?.nama}` } alt="" />
 								</div>
 								<div className="flex items-start justify-center p-2.5 xl:p-5">
 									<p className="text-black dark:text-white">{ c.nama }</p>

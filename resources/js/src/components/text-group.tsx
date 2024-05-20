@@ -2,16 +2,16 @@ import { forwardRef, useId } from "react";
 import { twMerge as twm } from "tailwind-merge";
 
 export type TPropsTextGroup = {
-    type: "number" | "text" | "email" | "password";
-    name: string;
-    title: string;
-    required?: boolean;
-    errorMessage?: string;
-    placeholder?: string;
-    defaultValue?: string | number;
-    onBlur?: (e: React.FocusEvent<HTMLInputElement>) => void;
-    onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
-};
+	type: 'number' | 'text' | 'email' | 'password',
+	name: string;
+	title: string,
+	required?: boolean,
+	errorMessage?: string,
+	placeholder?: string,
+	defaultValue?: string | number,
+	onBlur?: (e: React.FocusEvent<HTMLInputElement>) => void,
+	onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void,
+}
 
 const TextGroup = forwardRef(({ type, title, name, onChange, onBlur, defaultValue, required, errorMessage, placeholder, ...rest }: TPropsTextGroup, ref: React.LegacyRef<HTMLInputElement>) => {
 	const id = useId()

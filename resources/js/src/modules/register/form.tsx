@@ -18,6 +18,7 @@ export default function FormRegister() {
 		defaultValues: {
 			name: '',
 			email: '',
+			nomor: '',
 			password: '',
 		}
 	})
@@ -42,6 +43,14 @@ export default function FormRegister() {
 				title="Your name"
 				errorMessage={ errors.name?.message }
 				{ ...register('name') }
+			/>
+			<TextGroup
+				required
+				type="tel"
+				title="Nomor whatsapp (+62)"
+				errorMessage={ errors.nomor?.message }
+				{ ...register('nomor') }
+				placeholder="+62"
 			/>
 			<TextGroup
 				required
