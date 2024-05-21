@@ -2,12 +2,15 @@
 
 namespace App\Http\Controllers\api;
 
+use App\Models\Gambar;
 use App\Models\User;
 use App\Traits\ResponseFormat;
 use App\Traits\UserCookie;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
+use Illuminate\Support\Facades\Cookie;
 use Illuminate\Support\Facades\Crypt;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 
@@ -29,13 +32,21 @@ class ApiAuthController extends Controller
 		$toSave['password'] = Hash::make($toSave['password']);
 
 		$m = new User();
-		$m->role_id = 2;
-		$m->nama = $toSave['nama'];
-		$m->email = $toSave['email'];
-		$m->nomor = $toSave['nomor'];
-		$m->password = $toSave['password'];
-		$m->save();
-		$m->id;
+
+		DB::transaction(function() use($toSave, &$m) {
+			$g = new Gambar();
+			$g->nama = "";
+			$g->save();
+
+			$m->role_id = 2;
+			$m->gambar_id = $g->id;
+			$m->nama = $toSave['nama'];
+			$m->email = $toSave['email'];
+			$m->nomor = $toSave['nomor'];
+			$m->password = $toSave['password'];
+			$m->save();
+			$m->id;
+		});
 
 		$encrypted = $this->setUserCookie($m->id);
 
@@ -57,6 +68,10 @@ class ApiAuthController extends Controller
 		$encrypted = $this->setUserCookie($m->id);
 
 		return $this->res("Success", 201)->withCookie('token', $encrypted, 24 * 60, '/', null, false, true, 'strict');
+	}
+
+	function logout(Request $req) {
+		return $this->res("Success", 201)->withCookie(Cookie::forget('token'));
 	}
 }
 

@@ -43,11 +43,14 @@ Route::get("/uploaded/{filename}", function ($filename) {
 Route::prefix("/auth")->group(function () {
 	Route::post("/register", [ApiAuthController::class, 'register']);
 	Route::post("/login", [ApiAuthController::class, 'login']);
+	Route::post("/logout", [ApiAuthController::class, 'logout']);
 });
 
 Route::prefix("/profile")->group(function () {
 	Route::get('/', [ApiProfileController::class, 'show']);
 	Route::put('/', [ApiProfileController::class, 'update']);
+	Route::post('/picture', [ApiProfileController::class, 'update_profile_picture']);
+
 });
 
 Route::prefix("/kategori")->middleware('auth.stateless')->group(function () {

@@ -16,6 +16,13 @@ return new class extends Migration
                 $table->foreign('role_id')->references('id')->on('roles')->onDelete('restrict')->onUpdate('cascade');
             });
         }
+		
+        if (!Schema::hasColumn('users', 'gambar_id')) {
+            Schema::table('users', function (Blueprint $table) {
+                $table->unsignedBigInteger('gambar_id')->nullable();
+                $table->foreign('gambar_id')->references('id')->on('gambars')->onDelete('restrict')->onUpdate('cascade');
+            });
+        }
 
 
         // produk
@@ -106,6 +113,8 @@ return new class extends Migration
         Schema::table('users', function (Blueprint $table) {
             $table->dropForeign(['role_id']);
             $table->dropColumn(['role_id']);
+			$table->dropForeign(['gambar_id']);
+            $table->dropColumn(['gambar_id']);
         });
 
         Schema::table('produks', function (Blueprint $table) {

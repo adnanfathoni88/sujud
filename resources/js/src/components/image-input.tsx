@@ -1,7 +1,7 @@
 import { forwardRef, useEffect, useState } from "react"
 import { twMerge } from "tailwind-merge";
 
-function ImageInput({ label, error, name, defaultImage, ...rest }: { label: string, defaultImage?: string, name: string, error: string }, ref) {
+function ImageInput({ label, error, name, defaultImage, ...rest }: { label: string, defaultImage?: string, name: string, error?: string }, ref) {
 	const [file, setFile] = useState<string>(null)
 
 	const onChange = e => {

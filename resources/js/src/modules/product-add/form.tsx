@@ -117,11 +117,11 @@ export default function FormAddProduct({ category }: { category: ICategoryList }
 					name="ukuran"
 					label="Ukuran"
 					options={ [
-						{ id: 0, nama: "S" },
-						{ id: 1, nama: "M" },
-						{ id: 2, nama: "L" },
-						{ id: 3, nama: "XL" },
-						{ id: 4, nama: "XXL" }
+						{ id: 'S', nama: "S" },
+						{ id: 'M', nama: "M" },
+						{ id: 'L', nama: "L" },
+						{ id: 'XL', nama: "XL" },
+						{ id: 'XXL', nama: "XXL" }
 					] }
 					defaultValue={ 0 }
 					error={ errors?.ukuran?.message }
