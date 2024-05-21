@@ -30,4 +30,9 @@ class Pesanan extends Model
     {
         return $this->belongsTo(User::class);
     }
+
+	function ongkir() 
+	{
+		return $this->hasOne(Ongkir::class, 'pesanan_grup', 'pesanan_grup');
+	}
 }
