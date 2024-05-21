@@ -16,6 +16,8 @@ import {
     paymentRoute,
     shopRoute,
 } from "./user";
+import { adminRoute } from "./admin";
+import { ulasanRoute } from "./ulasan-route";
 
 export const rootRoute = createRootRoute({
     component: () => (
@@ -27,6 +29,8 @@ export const rootRoute = createRootRoute({
 });
 
 export const routeTree = rootRoute.addChildren([
+    ulasanRoute,
+    adminRoute,
     paymentRoute,
     cartRoute,
     detailShopRoute,

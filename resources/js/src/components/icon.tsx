@@ -36,6 +36,8 @@ const Icon = ({ nama }: IconProps) => {
                 <i className="fa-solid fa-arrow-left"></i>
             )}
             {nama === "star" && <i className="fa-solid fa-star"></i>}
+            {nama === "reply" && <i className="fa-solid fa-comment-dots"></i>}
+            {nama === "trash" && <i className="fa-solid fa-trash"></i>}
         </div>
     );
 };

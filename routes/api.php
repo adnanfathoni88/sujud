@@ -32,7 +32,7 @@ use Illuminate\Support\Facades\Route;
 // Route::put('/kategori/{id}', [KategoriController::class, 'update']);
 // Route::delete('/kategori/{id}', [KategoriController::class, 'destroy']);
 
-Route::get("/uploaded/{filename}", function ($filename) {
+Route::get("/uploaded/{filename}", function ($filename) {	
 	try {
 		return response()->file(storage_path("app/public/uploaded/$filename"));
 	} catch (\Throwable $th) {
@@ -45,10 +45,9 @@ Route::prefix("/auth")->group(function () {
 	Route::post("/login", [ApiAuthController::class, 'login']);
 });
 
-Route::prefix("/profile")->group(function() {
+Route::prefix("/profile")->group(function () {
 	Route::get('/', [ApiProfileController::class, 'show']);
 	Route::put('/', [ApiProfileController::class, 'update']);
-
 });
 
 Route::prefix("/kategori")->middleware('auth.stateless')->group(function () {
