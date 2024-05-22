@@ -1,8 +1,8 @@
-import { forwardRef, useId } from "react"
-import { twMerge as twm } from 'tailwind-merge'
+import { forwardRef, useId } from "react";
+import { twMerge as twm } from "tailwind-merge";
 
 export type TPropsTextGroup = {
-	type: 'number' | 'text' | 'email' | 'password' | 'tel',
+	type: 'number' | 'text' | 'email' | 'password',
 	name: string;
 	title: string,
 	required?: boolean,
@@ -15,7 +15,6 @@ export type TPropsTextGroup = {
 
 const TextGroup = forwardRef(({ type, title, name, onChange, onBlur, defaultValue, required, errorMessage, placeholder, ...rest }: TPropsTextGroup, ref: React.LegacyRef<HTMLInputElement>) => {
 	const id = useId()
-	
 	return (
 		<div>
 			<label htmlFor={ id } className="block text-sm font-medium leading-6 text-gray-900 dark:text-white">
@@ -41,4 +40,4 @@ const TextGroup = forwardRef(({ type, title, name, onChange, onBlur, defaultValu
 	)
 })
 
-export default TextGroup
+export default TextGroup;

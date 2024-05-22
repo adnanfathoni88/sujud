@@ -11,28 +11,32 @@ class ReactHandlerController extends Controller
 {
 	use AuthWeb, Payment;
 
-    public function index(Request $request) {
+	public function index(Request $request)
+	{
 		$token = $request->cookie('token');
-		if(!$this->webAuthenticate($token)) return redirect('/login');
+		if (!$this->webAuthenticate($token)) return redirect('/login');
 		return view('index');
 	}
 
-	public function admin(Request $request) {
+	public function admin(Request $request)
+	{
 		$token = $request->cookie('token');
-		if(!$this->webAuthenticate($token)) return redirect('/login');
-		if(!$this->webAuthorization($token, 'admin')) return "Unauthorized Access";
+		if (!$this->webAuthenticate($token)) return redirect('/login');
+		// if(!$this->webAuthorization($token, 'admin')) return "Unauthorized Access";
 		return view('index');
 	}
 
-	public function login(Request $request) {
+	public function login(Request $request)
+	{
 		$token = $request->cookie('token');
-		if($this->webAuthenticate($token)) return redirect('/');
+		if ($this->webAuthenticate($token)) return redirect('/');
 		return view('index');
 	}
 
-	public function register(Request $request) {
+	public function register(Request $request)
+	{
 		$token = $request->cookie('token');
-		if($this->webAuthenticate($token)) return redirect('/');
+		if ($this->webAuthenticate($token)) return redirect('/');
 		return view('index');
 	}
 }

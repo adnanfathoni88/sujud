@@ -1,6 +1,14 @@
 import { IoIosInformationCircleOutline } from "react-icons/io";
+<<<<<<< HEAD
 import { useDeleteProductById, useGetProductList } from "../../adapters/hooks/useProducts";
 import { Link, useNavigate, useSearch } from "@tanstack/react-router";
+=======
+import {
+    useDeleteProductById,
+    useGetProductList,
+} from "../../adapters/hooks/useProducts";
+import { Link } from "@tanstack/react-router";
+>>>>>>> c355abd763eeca57e6473288eb4a8c1871a64206
 import Loader from "../../components/loader";
 import { twMerge } from "tailwind-merge";
 import { CiTrash } from "react-icons/ci";
@@ -15,10 +23,14 @@ const ProductListModule: React.FC = () => {
 	const { data } = useGetProductList({ q: search?.q, page: search?.page});
 	const deleteProduct = useDeleteProductById();
 
-	const handleDelete = (id: number) => () => deleteProduct.mutate({ id }, {
-		onSuccess: () => toastSuccess("Kategori berhasil dihapus"),
-		onError: () => toastError("Gagal menghapus kategori")
-	});
+    const handleDelete = (id: number) => () =>
+        deleteProduct.mutate(
+            { id },
+            {
+                onSuccess: () => toastSuccess("Kategori berhasil dihapus"),
+                onError: () => toastError("Gagal menghapus kategori"),
+            }
+        );
 
 	const onKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
 		if(e.key === "Enter") {
