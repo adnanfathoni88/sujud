@@ -1,12 +1,12 @@
 import { api } from "../../services/api";
-import { TAddProductSchema } from "../../modules/product/product-add/schema";
+import { TAddProductSchema } from "../../modules/product-add/schema";
 import { IProduct, IProductList } from "../../interfaces/product";
 import { TUpdateProductSchema } from "../../modules/product-list/schema";
 
-export async function getProductList(props?: { q?: string, page?: number }) {
-	const query = new URLSearchParams();
-	if(props?.q) query.append("q", props.q);
-	if(props?.page) query.append("page", props.page.toString());
+export async function getProductList(props?: { q?: string; page?: number }) {
+    const query = new URLSearchParams();
+    if (props?.q) query.append("q", props.q);
+    if (props?.page) query.append("page", props.page.toString());
     const res = await api.get(`/produk?${query.toString()}`);
     return res.data as { response: { data: IProductList } };
 }
@@ -16,7 +16,7 @@ export async function addProduct({
     nama,
     deskripsi,
     harga,
-    warna,
+    // warna,
     image,
     stok,
     ukuran,
@@ -27,7 +27,7 @@ export async function addProduct({
     formData.append("nama", nama);
     formData.append("deskripsi", deskripsi);
     formData.append("harga", harga.toString());
-    formData.append("warna", warna);
+    // formData.append("warna", warna);
     formData.append("stok", stok.toString());
     formData.append("image", image[0]);
     formData.append("ukuran", ukuran);

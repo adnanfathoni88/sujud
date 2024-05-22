@@ -21,7 +21,7 @@ export default function Reply({ parentId }: { parentId: number }) {
     return (
         <Modal
             open={open}
-            title="Buat Kategori"
+            title="Buat Ulasan"
             onOpen={() => setOpen(true)}
             onClose={() => setOpen(false)}
             Trigger={
