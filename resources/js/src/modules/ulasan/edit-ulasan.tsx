@@ -43,7 +43,6 @@ export default function EditUlasan({ ulasan }: { ulasan: IBaseUlasan }) {
     };
 
     const onSubmit = (data: any) => {
-        // conso
         ulasanEdit.mutate(
             {
                 ...data,

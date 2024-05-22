@@ -10,6 +10,7 @@ import {
     AiFillAmazonSquare,
     AiFillWechat,
     AiOutlineProduct,
+    AiOutlineUserAdd,
 } from "react-icons/ai";
 import { LiaProductHunt } from "react-icons/lia";
 
@@ -198,18 +199,18 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }: SidebarProps) => {
                                     );
                                 }}
                             </SidebarLinkGroup>
-                            {/* <li>
+                            <li>
                                 <Link
-                                    to="/admin/category"
+                                    to="/admin/admin"
                                     className={`group relative flex items-center gap-2.5 rounded-sm py-2 px-4 font-medium text-bodydark1 duration-300 ease-in-out hover:bg-graydark dark:hover:bg-meta-4 ${
                                         locationId === "category" &&
                                         "bg-graydark dark:bg-meta-4"
                                     }`}
                                 >
-                                    <AiFillWechat className="fill-current" />
-                                    Ulasan
+                                    <AiOutlineUserAdd className="fill-current" />
+                                    Admin
                                 </Link>
-                            </li> */}
+                            </li>
                         </ul>
                     </div>
                 </nav>

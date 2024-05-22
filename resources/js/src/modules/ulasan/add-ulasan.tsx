@@ -14,7 +14,7 @@ import { useParams } from "@tanstack/react-router";
 import { useForm } from "react-hook-form";
 
 export default function NewUlasan() {
-    const ulasan = useAddUlasan()
+    const ulasan = useAddUlasan();
     const { produkId } = useParams({ strict: false });
     const { varianId } = useParams({ strict: false });
 
@@ -24,37 +24,44 @@ export default function NewUlasan() {
     const ulasanAdd = useAddUlasan();
 
     const {
-		register,
-		setValue,
-		handleSubmit,
+        register,
+        setValue,
+        handleSubmit,
         formState: { errors },
     } = useForm({
         resolver: zodResolver(AddUlasanSchema),
-        defaultValues: { 
-			konten: "",
-			rating: selectedStar
-		},
+        defaultValues: {
+            konten: "",
+            rating: selectedStar,
+        },
     });
 
     // handle star
     const handleStar = (value: number) => {
         setSelectedStar(value);
-		setValue('rating', value);
+        setValue("rating", value);
     };
 
     const onSubmit = (data: any) => {
-		ulasan.mutate({ ...data, produkId: Number(produkId), varianId: Number(varianId) } as TAddUlasanSchema & { produkId: number, varianId: number }, {
-			onError: () => toastError("Failed add new ulasan"),
-			onSuccess: () => {
-				setOpen(false)
-				toastSuccess("Success add new ulasan")
-			},
-		})
+        ulasan.mutate(
+            {
+                ...data,
+                produkId: Number(produkId),
+                varianId: Number(varianId),
+            } as TAddUlasanSchema & { produkId: number; varianId: number },
+            {
+                onError: () => toastError("Failed add new ulasan"),
+                onSuccess: () => {
+                    setOpen(false);
+                    toastSuccess("Success add new ulasan");
+                },
+            }
+        );
     };
 
     return (
         <CategoryModal
-			open={open}
+            open={open}
             title="Buat Ulasan"
             onClose={() => setOpen(false)}
             onOpen={() => setOpen(true)}
@@ -92,7 +99,7 @@ export default function NewUlasan() {
                             ))}
                         </div>
                     </div>
-					<input type="hidden" { ...register('rating') } />
+                    <input type="hidden" {...register("rating")} />
 
                     <div className="mt-4">
                         <button
