@@ -118,8 +118,11 @@ class ApiPesananController extends Controller
 			->where('user_id', $this->getUserCookie($request->cookie('token')))
 			->where('status', 'belum-bayar')
 			->first();
-
 		if(!$m) return $this->res("Not Found", 404);
+
+		$m2 = Ongkir::where('pesanan_grup', $m->pesanan_grup)->first();
+		if(!$m2) return $this->res("Not Found", 404);
+		if($m2->is_confirmed_by_admin) return $this->res("Pesanan sudah dikonfirmasi", 400);
 
 		$m->delete();
 

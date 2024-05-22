@@ -18,6 +18,7 @@ export default function Pagination({ withSearch, navigate, nextUrl }: { withSear
 		const urlSearchParam = new URLSearchParams()
 		urlSearchParam.append("page", page.toString())
 		if(search?.q) urlSearchParam.append("q", search?.q || "")
+		if(search?.isConfirmed) urlSearchParam.append("isConfirmed", search?.isConfirmed || "")
 		navigate({ to: `?${urlSearchParam.toString()}` })
 	}
 

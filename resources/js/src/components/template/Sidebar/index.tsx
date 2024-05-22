@@ -1,3 +1,4 @@
+import { TfiTruck } from "react-icons/tfi";
 import { useEffect, useRef, useState } from "react";
 import { Link, useLocation } from "@tanstack/react-router";
 import SidebarLinkGroup from "./SidebarLinkGroup";
@@ -209,6 +210,18 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }: SidebarProps) => {
                                 >
                                     <AiFillWechat size={20} className="fill-current" />
                                     Ulasan
+                                </Link>
+                            </li>
+                            <li>
+                                <Link
+                                    to="/admin/ongkir"
+                                    className={`group relative flex items-center gap-2.5 rounded-sm py-2 px-4 font-medium text-bodydark1 duration-300 ease-in-out hover:bg-graydark dark:hover:bg-meta-4 ${
+                                        locationId === "ongkir" &&
+                                        "bg-graydark dark:bg-meta-4"
+                                    }`}
+                                >
+                                    <TfiTruck size={20} className="fill-current" />
+                                    Ongkir
                                 </Link>
                             </li>
                         </ul>

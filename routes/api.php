@@ -135,7 +135,6 @@ Route::prefix("/ongkir")->middleware('auth.stateless')->middleware('guard.admin'
 	Route::get('/', [ApiOngkirController::class, 'index']);
 	Route::get('/{id}', [ApiOngkirController::class, 'show']);
 	Route::put('/{id}', [ApiOngkirController::class, 'update']);
-	Route::delete('/{id}', [ApiOngkirController::class, 'destroy']);
 });
 
 Route::prefix("/user")->middleware('auth.stateless')->middleware('guard.admin')->group(function () {
