@@ -1,5 +1,8 @@
 import { IUlasanList } from "../../interfaces/ulasan";
-import { TAddUlasanSchema } from "../../modules/ulasan/schema";
+import {
+    TAddUlasanSchema,
+    TUpdateUlasanSchema,
+} from "../../modules/ulasan/schema";
 import { api } from "../../services/api";
 
 export async function getUlasanList(produkId: number, varianId: number) {
@@ -25,7 +28,7 @@ export async function addUlasan({
     varianId,
     konten,
     rating,
-}: TAddUlasanSchema & { produkId: number, varianId: number }) {
+}: TAddUlasanSchema & { produkId: number; varianId: number }) {
     const formData = new FormData();
     formData.append("konten", konten);
     formData.append("rating", rating.toString());
@@ -33,6 +36,33 @@ export async function addUlasan({
     const res = await api.post(
         `/produk/${produkId}/varian/${varianId}/ulasan/`,
         formData
+    );
+
+    return res.data;
+}
+
+export async function updateUlasan(
+    data: TUpdateUlasanSchema & {
+        produkId: number;
+        varianId: number;
+        ulasanId: number;
+    }
+) {
+    const { produkId, varianId, ulasanId, konten, rating } = data;
+
+    const payload = {
+        konten,
+        rating,
+    };
+
+    const res = await api.put(
+        `/produk/${produkId}/varian/${varianId}/ulasan/${ulasanId}`,
+        payload,
+        {
+            headers: {
+                "Content-Type": "application/json",
+            },
+        }
     );
 
     return res.data;
