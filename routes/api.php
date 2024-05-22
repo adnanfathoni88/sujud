@@ -91,8 +91,8 @@ Route::prefix("/produk")->group(function () {
 			Route::prefix("/{id_ulasan_parent}/reply")->middleware('guard.admin')->group(function () {
 				Route::get('/', [ApiUlasanReplyController::class, 'index']);
 				Route::get('/{id}', [ApiUlasanReplyController::class, 'show']);
-
-				Route::middleware('guard.admin')->group(function () {
+				
+				Route::middleware('guard.admin')->group(function() {
 					Route::post('/', [ApiUlasanReplyController::class, 'store']);
 					Route::put('/{id}', [ApiUlasanReplyController::class, 'update']);
 					Route::delete('/{id}', [ApiUlasanReplyController::class, 'destroy']);
@@ -107,6 +107,17 @@ Route::prefix("/produk")->group(function () {
 			Route::put('/{id}', [ApiCartController::class, 'update']);
 			Route::delete('/{id}', [ApiCartController::class, 'destroy']);
 		});
+	});
+});
+
+Route::prefix("/ulasan")->group(function () {
+	Route::middleware('guard.admin')->get('/user-ulasan', [ApiUlasanReplyController::class, 'user_ulasan']);
+	
+	Route::get('/{user_ulasan_id}', [ApiUlasanReplyController::class, 'show']);
+	Route::middleware('guard.admin')->group(function () {
+		Route::put('/{id}', [ApiUlasanReplyController::class, 'update']);
+		Route::delete('{id}', [ApiUlasanReplyController::class, 'destroy']);
+		Route::post('/{parent_ulasan_id}/varian/{id_varian}', [ApiUlasanReplyController::class, 'store']);
 	});
 });
 
@@ -135,7 +146,6 @@ Route::prefix("/ongkir")->middleware('auth.stateless')->middleware('guard.admin'
 	Route::get('/', [ApiOngkirController::class, 'index']);
 	Route::get('/{id}', [ApiOngkirController::class, 'show']);
 	Route::put('/{id}', [ApiOngkirController::class, 'update']);
-	Route::delete('/{id}', [ApiOngkirController::class, 'destroy']);
 });
 
 Route::prefix("/user")->middleware('auth.stateless')->middleware('guard.admin')->group(function () {

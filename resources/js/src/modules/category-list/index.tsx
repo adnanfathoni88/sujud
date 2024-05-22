@@ -30,7 +30,9 @@ const CategoryListModule: React.FC = () => {
                     <h4 className="text-xl font-semibold text-black dark:text-white me-auto sm:me-0">
                         Daftar Kategori
                     </h4>
-                    <NewCategory />
+                    <div className="sm:mt-0 ml-auto mt-4">
+						<NewCategory />
+					</div>
                 </div>
                 <div className="flex flex-col">
                     <div className="grid grid-cols-3 rounded-sm bg-gray-2 dark:bg-meta-4 sm:grid-cols-5">

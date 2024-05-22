@@ -8,6 +8,8 @@ import { match } from "ts-pattern";
 import { toastError, toastSuccess } from "../../utils/toast";
 import UpdateProduct from "./update-product";
 import { productRoute } from "../../routes/product-route";
+// @ts-ignore
+import Pagination from "../../components/pagination";
 
 const ProductListModule: React.FC = () => {
 	const search = useSearch({ strict: false })
@@ -15,24 +17,14 @@ const ProductListModule: React.FC = () => {
 	const { data } = useGetProductList({ q: search?.q, page: search?.page});
 	const deleteProduct = useDeleteProductById();
 
-    const handleDelete = (id: number) => () =>
-        deleteProduct.mutate(
-            { id },
-            {
-                onSuccess: () => toastSuccess("Kategori berhasil dihapus"),
-                onError: () => toastError("Gagal menghapus kategori"),
-            }
-        );
-
-	const onKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
-		if(e.key === "Enter") {
-			const q = (e.target as HTMLInputElement).value
-			const urlSearchParam = new URLSearchParams()
-			urlSearchParam.append("q", q)
-			if(search?.page) urlSearchParam.append("page", search.page)
-			navigate({ to: `?${urlSearchParam.toString()}` })
+    const handleDelete = (id: number) => () => deleteProduct.mutate(
+		{ id },
+		{
+			onSuccess: () => toastSuccess("Kategori berhasil dihapus"),
+			onError: () => toastError("Gagal menghapus kategori"),
 		}
-	}
+	);
+
 
 	return (
 		<>
@@ -41,37 +33,13 @@ const ProductListModule: React.FC = () => {
 					<h4 className="text-xl font-semibold text-black dark:text-white me-auto sm:me-0">Daftar Produk</h4>
 					<Link
 						to="/admin/produk/add"
-						className="rounded-md bg-first py-2 px-4 text-sm font-medium text-white ml-auto"
+						className="rounded-md bg-first py-2 px-4 text-sm font-medium text-white ml-auto mt-4 sm:mt-0"
 					>
 						Buat Produk
 					</Link>
 				</div>
 				{/* search bar */}
-				<div className="flex items-center mb-6">
-					<input
-						onKeyDown={onKeyDown}
-						type="text"
-						placeholder="Cari produk (Enter)"
-						className={ twMerge(`w-full rounded-md border border-stroke px-4 py-2 text-sm text-black bg-zinc-200 dark:bg-black/40 dark:text-white dark:border-strokedark`) }
-					/>
-					{/* next prev button */}
-					{/* <div className="flex items-center space-x-2 ml-4">
-						<button
-							onClick={ () => navigate({ to: `?page=${Number(search?.page || 1) - 1}` }) }
-							disabled={ search?.page === "1" }
-							className={ twMerge(`rounded-md border border-stroke px-4 py-2 text-sm text-black bg-zinc-200 dark:bg-black/40 dark:text-white dark:border-strokedark`, search?.page === "1" && `cursor-not-allowed`) }
-						>
-							Prev
-						</button>
-						<button
-							onClick={ () => navigate({ to: `?page=${Number(search?.page || 1) + 1}` }) }
-							disabled={ !data?.response?.next_page_url }
-							className={ twMerge(`rounded-md border border-stroke px-4 py-2 text-sm text-black bg-zinc-200 dark:bg-black/40 dark:text-white dark:border-strokedark`, !data?.response?.next_page_url && `cursor-not-allowed`) }
-						>
-							Next
-						</button>
-					</div> */}
-				</div>
+				<Pagination withSearch={true} navigate={navigate} nextUrl={ data?.response?.next_page_url } />
 				<div className="overflow-x-auto">
 					<div className="align-middle">
 						<table className="min-w-[100%]">

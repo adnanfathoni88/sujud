@@ -7,8 +7,8 @@ import {
 	updateProduct,
 } from "../api/products";
 import { queryClient } from "../../main";
-import { TAddProductSchema } from "../../modules/product/product-add/schema";
 import { TUpdateProductSchema } from "../../modules/product-list/schema";
+import { TAddProductSchema } from "../../modules/product-add/schema";
 
 // show all
 export function useGetProductList({ q, page }: { q?: string, page?: number }) {

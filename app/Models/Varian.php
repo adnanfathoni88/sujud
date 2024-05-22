@@ -23,7 +23,7 @@ class Varian extends Model
 	public function produk()
 	{
 		// return $this->belongsTo(Produk::class, );
-		return $this->hasOne(Produk::class, 'id', 'product_id');
+		return $this->hasOne(Produk::class, 'id', 'produk_id');
 	}
 
 	public function gambar()

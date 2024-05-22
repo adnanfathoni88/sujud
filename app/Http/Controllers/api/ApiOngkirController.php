@@ -35,7 +35,8 @@ class ApiOngkirController extends Controller
     {
 		$ongkir = Ongkir::where('id', $id)
 			->with('pelanggan')
-			->with('pesanan')
+			->with('pesanan.varian.produk')
+			->with('pesanan.varian.gambar')
 			->with('transaksi')
 			->first();
 
@@ -83,19 +84,5 @@ class ApiOngkirController extends Controller
 		}
 
 		return $this->res("Transaksi sudah dibayar", 400);
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(string $id)
-    {
-        $ongkir = Ongkir::find($id);
-		$pesanan = Pesanan::where('pesanan_grup', $ongkir->pesanan_grup)->first();
-		if(!$pesanan) {
-			$ongkir->delete();
-			return $this->res("Success", 200);
-		}
-		return $this->res("Pelanggan belum menghapus pesanannya", 400);
     }
 }

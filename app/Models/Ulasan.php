@@ -17,7 +17,8 @@ class Ulasan extends Model
         'rating',
         'produk_id',
         'user_id',
-        'parent_id'
+        'parent_id',
+		'is_replied'
     ];
 
     public function produk()
