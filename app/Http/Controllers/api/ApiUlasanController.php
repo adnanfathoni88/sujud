@@ -17,7 +17,7 @@ class ApiUlasanController extends Controller
      */
     public function index(string $id_produk, string $id_varian)
     {
-		$m = Ulasan::where('varian_id', $id_varian)->paginate(15);
+		$m = Ulasan::where('varian_id', $id_varian)->where("parent_id", null)->orderBy('rating', 'DESC')->paginate(15);
 		return $this->res($m, 200);
     }
 

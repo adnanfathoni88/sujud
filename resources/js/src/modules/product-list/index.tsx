@@ -8,7 +8,8 @@ import { match } from "ts-pattern";
 import { toastError, toastSuccess } from "../../utils/toast";
 import UpdateProduct from "./update-product";
 import { productRoute } from "../../routes/product-route";
-import Pagination from "../../components/Pagination";
+// @ts-ignore
+import Pagination from "../../components/pagination";
 
 const ProductListModule: React.FC = () => {
 	const search = useSearch({ strict: false })

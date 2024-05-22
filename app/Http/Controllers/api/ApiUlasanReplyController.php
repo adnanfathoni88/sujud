@@ -16,7 +16,7 @@ class ApiUlasanReplyController extends Controller
 
 	public function user_ulasan() 
 	{
-		return $this->res(Ulasan::where('parent_id', null)->orderBy('is_replied', 'ASC')->paginate(15), 200);
+		return $this->res(Ulasan::where('parent_id', null)->orderBy('is_replied', 'ASC')->with('user')->paginate(15), 200);
 	}
 
     

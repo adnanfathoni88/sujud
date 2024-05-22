@@ -36,8 +36,8 @@ export default function Pagination({ withSearch, navigate, nextUrl }: { withSear
 			<div className={twMerge("flex items-center space-x-2", withSearch ? "ml-4" : "ml-0 justify-between w-full")}>
 				<button
 					onClick={ onPagination(Number(search?.page || 1) - 1) }
-					disabled={ search?.page == "1" }
-					className={ twMerge(`rounded-md border border-stroke px-4 py-2 text-sm text-black bg-zinc-200 dark:bg-black/40 dark:text-white dark:border-strokedark`, search?.page === "1" && `cursor-not-allowed`) }
+					disabled={ (search?.page <= 1) || !search?.page }
+					className={ twMerge(`rounded-md border border-stroke px-4 py-2 text-sm text-black bg-zinc-200 dark:bg-black/40 dark:text-white dark:border-strokedark`, ((search?.page <= 1) || !search?.page) && `cursor-not-allowed`) }
 				>
 					Prev
 				</button>

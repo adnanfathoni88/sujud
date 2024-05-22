@@ -70,7 +70,7 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }: SidebarProps) => {
                 ?.classList.remove("sidebar-expanded");
         }
     }, [sidebarExpanded]);
-
+	console.log(locationId)
     return (
         <aside
             ref={sidebar}
@@ -126,7 +126,7 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }: SidebarProps) => {
                                         "bg-graydark dark:bg-meta-4"
                                     }`}
                                 >
-                                    <AiOutlineProduct className="fill-current" />
+                                    <AiOutlineProduct size={20} className="fill-current" />
                                     Kategori
                                 </Link>
                             </li>
@@ -151,9 +151,10 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }: SidebarProps) => {
                                                           );
                                                 }}
                                             >
-                                                <LiaProductHunt className="fill-current" />
+                                                <LiaProductHunt size={20} className="fill-current" />
                                                 Produk
                                                 <MdExpandMore
+													size={20}
                                                     className={`absolute right-4 top-1/2 -translate-y-1/2 fill-current ${
                                                         open && "rotate-180"
                                                     }`}
@@ -198,18 +199,18 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }: SidebarProps) => {
                                     );
                                 }}
                             </SidebarLinkGroup>
-                            {/* <li>
+                            <li>
                                 <Link
-                                    to="/admin/category"
+                                    to="/admin/ulasan"
                                     className={`group relative flex items-center gap-2.5 rounded-sm py-2 px-4 font-medium text-bodydark1 duration-300 ease-in-out hover:bg-graydark dark:hover:bg-meta-4 ${
-                                        locationId === "category" &&
+                                        locationId === "reply-ulasan" &&
                                         "bg-graydark dark:bg-meta-4"
                                     }`}
                                 >
-                                    <AiFillWechat className="fill-current" />
+                                    <AiFillWechat size={20} className="fill-current" />
                                     Ulasan
                                 </Link>
-                            </li> */}
+                            </li>
                         </ul>
                     </div>
                 </nav>

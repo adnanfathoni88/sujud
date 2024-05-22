@@ -2,7 +2,7 @@ import { forwardRef, useId } from "react";
 import { twMerge as twm } from "tailwind-merge";
 
 export type TPropsTextGroup = {
-	type: 'number' | 'text' | 'email' | 'password',
+	type: 'number' | 'text' | 'email' | 'password' | 'tel',
 	name: string;
 	title: string,
 	required?: boolean,
