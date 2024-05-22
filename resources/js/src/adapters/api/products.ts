@@ -1,14 +1,14 @@
 import { api } from "../../services/api";
-import { TAddProductSchema } from "../../modules/product/product-add/schema";
 import { IProduct, IProductList } from "../../interfaces/product";
 import { TUpdateProductSchema } from "../../modules/product-list/schema";
+import { TAddProductSchema } from "../../modules/product-add/schema";
 
 export async function getProductList(props?: { q?: string, page?: number }) {
 	const query = new URLSearchParams();
 	if(props?.q) query.append("q", props.q);
 	if(props?.page) query.append("page", props.page.toString());
     const res = await api.get(`/produk?${query.toString()}`);
-    return res.data as { response: { data: IProductList } };
+    return res.data as { response: { data: IProductList, next_page_url?: string } };
 }
 
 export async function addProduct({

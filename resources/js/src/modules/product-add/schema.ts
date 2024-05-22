@@ -5,7 +5,7 @@ export const AddProductSchema = z.object({
     nama: z.string().max(255),
     deskripsi: z.string().max(255),
     kategori_id: z.string().max(255),
-    // warna: z.string().max(255),
+    warna: z.string().max(255),
     ukuran: z.string().max(255),
     harga: z.string().max(255),
     stok: z.string().max(255),
