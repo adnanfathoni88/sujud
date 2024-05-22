@@ -6,11 +6,12 @@ import {
     UseGetUlasanList,
     useDeleteUlasanById,
 } from "../../adapters/hooks/useUlasan";
-import { useParams } from "@tanstack/react-router";
+import { Link, useParams } from "@tanstack/react-router";
 import Icon from "../../components/icon";
 import { convertISODateToCustomFormat } from "../../utils/toast";
 import Reply from "./reply";
 import Swal from "sweetalert2";
+import NewUlasan from "./add-ulasan";
 
 const UlasanModule: React.FC = () => {
     const { produkId } = useParams({ strict: false });
@@ -47,6 +48,10 @@ const UlasanModule: React.FC = () => {
 
     return (
         <>
+            <div className="mb-4">
+                <NewUlasan />
+            </div>
+
             <div className="rounded-sm border border-stroke bg-white px-5 pb-2.5 pt-6 shadow-default dark:border-strokedark dark:bg-boxdark sm:px-7.5 xl:pb-1">
                 <h4 className="mb-6 text-xl font-bold text-black dark:text-white">
                     Ulasan
