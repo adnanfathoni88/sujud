@@ -33,7 +33,7 @@ use Illuminate\Support\Facades\Route;
 // Route::put('/kategori/{id}', [KategoriController::class, 'update']);
 // Route::delete('/kategori/{id}', [KategoriController::class, 'destroy']);
 
-Route::get("/uploaded/{filename}", function ($filename) {	
+Route::get("/uploaded/{filename}", function ($filename) {
 	try {
 		return response()->file(storage_path("app/public/uploaded/$filename"));
 	} catch (\Throwable $th) {
@@ -51,7 +51,6 @@ Route::prefix("/profile")->middleware('auth.stateless')->group(function () {
 	Route::get('/', [ApiProfileController::class, 'show']);
 	Route::put('/', [ApiProfileController::class, 'update']);
 	Route::post('/picture', [ApiProfileController::class, 'update_profile_picture']);
-
 });
 
 Route::prefix("/kategori")->middleware('auth.stateless')->group(function () {
@@ -66,7 +65,7 @@ Route::prefix("/produk")->group(function () {
 	Route::get('/', [ApiProductController::class, 'index']);
 	Route::get('/{id}', [ApiProductController::class, 'show']);
 
-	Route::middleware('guard.admin')->middleware('auth.stateless')->group(function() {
+	Route::middleware('guard.admin')->middleware('auth.stateless')->group(function () {
 		Route::post('/', [ApiProductController::class, 'store']);
 		Route::put('/{id}', [ApiProductController::class, 'update']);
 		Route::delete('/{id}', [ApiProductController::class, 'destroy']);
@@ -75,7 +74,7 @@ Route::prefix("/produk")->group(function () {
 	Route::prefix("/{id_produk}/varian")->middleware('auth.stateless')->group(function () {
 		Route::get('/', [ApiVarianController::class, 'index']);
 
-		Route::middleware('guard.admin')->group(function() {
+		Route::middleware('guard.admin')->group(function () {
 			Route::post('/', [ApiVarianController::class, 'store']);
 			Route::get('/{id}', [ApiVarianController::class, 'show']);
 			Route::post('/update/{id}', [ApiVarianController::class, 'update']);
@@ -88,17 +87,6 @@ Route::prefix("/produk")->group(function () {
 			Route::get('/{id}', [ApiUlasanController::class, 'show']);
 			Route::put('/{id}', [ApiUlasanController::class, 'update']);
 			Route::delete('/{id}', [ApiUlasanController::class, 'destroy']);
-
-			Route::prefix("/{id_ulasan_parent}/reply")->middleware('guard.admin')->group(function () {
-				Route::get('/', [ApiUlasanReplyController::class, 'index']);
-				Route::get('/{id}', [ApiUlasanReplyController::class, 'show']);
-				
-				Route::middleware('guard.admin')->group(function() {
-					Route::post('/', [ApiUlasanReplyController::class, 'store']);
-					Route::put('/{id}', [ApiUlasanReplyController::class, 'update']);
-					Route::delete('/{id}', [ApiUlasanReplyController::class, 'destroy']);
-				});
-			});
 		});
 
 		Route::prefix("/{id_varian}/cart")->group(function () {
@@ -111,9 +99,20 @@ Route::prefix("/produk")->group(function () {
 	});
 });
 
+Route::prefix("/ulasan")->group(function () {
+	Route::middleware('guard.admin')->get('/user-ulasan', [ApiUlasanReplyController::class, 'user_ulasan']);
+	
+	Route::get('/{user_ulasan_id}', [ApiUlasanReplyController::class, 'show']);
+	Route::middleware('guard.admin')->group(function () {
+		Route::put('/{id}', [ApiUlasanReplyController::class, 'update']);
+		Route::delete('{id}', [ApiUlasanReplyController::class, 'destroy']);
+		Route::post('/{parent_ulasan_id}/varian/{id_varian}', [ApiUlasanReplyController::class, 'store']);
+	});
+});
+
 
 Route::prefix("/pesanan")->group(function () {
-	Route::middleware('auth.stateless')->group(function()  {
+	Route::middleware('auth.stateless')->group(function () {
 		Route::get('/', [ApiPesananController::class, 'index']);
 		Route::post('/', [ApiPesananController::class, 'store']);
 		Route::get('/{id}', [ApiPesananController::class, 'show']);
@@ -128,7 +127,7 @@ Route::prefix("/pesanan")->group(function () {
 			// Route::delete('/{id}', [ApiPesananController::class, 'destroy']);
 		});
 	});
-	
+
 	Route::post('/{pesanan_group}/transaksi/callback', [ApiTransaksiController::class, 'callbackAction']);
 });
 
@@ -139,8 +138,7 @@ Route::prefix("/ongkir")->middleware('auth.stateless')->middleware('guard.admin'
 	Route::delete('/{id}', [ApiOngkirController::class, 'destroy']);
 });
 
-Route::prefix("/user")->middleware('auth.stateless')->middleware('guard.admin')->group(function ()
-{
+Route::prefix("/user")->middleware('auth.stateless')->middleware('guard.admin')->group(function () {
 	Route::get('/', [ApiUserController::class, 'index']);
 	Route::post('/', [ApiUserController::class, 'store']);
 	Route::get('/{id}', [ApiUserController::class, 'show']);

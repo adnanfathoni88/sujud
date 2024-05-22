@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->text('konten');
             $table->integer('rating');
+            $table->integer('is_replied')->default(0);
             $table->timestamps();
         });
     }
