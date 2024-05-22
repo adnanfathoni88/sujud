@@ -1,11 +1,13 @@
-import { ErrorComponent } from "@tanstack/react-router";
-import { apiJSONPlaceholder, api } from "../../services/api";
+import { api } from "../../services/api";
 import { TAddProductSchema } from "../../modules/product/product-add/schema";
 import { IProduct, IProductList } from "../../interfaces/product";
 import { TUpdateProductSchema } from "../../modules/product-list/schema";
 
-export async function getProductList() {
-    const res = await api.get("/produk");
+export async function getProductList(props?: { q?: string, page?: number }) {
+	const query = new URLSearchParams();
+	if(props?.q) query.append("q", props.q);
+	if(props?.page) query.append("page", props.page.toString());
+    const res = await api.get(`/produk?${query.toString()}`);
     return res.data as { response: { data: IProductList } };
 }
 

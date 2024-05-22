@@ -24,7 +24,7 @@ class ApiProductController extends Controller
     {
 		$query = $request ->query('q');
 		if($query) {
-			$m = Produk::where('nama', 'like', "%$query%")->with('kategori')->with('varian.gambar')->get();
+			$m = Produk::where('nama', 'like', "%$query%")->with('kategori')->with('varian.gambar')->paginate(15);
 			return $this->res($m, 200);
 		}
 		$m = Produk::with('kategori')->with('varian.gambar')->paginate(15);
