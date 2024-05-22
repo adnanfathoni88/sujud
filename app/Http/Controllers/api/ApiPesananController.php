@@ -35,7 +35,8 @@ class ApiPesananController extends Controller
 		$m = Pesanan::where('user_id', $userId)
 			->where('status', $status)
 			->with('varian.gambar')
-			->paginate(10)
+			->with('ongkir')
+			->get()
 			->groupBy('pesanan_grup');
 		return $this->res($m, 200);
     }
@@ -60,7 +61,7 @@ class ApiPesananController extends Controller
 		function getVariant(Collection $pesanan) {
 			return $pesanan->map(fn($p) => $p['varian_id'])->toArray();
 		}
-
+		
 		$validator = Validator::make($request->all(), [
 			'alamat' => 'required|max:255',
 			'pesanan' => 'required|array',

@@ -29,14 +29,6 @@ class ApiOngkirController extends Controller
     }
 
     /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request)
-    {
-        //
-    }
-
-    /**
      * Display the specified resource.
      */
     public function show(string $id)
@@ -67,7 +59,7 @@ class ApiOngkirController extends Controller
 			->where('is_confirmed_by_admin', false)
 			->first();
 
-		if(!$ongkir) return $this->res("Pesanan sudah dibayar", 404);
+		if(!$ongkir) return $this->res("Pesanan sudah dikonfirmasi", 404);
 		foreach($ongkir->pesanan as $pesanan) {
 			if($pesanan->varian->stok < $pesanan->qty) {
 				return $this->res("Out of stock", 400);

@@ -20,12 +20,13 @@ class ApiProductController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-		// $subselect = DB::raw("(SELECT gambars.nama FROM varians JOIN gambars ON gambars.varian_id = varians.id WHERE produk_id = produks.id LIMIT 1) as thumbnail");
-		// $m = Produk::select("*", $subselect)
-		// 	->paginate(15);
-
+		$query = $request ->query('q');
+		if($query) {
+			$m = Produk::where('nama', 'like', "%$query%")->with('kategori')->with('varian.gambar')->get();
+			return $this->res($m, 200);
+		}
 		$m = Produk::with('kategori')->with('varian.gambar')->paginate(15);
 		return $this->res($m, 200);
     }
