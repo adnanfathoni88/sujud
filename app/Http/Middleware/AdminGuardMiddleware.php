@@ -11,7 +11,7 @@ use Symfony\Component\HttpFoundation\Response;
 
 class AdminGuardMiddleware
 {
-	use ResponseFormat, UserCookie;
+    use ResponseFormat, UserCookie;
     /**
      * Handle an incoming request.
      *
@@ -19,16 +19,16 @@ class AdminGuardMiddleware
      */
     public function handle(Request $request, Closure $next): Response
     {
-		$token = $request->cookie('token');
-		if(!$token) return $this->res("unauthenticated", 401);
-		
-		$decrypted = $this->getUserCookie($token);
-		if(!is_numeric($decrypted)) return $this->res("unauthenticated", 401);
+        $token = $request->cookie('token');
+        if (!$token) return $this->res("unauthenticated", 401);
 
-		$user = User::find($decrypted)->first();
-		if(!$user) return $this->res("unauthenticated", 401);
-		
-		if($user->role->nama !== 'admin') return $this->res("unauthorized", 403);
+        $decrypted = $this->getUserCookie($token);
+        if (!is_numeric($decrypted)) return $this->res("unauthenticated", 401);
+
+        $user = User::find($decrypted)->first();
+        if (!$user) return $this->res("unauthenticated", 401);
+
+        if ($user->role->nama !== 'admin') return $this->res("unauthorized", 403);
 
         return $next($request);
     }
