@@ -4,17 +4,17 @@ import TextGroup from "../../components/text-group";
 import TextArea from "../../components/textarea";
 import { FormEvent, useRef, useState } from "react";
 import { useAddCategory } from "../../adapters/hooks/useCategory";
-import { toastSuccess } from "../../utils/toast";
+import { toastError, toastSuccess } from "../../utils/toast";
 import Textarea from "../../components/textarea";
-import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { AddUlasanSchema, TAddUlasanSchema } from "./schema";
 import Icon from "../../components/icon";
 import { useAddUlasan } from "../../adapters/hooks/useUlasan";
 import { useParams } from "@tanstack/react-router";
+import { useForm } from "react-hook-form";
 
 export default function NewUlasan() {
-    // const newCategory = useAddCategory();
+    const ulasan = useAddUlasan()
     const { produkId } = useParams({ strict: false });
     const { varianId } = useParams({ strict: false });
 
@@ -24,34 +24,38 @@ export default function NewUlasan() {
     const ulasanAdd = useAddUlasan();
 
     const {
-        register,
-        handleSubmit,
+		register,
+		setValue,
+		handleSubmit,
         formState: { errors },
     } = useForm({
         resolver: zodResolver(AddUlasanSchema),
-        defaultValues: {
-            produkId: produkId,
-            varian_id: varianId,
-            konten: "",
-            rating: 0,
-            user_id: 0,
-            parent_id: 0,
-        },
+        defaultValues: { 
+			konten: "",
+			rating: selectedStar
+		},
     });
 
     // handle star
     const handleStar = (value: number) => {
         setSelectedStar(value);
+		setValue('rating', value);
     };
 
-    const onSubmit = (e: any) => {
-        alert("p");
+    const onSubmit = (data: any) => {
+		ulasan.mutate({ ...data, produkId: Number(produkId), varianId: Number(varianId) } as TAddUlasanSchema & { produkId: number, varianId: number }, {
+			onError: () => toastError("Failed add new ulasan"),
+			onSuccess: () => {
+				setOpen(false)
+				toastSuccess("Success add new ulasan")
+			},
+		})
     };
 
     return (
         <CategoryModal
+			open={open}
             title="Buat Ulasan"
-            open={open}
             onClose={() => setOpen(false)}
             onOpen={() => setOpen(true)}
         >
@@ -88,6 +92,7 @@ export default function NewUlasan() {
                             ))}
                         </div>
                     </div>
+					<input type="hidden" { ...register('rating') } />
 
                     <div className="mt-4">
                         <button

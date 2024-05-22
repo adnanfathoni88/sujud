@@ -4,7 +4,7 @@ import { api } from "../../services/api";
 
 export async function getUlasanList(produkId: number, varianId: number) {
     const res = await api.get(`/produk/${produkId}/varian/${varianId}/ulasan`);
-    return res.data as { response: IUlasanList };
+    return res.data as { response: { data: IUlasanList } };
 }
 
 // delete ulasan
@@ -22,20 +22,16 @@ export async function deleteUlasanById(
 // add ulasan
 export async function addUlasan({
     produkId,
-    varian_id,
+    varianId,
     konten,
     rating,
-    user_id,
-    parent_id,
-}: TAddUlasanSchema) {
+}: TAddUlasanSchema & { produkId: number, varianId: number }) {
     const formData = new FormData();
     formData.append("konten", konten);
     formData.append("rating", rating.toString());
-    formData.append("user_id", user_id.toString());
-    formData.append("parent_id", parent_id.toString());
 
     const res = await api.post(
-        `/produk/${produkId}/varian/${varian_id}/ulasan/`,
+        `/produk/${produkId}/varian/${varianId}/ulasan/`,
         formData
     );
 

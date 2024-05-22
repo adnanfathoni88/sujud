@@ -7,7 +7,6 @@ import {
     productAddRoute,
     productDetailRoute,
     productRoute,
-    productUpdateRoute,
 } from "./product-route";
 import {
     LandingPageRoute,
@@ -39,7 +38,6 @@ export const routeTree = rootRoute.addChildren([
     shopRoute,
     productRoute,
     productAddRoute,
-    productUpdateRoute,
     productDetailRoute,
     categoryListRoute,
     loginRoute,
