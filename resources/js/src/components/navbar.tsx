@@ -1,18 +1,8 @@
 import { match } from "ts-pattern";
 import { useProfileStore } from "../store/useProfile";
-import Icon from "./icon";
 import { MdShoppingCart } from "react-icons/md";
 import { Link } from "@tanstack/react-router";
-
-import { Menu, MenuButton, MenuItem, MenuItems, Transition } from '@headlessui/react'
-// import {
-// 	ArchiveBoxXMarkIcon,
-// 	ChevronDownIcon,
-// 	PencilIcon,
-// 	Square2StackIcon,
-// 	TrashIcon,
-// } from '@heroicons/react/16/solid'
-import { Popover, PopoverButton, PopoverPanel } from '@headlessui/react'
+import { Transition, Popover, PopoverButton, PopoverPanel } from '@headlessui/react'
 import { handleLogout } from "../services/auth";
 
 function ProfileDropdown({ profileImage }: { profileImage: string }) {
@@ -68,12 +58,12 @@ function Navbar() {
 	return (
 		<nav className=" bg-sky-600 w-full fixed dark:bg-gray-900 z-50">
 			<div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
-				<a
-					href="#"
+				<Link
+					to="/"
 					className="flex items-center space-x-3 rtl:space-x-reverse"
 				>
 					<img src="/img/logo/sujud.png" className="h-8" />
-				</a>
+				</Link>
 				<button
 					data-collapse-toggle="navbar-default"
 					type="button"
@@ -104,12 +94,12 @@ function Navbar() {
 				>
 					<ul className="tex-t font-medium flex flex-col p-4 md:p-0 mt-4 border items-center border-gray-100 rounded-lg md:flex-row rtl:space-x-reverse md:mt-0 md:border-0  md:dark:bg-gray-900 dark:border-gray-700">
 						<li>
-							<a
-								href="#"
+							<Link
+								to="/shop"
 								className="px-4 py-3 font-semibold rounded-md text-white hover:bg-sky-500/25 transition-all "
 							>
 								Shop All
-							</a>
+							</Link>
 						</li>
 
 						<li>

@@ -11,10 +11,10 @@ import { TUpdateProductSchema } from "../../modules/product-list/schema";
 import { TAddProductSchema } from "../../modules/product-add/schema";
 
 // show all
-export function useGetProductList({ q, page }: { q?: string, page?: number }) {
+export function useGetProductList({ q, page, kategori_id }: { q?: string, page?: number, kategori_id?: number}) {
 	return useQuery({
-		queryKey: ["useGetProductList", q, page],
-		queryFn: () => getProductList({ q, page }),
+		queryKey: ["useGetProductList", q, page, kategori_id],
+		queryFn: () => getProductList({ q, page, kategori_id }),
 	});
 }
 
