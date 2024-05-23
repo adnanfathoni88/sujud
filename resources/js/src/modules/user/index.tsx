@@ -4,7 +4,7 @@ import Navbar from "../../components/navbar";
 
 const LandingPageModule: React.FC = () => {
     return (
-        <div>
+        <div className="font-sans">
             <Navbar />
             <div className="relative bg-sky-300 h-screen mx-auto">
                 <div className="px-4 grid sm:grid-cols-1 md:grid-cols-1 lg:grid-cols-2 sm:mx-10 md:mx-24">
@@ -19,7 +19,7 @@ const LandingPageModule: React.FC = () => {
                             sit doloremque.
                         </p>
                         <div className="w-full">
-                            <button className="bg-yellow-300 px-2 py-3 rounded-full w-36 hover:bg-yellow-400">
+                            <button className="bg-custom-yellow px-2 py-3 rounded-full w-36 hover:bg-yellow-500">
                                 Shop Now
                             </button>
                         </div>
@@ -48,7 +48,7 @@ const LandingPageModule: React.FC = () => {
                                         />
                                     </div>
                                     <div className="text-start flex flex-col justify-center">
-                                        <h5 className="text-yellow-300">
+                                        <h5 className="text-custom-yellow md:text-xl">
                                             Sajadah
                                         </h5>
                                         <h2 className="text-sky-600 text-xl font-semibold md:text-3xl">
@@ -65,7 +65,7 @@ const LandingPageModule: React.FC = () => {
                                         />
                                     </div>
                                     <div className="text-start flex flex-col justify-center">
-                                        <h5 className="text-yellow-300">
+                                        <h5 className="text-custom-yellow md:text-xl">
                                             Sajadah
                                         </h5>
                                         <h2 className="text-sky-600 text-xl font-semibold md:text-3xl">
@@ -78,16 +78,13 @@ const LandingPageModule: React.FC = () => {
                     </div>
                     <div className="pt-[350px] text-center pb-20 p-4 mx-4 sm:pt-[180px] md:pt-[300px]">
                         <h2 className="text-sky-600 text-2xl font-semibold mb-4 lg:text-4xl">
-                            Why Should We?
+                            Kenapa Harus Kami?
                         </h2>
                         <div className="flex justify-center flex-col gap-4 md:flex-row md:flex-wrap md:gap-6 ">
                             {/* card */}
                             <div className="rounded-md border-2 border-slate-200/75 p-6 md:w-[40%]">
                                 <div className="flex justify-center">
-                                    <div className="text-sky-600/75 text-2xl">
-                                        <Icon nama={"pray"} />
-                                    </div>
-                                    <h4 className="text-yellow-300 text-start mx-4 text-2xl font-medium ">
+                                    <h4 className="text-custom-yellow text-start mx-4 text-2xl font-semibold ">
                                         Spiritual
                                     </h4>
                                 </div>
@@ -101,10 +98,7 @@ const LandingPageModule: React.FC = () => {
                             </div>
                             <div className="rounded-md border-2 border-slate-200/75 p-6 md:w-[40%]">
                                 <div className="flex justify-center">
-                                    <div className="text-sky-600/75 text-2xl">
-                                        <Icon nama={"happy"} />
-                                    </div>
-                                    <h4 className="text-yellow-300 text-start mx-4 text-2xl font-medium ">
+                                    <h4 className="text-custom-yellow text-start mx-4 text-2xl font-semibold ">
                                         Happiness
                                     </h4>
                                 </div>
@@ -118,10 +112,7 @@ const LandingPageModule: React.FC = () => {
                             </div>
                             <div className="rounded-md border-2 border-slate-200/75 p-6 md:w-[40%]">
                                 <div className="flex justify-center">
-                                    <div className="text-sky-600/75 text-2xl">
-                                        <Icon nama={"up"} />
-                                    </div>
-                                    <h4 className="text-yellow-300 text-start mx-4 text-2xl font-medium ">
+                                    <h4 className="text-custom-yellow text-start mx-4 text-2xl font-semibold ">
                                         Improvment
                                     </h4>
                                 </div>
@@ -135,10 +126,7 @@ const LandingPageModule: React.FC = () => {
                             </div>
                             <div className="rounded-md border-2 border-slate-200/75 p-6 md:w-[40%]">
                                 <div className="flex justify-center">
-                                    <div className="text-sky-600/75 text-2xl">
-                                        <Icon nama={"professional"} />
-                                    </div>
-                                    <h4 className="text-yellow-300 text-start mx-4 text-2xl font-medium ">
+                                    <h4 className="text-custom-yellow text-start mx-4 text-2xl font-semibold ">
                                         Professional
                                     </h4>
                                 </div>
@@ -170,12 +158,12 @@ const LandingPageModule: React.FC = () => {
                         </p>
                     </div>
                 </div>
-                <div className="py-10 md:px-12 bg-white">
+                <div className="py-10 md:px-20 bg-white">
                     <div className="flex justify-between text-center">
                         <h2 className="text-sky-600 text-2xl font-semibold md:text-3xl">
                             Koleksi Produk
                         </h2>
-                        <button className="bg-yellow-300 hover:bg-yellow-400 text-white px-6 rounded-md">
+                        <button className="bg-custom-yellow hover:bg-yellow-400 text-white px-6 rounded-md">
                             Lihat
                         </button>
                     </div>

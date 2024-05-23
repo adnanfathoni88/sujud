@@ -31,6 +31,7 @@ module.exports = {
     theme: {
         fontFamily: {
             satoshi: ["Satoshi", "sans-serif"],
+            sans: ["Inter", "sans-serif"],
         },
         screens: {
             "2xsm": "375px",
@@ -76,6 +77,7 @@ module.exports = {
                 success: "#219653",
                 danger: "#D34053",
                 warning: "#FFA70B",
+                "custom-yellow": "#FEB941",
             },
             fontSize: {
                 "title-xxl": ["44px", "55px"],

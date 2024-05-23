@@ -1,4 +1,5 @@
 import Icon from "./icon";
+import { MdShoppingCart } from "react-icons/md";
 
 function Navbar() {
     return (
@@ -47,14 +48,7 @@ function Navbar() {
                                 Shop All
                             </a>
                         </li>
-                        <li>
-                            <a
-                                href="#"
-                                className="px-4 py-3 font-semibold rounded-md text-white hover:bg-sky-500/25 transition-all "
-                            >
-                                Collection
-                            </a>
-                        </li>
+
                         <li>
                             <a
                                 href="#"
@@ -66,6 +60,11 @@ function Navbar() {
                         <li>
                             <div className="px-3 py-2 font-semibold mx-2 rounded-full bg-white text-sky-600 hover:bg-sky-500/25 hover:text-white transition-all ">
                                 <Icon nama={"user"} />
+                            </div>
+                        </li>
+                        <li>
+                            <div className="px-3 py-3 font-semibold mx-2 rounded-full bg-white text-sky-600 hover:bg-sky-500/25 hover:text-white transition-all ">
+                                <MdShoppingCart />
                             </div>
                         </li>
                         <li>

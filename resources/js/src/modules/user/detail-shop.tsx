@@ -192,7 +192,7 @@ const DetailShopPageModule: React.FC = () => {
                                 </p>
                             </div>
                         </div>
-                        <div className="w-full py-4 flex justify-center gap-2 lg:py-6">
+                        {/* <div className="w-full py-4 flex justify-center gap-2 lg:py-6">
                             <button className="bg-yellow-300 rounded-lg text-yellow-800 px-3 py-3 md:px-2 md:py-1 md:text-xl lg:text-2xl hover:bg-yellow-400">
                                 <Icon nama={"panah-kiri"} />
                             </button>
@@ -208,107 +208,7 @@ const DetailShopPageModule: React.FC = () => {
                             <button className="bg-yellow-300 rounded-lg text-yellow-800 px-3 py-3 md:px-2 md:py-1 md:text-xl lg:text-2xl hover:bg-yellow-400 ">
                                 <Icon nama={"panah-kanan"} />
                             </button>
-                        </div>
-                    </div>
-                </div>
-                {/* produk */}
-                <div className="p-6 md:px-10">
-                    <div className="flex justify-between items-center">
-                        <h2 className="text-sky-600 text-2xl font-semibold mb-2">
-                            Produk Serupa
-                        </h2>
-                        <p className="font-medium">Lihat Semua</p>
-                    </div>
-                    <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 md:gap-4 lg:gap-6">
-                        <div className="p-4 w-full bg-white shadow-md">
-                            <div className="bg-slate-200/75 w-full h-fit p-4">
-                                <img
-                                    className="w-full max-h-26 md:max-h-32 lg:max-h-40 object-contain"
-                                    src="/img/produk/sajadah-geometry.png"
-                                    alt=""
-                                />
-                            </div>
-                            <div>
-                                <div className="flex gap-1 text-yellow-300 text-sm py-2">
-                                    <Icon nama={"star"} />
-                                    <Icon nama={"star"} />
-                                    <Icon nama={"star"} />
-                                    <Icon nama={"star"} />
-                                    <Icon nama={"star"} />
-                                </div>
-                                <h2 className="text-slate-500 text-base font-semibold">
-                                    Sajadah Geometry
-                                </h2>
-                                <p className="text-slate-400">Rp 100.000</p>
-                            </div>
-                        </div>
-
-                        <div className="p-4 w-full bg-white shadow-md">
-                            <div className="bg-slate-200/75 w-full h-fit p-4">
-                                <img
-                                    className="w-full max-h-26 md:max-h-32 lg:max-h-40 object-contain"
-                                    src="/img/produk/sajadah-geometry.png"
-                                    alt=""
-                                />
-                            </div>
-                            <div>
-                                <div className="flex gap-1 text-yellow-300 text-sm py-2">
-                                    <Icon nama={"star"} />
-                                    <Icon nama={"star"} />
-                                    <Icon nama={"star"} />
-                                    <Icon nama={"star"} />
-                                    <Icon nama={"star"} />
-                                </div>
-                                <h2 className="text-slate-500 text-base font-semibold">
-                                    Sajadah Geometry
-                                </h2>
-                                <p className="text-slate-400">Rp 100.000</p>
-                            </div>
-                        </div>
-                        <div className="p-4 w-full bg-white shadow-md">
-                            <div className="bg-slate-200/75 w-full h-fit p-4">
-                                <img
-                                    className="w-full max-h-26 md:max-h-32 lg:max-h-40 object-contain"
-                                    src="/img/produk/sajadah-geometry.png"
-                                    alt=""
-                                />
-                            </div>
-                            <div>
-                                <div className="flex gap-1 text-yellow-300 text-sm py-2">
-                                    <Icon nama={"star"} />
-                                    <Icon nama={"star"} />
-                                    <Icon nama={"star"} />
-                                    <Icon nama={"star"} />
-                                    <Icon nama={"star"} />
-                                </div>
-                                <h2 className="text-slate-500 text-base font-semibold">
-                                    Sajadah Geometry
-                                </h2>
-                                <p className="text-slate-400">Rp 100.000</p>
-                            </div>
-                        </div>
-                        <div className="p-4 w-full bg-white shadow-md">
-                            <div className="bg-slate-200/75 w-full h-fit p-4">
-                                <img
-                                    className="w-full max-h-26 md:max-h-32 lg:max-h-40 object-contain"
-                                    src="/img/produk/sajadah-geometry.png"
-                                    alt=""
-                                />
-                            </div>
-                            <div>
-                                <div className="flex gap-1 text-yellow-300 text-sm py-2">
-                                    <Icon nama={"star"} />
-                                    <Icon nama={"star"} />
-                                    <Icon nama={"star"} />
-                                    <Icon nama={"star"} />
-                                    <Icon nama={"star"} />
-                                </div>
-                                <h2 className="text-slate-500 text-base font-semibold">
-                                    Sajadah Geometry
-                                </h2>
-                                <p className="text-slate-400">Rp 100.000</p>
-                            </div>
-                        </div>
+                        </div> */}
                     </div>
                 </div>
             </div>
