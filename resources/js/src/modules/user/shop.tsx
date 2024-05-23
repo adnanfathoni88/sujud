@@ -40,7 +40,7 @@ const ShopPageModule: React.FC = () => {
                         <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 md:gap-4 lg:gap-6">
                             {Array.isArray(data?.response)
                                 ? data.response.map((c, key) => (
-                                      <div className="p-4 w-full bg-white shadow-md">
+                                      <div key={key} className="p-4 w-full bg-white shadow-md">
                                           <div className="bg-slate-200/75 w-full h-fit p-4">
                                               <img
                                                   className="w-full max-h-26 md:max-h-32 lg:max-h-40 object-contain"

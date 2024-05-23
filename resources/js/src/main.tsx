@@ -2,6 +2,7 @@ import { router } from './routes'
 import { ToastContainer } from 'react-toastify';
 import { RouterProvider } from '@tanstack/react-router'
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
+import { AuthWrapper } from './services/auth';
 
 // Create a client
 export const queryClient = new QueryClient();

@@ -6,10 +6,18 @@ import {
 import {
     addUlasan,
     deleteUlasanById,
+    getUlasanByProdukId,
     getUlasanList,
     updateUlasan,
 } from "../api/ulasan";
 import { useQuery, useMutation } from "@tanstack/react-query";
+
+export function useGetUlasanListByProdukId(produkId: number, page?: number) {
+	return useQuery({
+		queryKey: ["useGetUlasanListByProdukId", produkId, page],
+		queryFn: () => getUlasanByProdukId({ produkId, page }),
+	});
+}
 
 // show all
 export function UseGetUlasanList(produkId: number, varianId: number) {

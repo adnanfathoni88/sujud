@@ -6,15 +6,18 @@ import { match } from "ts-pattern"
 import Loader from "../../components/loader"
 import ProfileUpdate from "./profile-update"
 import ProfilePictureUpdate from "./profile-picture-update"
+import Navbar from "../../components/navbar"
+import { twMerge } from "tailwind-merge"
 
 export default function ProfileModule() {
 	const { data } = useGetProfile()
 
-
 	return (
 		<div className="dark:bg-boxdark-2 min-h-[100vh]">
-			<Header withSidebar={ false } withSearch={ false } />
-			<div className="max-w-[1000px] mx-auto mt-10">
+			{ match(data?.response?.role_id)
+				.with(2, () => (<Navbar />))
+				.otherwise(() => <Header withSidebar={ false } withSearch={ false } /> ) }
+			<div className={twMerge("max-w-[1000px] mx-auto", data?.response?.role_id == 2 ? "pt-32" : "mt-10" )}>
 				<div className="flex px-4 justify-between flex-col sm:flex-row sm:items-center">
 					<div>
 						<h3 className="text-base font-semibold leading-7 text-gray-900 dark:text-zinc-100">Profile</h3>

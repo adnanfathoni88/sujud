@@ -5,6 +5,13 @@ import {
 } from "../../modules/ulasan/schema";
 import { api } from "../../services/api";
 
+export async function getUlasanByProdukId({ produkId, page }: { produkId: number; page?: number }) {
+    const query = new URLSearchParams();
+    if (page) query.append("page", page.toString());
+	const res = await api.get(`/produk/${produkId}/ulasan?${query.toString()}`);
+	return res.data as { response: { data: IUlasanList, next_page_url?: string } };
+}
+
 export async function getUlasanList(produkId: number, varianId: number) {
     const res = await api.get(`/produk/${produkId}/varian/${varianId}/ulasan`);
     return res.data as { response: { data: IUlasanList } };

@@ -14,7 +14,7 @@ export interface IBaseProduct {
 }
 
 export interface IProduct extends IBaseProduct {
-	variants: IVariantList;
+	varians: IVariantList;
 }
 
 export interface IBaseProductList extends IBaseProduct {

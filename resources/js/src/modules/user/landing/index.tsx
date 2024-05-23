@@ -1,6 +1,7 @@
-import Footer from "../../components/footer";
-import Icon from "../../components/icon";
-import Navbar from "../../components/navbar";
+import Footer from "../../../components/footer";
+import Icon from "../../../components/icon";
+import Navbar from "../../../components/navbar";
+import ProductLanding from "./product";
 
 const LandingPageModule: React.FC = () => {
     return (
@@ -158,100 +159,50 @@ const LandingPageModule: React.FC = () => {
                         </p>
                     </div>
                 </div>
-                <div className="py-10 md:px-20 bg-white">
-                    <div className="flex justify-between text-center">
-                        <h2 className="text-sky-600 text-2xl font-semibold md:text-3xl">
-                            Koleksi Produk
-                        </h2>
-                        <button className="bg-custom-yellow hover:bg-yellow-400 text-white px-6 rounded-md">
-                            Lihat
-                        </button>
-                    </div>
-                    <div className="py-4 md:flex gap-4 lg:gap-6 ">
-                        <div className="bg-white shadow-md p-6 mb-4 w-full rounded-lg">
-                            <div className="h-56 mb-2 md:h-64">
-                                <img
-                                    className="h-full object-cover w-full object-top-0 rounded-md"
-                                    src="/img/sajadah.png"
-                                    alt=""
-                                />
-                            </div>
-                            <h3 className="text-slate-600 text-xl font-semibold">
-                                Sajadah
-                            </h3>
-                            <p className="text-slate-500">Rp 180.000</p>
-                        </div>
-                        <div className="bg-white shadow-md p-6 mb-4 w-full rounded-lg">
-                            <div className="h-56 mb-2 md:h-64">
-                                <img
-                                    className="h-full object-cover w-full object-top-0 rounded-md"
-                                    src="/img/sajadah.png"
-                                    alt=""
-                                />
-                            </div>
-                            <h3 className="text-slate-600 text-xl font-semibold">
-                                Sajadah
-                            </h3>
-                            <p className="text-slate-500">Rp 180.000</p>
-                        </div>
-                        <div className="bg-white shadow-md p-6 mb-4 w-full rounded-lg">
-                            <div className="h-56 mb-2 md:h-64">
-                                <img
-                                    className="h-full object-cover w-full object-top-0 rounded-md"
-                                    src="/img/sajadah.png"
-                                    alt=""
-                                />
-                            </div>
-                            <h3 className="text-slate-600 text-xl font-semibold">
-                                Sajadah
-                            </h3>
-                            <p className="text-slate-500">Rp 180.000</p>
-                        </div>
-                    </div>
-                </div>
-                <div className="px-8 py-10 lg:px-40 bg-white">
+				<ProductLanding />
+                <div className="px-12 py-10 lg:px-40 bg-white pb-30">
                     <h2 className="font-bold text-center text-sky-600 text-2xl mb-4 lg:text-3xl">
                         Telah diliput oleh:
                     </h2>
-                    <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 lg:gap-16">
+                    <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-12 lg:gap-16">
                         <div>
                             <img
-                                className="h-full w-full object-contain"
+                                className="h-full object-contain mx-w-[100px]"
                                 src="/img/logo/trans-7.png"
                                 alt=""
                             />
                         </div>
                         <div>
                             <img
-                                className="h-full w-full object-contain"
+                                className="h-full object-contain mx-w-[100px]"
                                 src="/img/logo/liputan-6.png"
                                 alt=""
                             />
                         </div>
                         <div>
                             <img
-                                className="h-full w-full object-contain"
+                                className="h-full object-contain mx-w-[100px]"
                                 src="/img/logo/media-indonesia.png"
                                 alt=""
                             />
                         </div>
                         <div>
                             <img
-                                className="h-full w-full object-contain"
+                                className="h-full object-contain mx-w-[100px]"
                                 src="/img/logo/tribun-news.jpg"
                                 alt=""
                             />
                         </div>
                         <div>
                             <img
-                                className="h-full w-full object-contain"
+                                className="h-full object-contain mx-w-[100px]"
                                 src="/img/logo/radar-jogja.png"
                                 alt=""
                             />
                         </div>
                         <div>
                             <img
-                                className="h-full w-full object-contain"
+                                className="h-full object-contain mx-w-[100px]"
                                 src="/img/logo/kumparan.png"
                                 alt=""
                             />

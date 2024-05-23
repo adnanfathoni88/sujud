@@ -19,7 +19,7 @@ export const shopRoute = createRoute({
 });
 
 export const detailShopRoute = createRoute({
-    path: "/detail/shop",
+    path: "/detail/$id/shop",
     component: detailShopPage,
     getParentRoute: () => rootRoute,
 });

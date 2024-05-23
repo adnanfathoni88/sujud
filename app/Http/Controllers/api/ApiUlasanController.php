@@ -3,15 +3,28 @@
 namespace App\Http\Controllers\api;
 
 use App\Models\Ulasan;
+use App\Models\Varian;
 use App\Traits\ResponseFormat;
 use App\Traits\UserCookie;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
 
 class ApiUlasanController extends Controller
 {
 	use ResponseFormat, UserCookie;
+
+	function ulasan_by_produk(string $id_produk) 
+	{
+		$varians = Varian::select('id')->where('produk_id', $id_produk)->get();
+		$ulasan = Ulasan::whereIn('varian_id', $varians->pluck('id'))->orderBy('rating', 'DESC')
+			->where('parent_id', null)
+			->with('user:id,nama,gambar_id', 'user.gambar:id,nama')
+			->paginate(15);
+		return $this->res($ulasan, 200);
+	}
+
     /**
      * Display a listing of the resource.
      */
