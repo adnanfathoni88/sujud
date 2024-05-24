@@ -10,6 +10,7 @@ import Ulasan from "./ulasan";
 import { useAddToCart } from "../../../adapters/hooks/useCart";
 import { toastError, toastSuccess } from "../../../utils/toast";
 import { useProfileStore } from "../../../store/useProfile";
+import { match } from "ts-pattern";
 
 const DetailShopPageModule: React.FC = () => {
 	const navigate = useNavigate()
@@ -82,7 +83,15 @@ const DetailShopPageModule: React.FC = () => {
 					{ data?.response && (
 						<div className="md:w-[40%] lg:w-[50%]">
 							<h4 className="font-semibold text-2xl lg:text-4xl text-slate-800 capitalize">{ data?.response?.nama }</h4>
-							{ varian?.harga ? <p className="text-sm text-slate-700 mt-5">Rp. { varian?.harga.toLocaleString() }</p> : null }
+							{ match([Boolean(varian?.harga), varian?.harga_diskon > 0])
+								.with([true, true], () => (
+									<div className="flex gap-2 items-start my-5">
+										<p className="text-xs text-slate-500 line-through">Rp. { varian?.harga.toLocaleString() }</p>
+										<p className="text-xl font-semibold text-black">Rp. { (varian?.harga - varian?.harga_diskon).toLocaleString() }</p>
+									</div>
+								))
+								.with([true, false], () => (<p className="text-sm text-slate-700 mt-5">Rp. { varian?.harga.toLocaleString() }</p>))
+								.otherwise(() => null)	}
 							<p className="text-md text-slate-700 md:text-xl mt-4">{ varian?.stok > 0 ? `Stok ${varian?.stok.toLocaleString()}` : 'Stok habis' }.</p>
 							{/* <div className="flex gap-4 mt-1 mb-3">
 								<div className="flex text-yellow-300 gap-1">
@@ -116,9 +125,6 @@ const DetailShopPageModule: React.FC = () => {
 				</div>
 				{/* ulasan */ }
 				<div className="py-6 px-4 md:px-10">
-					<h2 className="text-sky-600 text-2xl font-semibold mb-8">
-						Ulasan
-					</h2>
 					<Ulasan productId={ param?.id } />
 				</div>
 			</div>

@@ -141,6 +141,7 @@ class ApiTransaksiController extends Controller
 			$publisherOrderId = $request->publisherOrderId;
 			$date = $request->settlementDate;
 
+			Pesanan::where('pesanan_grup', $pesanan_group)->update([ 'status' => 'failed' ]);
 			Transaksi::insert([
 				'tgl_bayar' => $date,
 				'metode' => $paymentMethod,

@@ -1,3 +1,4 @@
+import { IGambar } from "./gambar"
 import { IProduct } from "./product"
 import { IVariant } from "./variant"
 
@@ -19,4 +20,7 @@ export interface IPesanan {
 	varian_id: number
 	user_id: number
 	varian?: IProdukInVarian
+	gambar?: IGambar
 }
+
+export interface IPesananList extends Array<IPesanan> {}

@@ -7,18 +7,18 @@ export default function Pagination({ withSearch, navigate, nextUrl }: { withSear
 	const onKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
 		if(e.key === "Enter") {
 			const q = (e.target as HTMLInputElement).value
-			const urlSearchParam = new URLSearchParams()
-			urlSearchParam.append("q", q)
-			if(search?.page) urlSearchParam.append("page", search.page)
+			const urlSearchParam = new URLSearchParams(search)
+			urlSearchParam.set("q", q)
+			if(search?.page) urlSearchParam.set("page", search.page)
 			navigate({ to: `?${urlSearchParam.toString()}` })
 		}
 	}
 
 	const onPagination = (page: number) => () => {
-		const urlSearchParam = new URLSearchParams()
-		urlSearchParam.append("page", page.toString())
-		if(search?.q) urlSearchParam.append("q", search?.q || "")
-		if(search?.isConfirmed) urlSearchParam.append("isConfirmed", search?.isConfirmed || "")
+		const urlSearchParam = new URLSearchParams(search)
+		urlSearchParam.set("page", page.toString())
+		if(search?.q) urlSearchParam.set("q", search?.q || "")
+		if(search?.isConfirmed) urlSearchParam.set("isConfirmed", search?.isConfirmed || "")
 		navigate({ to: `?${urlSearchParam.toString()}` })
 	}
 

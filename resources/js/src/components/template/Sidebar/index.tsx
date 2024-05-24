@@ -1,3 +1,4 @@
+import { IoCartOutline } from "react-icons/io5";
 import { TfiTruck } from "react-icons/tfi";
 import { useEffect, useRef, useState } from "react";
 import { Link, useLocation } from "@tanstack/react-router";
@@ -72,7 +73,7 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }: SidebarProps) => {
                 ?.classList.remove("sidebar-expanded");
         }
     }, [sidebarExpanded]);
-    console.log(locationId);
+    
     return (
         <aside
             ref={sidebar}
@@ -230,11 +231,11 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }: SidebarProps) => {
                                         "bg-graydark dark:bg-meta-4"
                                     }`}
                                 >
-                                    <TfiTruck
+                                    <IoCartOutline
                                         size={20}
                                         className="fill-current"
                                     />
-                                    Ongkir
+                                    Pesanan
                                 </Link>
                             </li>
                             <li>

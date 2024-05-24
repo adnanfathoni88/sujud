@@ -1,11 +1,13 @@
 import { forwardRef } from "react"
 
-function TextArea({ name, label, defaultValue, required, error, ...rest }: { required?: boolean, error?: string, name: string, label: string, defaultValue?: string }, ref) {
+function TextArea({ name, label, defaultValue, required, error, ...rest }: { required?: boolean, error?: string, name: string, label?: string, defaultValue?: string }, ref) {
 	return (
 		<>
-			<label htmlFor={name} className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
-				{label}
-			</label>
+			{ label && (
+				<label htmlFor={name} className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+					{label}
+				</label>
+			) }
 			<textarea
 				{ ...rest }
 				ref={ref}

@@ -31,13 +31,30 @@ class ApiPesananController extends Controller
 			return 'belum-bayar';
 		})();
 
+		$is_confirmed_by_admin = $request->isConfirmed == 'true' ? true : false;
+		$telah_sampai = $request->arrived == 'true' ? true : false;
+		
+		if($telah_sampai) {
+			$status = 'dibayar';
+			$is_confirmed_by_admin = true;
+		}
+		
 		$userId = $this->getUserCookie($request->cookie('token'));
-		$m = Pesanan::where('user_id', $userId)
-			->where('status', $status)
-			->with('varian.gambar')
-			->with('ongkir')
-			->get()
-			->groupBy('pesanan_grup');
+
+		$m = Ongkir::with([
+			"pesanan" => function($q) use($userId, $status) {
+				$q->where('user_id', $userId)
+					->where('status', $status)
+					->with('varian:id,ukuran,warna,gambar_id,produk_id', 'varian.produk:id,nama', 'varian.gambar:id,nama')
+					->select('id', 'qty', 'total', 'diskon', 'status', 'varian_id', 'pesanan_grup');
+			}
+		])
+			->whereHas('pesanan', fn($q) => $q->where('user_id', $userId)->where('status', $status))
+			->where('pelanggan_user_id', $userId)
+			->where('telah_sampai', $telah_sampai)
+			->where('is_confirmed_by_admin', $is_confirmed_by_admin)
+			->paginate(5);
+
 		return $this->res($m, 200);
     }
 

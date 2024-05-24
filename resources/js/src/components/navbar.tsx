@@ -1,3 +1,4 @@
+import { FaUser } from "react-icons/fa";
 import { match } from "ts-pattern";
 import { useProfileStore } from "../store/useProfile";
 import { MdShoppingCart } from "react-icons/md";
@@ -6,13 +7,22 @@ import { Transition, Popover, PopoverButton, PopoverPanel } from '@headlessui/re
 import { handleLogout } from "../services/auth";
 
 function ProfileDropdown({ profileImage }: { profileImage: string }) {
+	
 	return (
 		<Popover>
-			<PopoverButton className="block font-semibold rounded-full border-2 border-white focus:outline-none">
-				<img
-					src={ profileImage }
-					className="w-9 h-9 rounded-full"
-				/>
+			<PopoverButton className="block font-semibold rounded-full border-2 overflow-hidden border-white focus:outline-none">
+				{ profileImage
+					? (
+						<img
+							src={ `/api/uploaded/${profileImage}` }
+							className="w-9 h-9 rounded-full"
+						/>
+					)
+					: (
+						<div className="w-9 h-9 flex items-center justify-center text-sky-500 bg-white">
+							<FaUser size={ 16 } />
+						</div>
+					) }
 			</PopoverButton>
 			<Transition
 				enter="transition ease-out duration-200"
@@ -31,10 +41,10 @@ function ProfileDropdown({ profileImage }: { profileImage: string }) {
 							<p className="font-semibold text-black/90">Profile</p>
 							<p className="text-black/50">Atur profil kamu di sini.</p>
 						</Link>
-						<a className="block rounded-lg py-2 px-3 transition hover:bg-black/5" href="#">
+						<Link to="/pesanan" className="block rounded-lg py-2 px-3 transition hover:bg-black/5">
 							<p className="font-semibold text-black/90">Pesanan</p>
 							<p className="text-black/50">Lihat dan kelola apa saja pesanan kamu.</p>
-						</a>
+						</Link>
 						<a className="block rounded-lg py-2 px-3 transition hover:bg-black/5" href="#">
 							<p className="font-semibold text-black/90">Transaksi</p>
 							<p className="text-black/50">Daftar transaksi yang pernah kamu lakukan.</p>
@@ -42,7 +52,7 @@ function ProfileDropdown({ profileImage }: { profileImage: string }) {
 					</div>
 					<div className="w-full h-[1px] bg-black/30"></div>
 					<div className="p-3 border-t-2 border-black">
-						<button onClick={handleLogout} className="text-start block rounded-lg py-3 px-3 transition hover:bg-black/5 w-full">
+						<button onClick={ handleLogout } className="text-start block rounded-lg py-3 px-3 transition hover:bg-black/5 w-full">
 							<p className="font-semibold text-black">Logout</p>
 						</button>
 					</div>
@@ -119,15 +129,15 @@ function Navbar() {
 										</Link>
 									</li>
 									<li>
-										<ProfileDropdown profileImage={ `/api/uploaded/${profile?.image}` } />
+										<ProfileDropdown profileImage={ `${profile?.image}` } />
 									</li>
 								</>
 							))
 							.otherwise(() => (
 								<li>
-									<div className="px-6 py-2 font-semibold rounded-full bg-white text-sky-600 hover:bg-sky-500/25 hover:text-white transition-all ">
+									<Link to="/register" className="px-6 py-2 font-semibold rounded-full bg-white text-sky-600 hover:bg-sky-500/25 hover:text-white transition-all ">
 										Register{ " " }
-									</div>
+									</Link>
 								</li>
 							)) }
 					</ul>

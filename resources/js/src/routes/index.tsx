@@ -12,7 +12,7 @@ import {
     LandingPageRoute,
     cartRoute,
     detailShopRoute,
-    paymentRoute,
+    pesananRoute,
     shopRoute,
 } from "./user";
 import { adminRoute } from "./admin-route";
@@ -34,7 +34,7 @@ export const rootRoute = createRootRoute({
 export const routeTree = rootRoute.addChildren([
     adminRoute,
     ulasanRoute,
-    paymentRoute,
+    pesananRoute,
     cartRoute,
     detailShopRoute,
     LandingPageRoute,

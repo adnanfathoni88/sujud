@@ -14,9 +14,11 @@ return new class extends Migration
 		Schema::create('ongkirs', function (Blueprint $table) {
             $table->id();
             $table->string('pesanan_grup');
+			$table->string('resi')->nullable();
 			$table->string('ekspedisi')->nullable();
 			$table->integer('ongkir')->default(0);
 			$table->integer('berat')->default(0);
+			$table->boolean('telah_sampai')->default(false);
 			$table->boolean('is_confirmed_by_admin')->default(false);
             $table->timestamps();
         });

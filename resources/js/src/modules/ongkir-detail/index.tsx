@@ -54,6 +54,14 @@ export default function OngkirListModule() {
 					</div>
 					<div className="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
 						<dt className="text-sm font-medium leading-6 text-gray-900">
+							Resi
+						</dt>
+						<dd className="mt-1 text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0">
+							{ data?.response?.resi ?? "-" }
+						</dd>
+					</div>
+					<div className="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
+						<dt className="text-sm font-medium leading-6 text-gray-900">
 							Ongkir
 						</dt>
 						<dd className="mt-1 text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0">
@@ -116,7 +124,7 @@ export default function OngkirListModule() {
 					</table>
 				</div>
 			</div>
-			{ Boolean(data?.response) && (
+			{ Boolean(data?.response) && !data?.response?.is_confirmed_by_admin && (
 				<KonfirmasiPesanan 
 					berat={ data.response.berat }
 					ongkirId={ data.response.id }
