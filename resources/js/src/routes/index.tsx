@@ -14,6 +14,7 @@ import {
     detailShopRoute,
     pesananRoute,
     shopRoute,
+    aboutUsRoute,
 } from "./user";
 import { adminRoute } from "./admin-route";
 import { ulasanRoute } from "./ulasan-route";
@@ -46,8 +47,9 @@ export const routeTree = rootRoute.addChildren([
     loginRoute,
     registerRoute,
     profileRoute,
-	replyUlasanRoute,
-	ongkirRoute,
-	ongkirDetailRoute
+    replyUlasanRoute,
+    ongkirRoute,
+    ongkirDetailRoute,
+    aboutUsRoute,
 ]);
 export const router = createRouter({ routeTree });

@@ -5,6 +5,7 @@ import shopPage from "../../pages/user/shop";
 import cartPage from "../../pages/user/cart";
 import detailShopPage from "../../pages/user/detail-shop";
 import PesananPage from "../../pages/user/pesanan";
+import aboutUsPage from "../../pages/user/about-us";
 
 export const LandingPageRoute = createRoute({
     path: "/",
@@ -33,5 +34,10 @@ export const cartRoute = createRoute({
 export const pesananRoute = createRoute({
     path: "/pesanan",
     component: PesananPage,
+    getParentRoute: () => rootRoute,
+});
+export const aboutUsRoute = createRoute({
+    path: "/about-us",
+    component: aboutUsPage,
     getParentRoute: () => rootRoute,
 });

@@ -51,8 +51,8 @@
                                         <p> 1. Menerapkan spiritual company di lingkungan perusahaan </p>
                                         <p> 2. Membangun tim yang bahagia, berintegritas, produktif dan
                                             professional </p>
-                                        <p> 3. Mempercepat pertumbuhan perusahaan dengan KAIZEN </p>
-                                        <p> 4. Memberi manfaat POSITIF untuk semua stakeholder </p>
+                                        <p>  </p>
+                                        <p>  </p>
                                     </div>
                                 </div>
                             </div>
