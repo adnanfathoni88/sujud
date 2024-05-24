@@ -16,7 +16,7 @@ return new class extends Migration
                 $table->foreign('role_id')->references('id')->on('roles')->onDelete('restrict')->onUpdate('cascade');
             });
         }
-		
+
         if (!Schema::hasColumn('users', 'gambar_id')) {
             Schema::table('users', function (Blueprint $table) {
                 $table->unsignedBigInteger('gambar_id')->nullable();
@@ -73,10 +73,13 @@ return new class extends Migration
         if (!Schema::hasColumn('varians', 'produk_id')) {
             Schema::table('varians', function (Blueprint $table) {
                 $table->unsignedBigInteger('produk_id');
-                $table->foreign('produk_id')->references('id')->on('produks')->onDelete('restrict')->onUpdate('cascade');
+                $table->foreign('produk_id')
+                    ->references('id')->on('produks')
+                    ->onDelete('restrict')
+                    ->onUpdate('cascade');
             });
         }
-		
+
         if (!Schema::hasColumn('varians', 'gambar_id')) {
             Schema::table('varians', function (Blueprint $table) {
                 $table->unsignedBigInteger('gambar_id');
@@ -84,23 +87,23 @@ return new class extends Migration
             });
         }
 
-		// ongkir
-		if (!Schema::hasColumn('ongkirs', 'pelanggan_user_id')) {
+        // ongkir
+        if (!Schema::hasColumn('ongkirs', 'pelanggan_user_id')) {
             Schema::table('ongkirs', function (Blueprint $table) {
                 $table->unsignedBigInteger('pelanggan_user_id');
                 $table->foreign('pelanggan_user_id')->references('id')->on('users')->onDelete('restrict')->onUpdate('cascade');
             });
         }
 
-		// ongkir
-		if (!Schema::hasColumn('carts', 'user_id')) {
+        // ongkir
+        if (!Schema::hasColumn('carts', 'user_id')) {
             Schema::table('carts', function (Blueprint $table) {
                 $table->unsignedBigInteger('user_id');
                 $table->foreign('user_id')->references('id')->on('users')->onDelete('restrict')->onUpdate('cascade');
             });
         }
-		
-		if (!Schema::hasColumn('carts', 'varian_id')) {
+
+        if (!Schema::hasColumn('carts', 'varian_id')) {
             Schema::table('carts', function (Blueprint $table) {
                 $table->unsignedBigInteger('varian_id');
                 $table->foreign('varian_id')->references('id')->on('varians')->onDelete('restrict')->onUpdate('cascade');
@@ -113,7 +116,7 @@ return new class extends Migration
         Schema::table('users', function (Blueprint $table) {
             $table->dropForeign(['role_id']);
             $table->dropColumn(['role_id']);
-			$table->dropForeign(['gambar_id']);
+            $table->dropForeign(['gambar_id']);
             $table->dropColumn(['gambar_id']);
         });
 
@@ -137,7 +140,7 @@ return new class extends Migration
         Schema::table('varians', function (Blueprint $table) {
             $table->dropForeign(['produk_id']);
             $table->dropColumn(['produk_id']);
-			$table->dropForeign(['gambar_id']);
+            $table->dropForeign(['gambar_id']);
             $table->dropColumn(['gambar_id']);
         });
 
@@ -155,11 +158,11 @@ return new class extends Migration
             $table->dropForeign(['pelanggan_user_id']);
             $table->dropColumn(['pelanggan_user_id']);
         });
-		
+
         Schema::table('carts', function (Blueprint $table) {
             $table->dropForeign(['user_id']);
             $table->dropColumn(['user_id']);
-			$table->dropForeign(['varian_id']);
+            $table->dropForeign(['varian_id']);
             $table->dropColumn(['varian_id']);
         });
     }
