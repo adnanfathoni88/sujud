@@ -12,51 +12,57 @@ function Footer() {
                         <h5 className="font-semibold md:text-lg ">
                             Hubungi Kami
                         </h5>
-                        <span className="text-white/75 text-sm md:text-md">
-                            lorem@gmail.com
+                        <span className="mt-5 text-white/75 text-sm md:text-md">
+                            <a href="mailto:sujudco@gmail.com">sujudco@gmail.com</a>
                         </span>
-                        <span className="text-white/75 text-sm md:text-md">
+                        <span className="mt-3 text-white/75 text-sm md:text-md">
                             Kec. Tegalrejo, Kota Yogyakarta, Daerah Istimewa
                             Yogyakarta
                         </span>
-                        <span className="text-white/75 text-sm md:text-md">
-                            0813-9371-9073
+                        <span className="mt-3 text-white/75 text-sm md:text-md">
+							<a href="https://wa.me/+6281226080439">+62 8122-6080-439</a>
                         </span>
                     </div>
                 </div>
                 <div className="md:flex md:flex-col mx-auto hidden">
-                    <div className="text-start flex flex-col">
-                        <h5 className="font-semibold md:text-lg">
-                            Koleksi Produk
+                    <div className="text-start flex flex-col gap-1">
+                        <h5 className="font-semibold md:text-lg ">
+                            Links
                         </h5>
-                        <span className="text-white/75 font-sm md:text-md">
-                            Sajadah
+                        <span className="mt-5 text-white/75 text-sm md:text-md">
+                            <a href="/shop-all">Shop All</a>
                         </span>
-                        <span className="text-white/75 font-sm md:text-md">
-                            Mukena
+                        <span className="mt-3 text-white/75 text-sm md:text-md">
+                            <a href="/register">Register</a>
                         </span>
-                        <span className="text-white/75 font-sm md:text-md">
-                            Hijab
+                        <span className="mt-3 text-white/75 text-sm md:text-md">
+                            <a href="/login">Login</a>
                         </span>
                     </div>
                 </div>
-                <div className="mx-auto">
-                    <div className="flex gap-2 mt-8">
-                        <div className="bg-sky-700 w-fit h-fit py-3 px-4 rounded-full md:py-2 md:px-3">
-                            <span className="text-xl md:text-md">
-                                <Icon nama={"instagram"} />
-                            </span>
-                        </div>
-                        <div className="bg-sky-700 w-fit h-fit py-3 px-4 rounded-full md:py-2 md:px-3">
-                            <span className="text-xl md:text-md">
-                                <Icon nama={"tiktok"} />
-                            </span>
-                        </div>
-                        <div className="bg-sky-700 w-fit h-fit py-3 px-4 rounded-full md:py-2 md:px-3">
-                            <span className="text-xl md:text-md">
-                                <Icon nama={"facebook"} />
-                            </span>
-                        </div>
+                <div className="md:flex md:flex-col mx-auto hidden">
+                    <div className="text-start flex flex-col gap-1">
+                        <h5 className="font-semibold md:text-lg ">
+                            Ikuti kami
+                        </h5>
+                        <span className="mt-5 text-white/75 text-sm md:text-md">
+                            <a href="https://instagram.com/" className="flex gap-2 items-center">
+								<Icon nama={"instagram"} />
+								<span>Instagram</span>
+							</a>
+                        </span>
+                        <span className="mt-3 text-white/75 text-sm md:text-md">
+                            <a href="https://tiktok.com/" className="flex gap-2 items-center">
+								<Icon nama={"tiktok"} />
+								<span>Tiktok</span>
+							</a>
+                        </span>
+                        <span className="mt-3 text-white/75 text-sm md:text-md">
+                            <a href="https://facebook.com/" className="flex gap-2 items-center">
+								<Icon nama={"facebook"} />
+								<span>Facebook</span>
+							</a>
+                        </span>
                     </div>
                 </div>
             </div>

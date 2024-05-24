@@ -21,13 +21,14 @@ import { ulasanRoute } from "./ulasan-route";
 import { profileRoute } from "./profile";
 import { replyUlasanRoute } from "./reply-ulasan-route";
 import { ongkirDetailRoute, ongkirRoute } from "./ongkir-route";
+import { AuthWrapper } from "../services/auth";
 
 export const rootRoute = createRootRoute({
     component: () => (
-        <>
+        <AuthWrapper>
             <Outlet />
             <TanStackRouterDevtools />
-        </>
+        </AuthWrapper>
     ),
 });
 

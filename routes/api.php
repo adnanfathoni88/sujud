@@ -64,6 +64,7 @@ Route::prefix("/kategori")->middleware('auth.stateless')->group(function () {
 Route::prefix("/produk")->group(function () {
 	Route::get('/', [ApiProductController::class, 'index']);
 	Route::get('/{id}', [ApiProductController::class, 'show']);
+	Route::get('/{id_produk}/ulasan', [ApiUlasanController::class, 'ulasan_by_produk']);
 
 	Route::middleware('guard.admin')->middleware('auth.stateless')->group(function () {
 		Route::post('/', [ApiProductController::class, 'store']);
@@ -109,6 +110,9 @@ Route::prefix("/produk")->group(function () {
 		});
 	});
 });
+
+
+Route::middleware('auth.stateless')->get('/cart', [ApiCartController::class, 'cart_by_user']);
 
 Route::prefix("/ulasan")->group(function () {
 	Route::middleware('guard.admin')->get('/user-ulasan', [ApiUlasanReplyController::class, 'user_ulasan']);

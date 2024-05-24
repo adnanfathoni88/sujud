@@ -9,6 +9,7 @@ export interface IProfile {
 	gambar: IGambar | null;
 	created_at: string;
 	updated_at: string;
+	role_id: number
 }
 
 export interface IProfileList extends Array<IProfile> {}	 

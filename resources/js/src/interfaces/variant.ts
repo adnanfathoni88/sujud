@@ -1,4 +1,5 @@
 import { IGambar } from "./gambar";
+import { IProduct } from "./product";
 
 export interface IVariant {
 	id: number;
@@ -12,6 +13,7 @@ export interface IVariant {
 	produk_id: number;
 	gambar_id: number;
 	gambar: IGambar;
+	produk?: IProduct
 }
 
 export interface IVariantList extends Array<IVariant> {}

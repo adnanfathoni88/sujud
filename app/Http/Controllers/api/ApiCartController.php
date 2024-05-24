@@ -13,6 +13,14 @@ use Illuminate\Support\Facades\Validator;
 class ApiCartController extends Controller
 {
 	use ResponseFormat, UserCookie;
+
+	function cart_by_user(Request $request) 
+	{
+		$userId = $this->getUserCookie($request->cookie('token'));
+		$m = CartModel::where('user_id', $userId)->with('varian.gambar:id,nama')->with('varian.produk:id,nama')->get();
+		return $this->res($m, 200);	
+	}
+
 	/**
 	 * Display a listing of the resource.
 	 */
@@ -35,14 +43,23 @@ class ApiCartController extends Controller
 		if ($validator->fails()) return $this->res($validator->messages(), 400);
 
 		$v = Varian::find($id_varian);
-		dd($v->stok);
 		if($v->stok < $request->qty) return $this->res("Out of stock", 400);
 
-		$m = new CartModel();
-		$m->qty = $request->qty;
-		$m->varian_id = $id_varian;
-		$m->user_id = $this->getUserCookie($request->cookie('token'));
-		$m->save();
+		$current = CartModel::where('varian_id', $id_varian)
+			->where('user_id', $this->getUserCookie($request->cookie('token')))
+			->first();
+
+		if ($current) {
+			$current->qty += $request->qty;
+			$current->save();
+		} else {
+			$m = new CartModel();
+			$m->qty = $request->qty;
+			$m->varian_id = $id_varian;
+			$m->user_id = $this->getUserCookie($request->cookie('token'));
+			$m->save();
+		}
+
 
 		return $this->res("Success", 201);
 	}

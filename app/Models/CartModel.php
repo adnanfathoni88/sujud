@@ -17,11 +17,11 @@ class CartModel extends Model
 
     public function varian()
     {
-        return $this->hasOne(Varian::class);
+        return $this->hasOne(Varian::class, 'id', 'varian_id');
     }
 
 	public function user()
 	{
-		return $this->hasOne(User::class);
+		return $this->hasOne(User::class, 'id', 'user_id');
 	}
 }

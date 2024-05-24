@@ -11,6 +11,11 @@ class ReactHandlerController extends Controller
 {
 	use AuthWeb, Payment;
 
+	public function home(Request $request)
+	{
+		return view('index');
+	}
+
 	public function index(Request $request)
 	{
 		$token = $request->cookie('token');
@@ -22,7 +27,7 @@ class ReactHandlerController extends Controller
 	{
 		$token = $request->cookie('token');
 		if (!$this->webAuthenticate($token)) return redirect('/login');
-		// if(!$this->webAuthorization($token, 'admin')) return "Unauthorized Access";
+		if(!$this->webAuthorization($token, 'admin')) return "Unauthorized Access";
 		return view('index');
 	}
 

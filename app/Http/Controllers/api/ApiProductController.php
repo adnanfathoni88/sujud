@@ -23,11 +23,23 @@ class ApiProductController extends Controller
     public function index(Request $request)
     {
 		$query = $request ->query('q');
+		$kategori_id = $request ->query('kategori_id');
 		if($query) {
-			$m = Produk::where('nama', 'like', "%$query%")->with('kategori')->with('varian.gambar')->paginate(15);
+			$m = Produk::where('nama', 'like', "%$query%")
+				->where(function($q) use($kategori_id) {
+					if($kategori_id) $q->where('kategori_id', $kategori_id);
+				})
+				->with('kategori')
+				->with('varian.gambar')
+				->paginate(15);
 			return $this->res($m, 200);
 		}
-		$m = Produk::with('kategori')->with('varian.gambar')->paginate(15);
+		$m = Produk::where(function($q) use($kategori_id) {
+				if($kategori_id) $q->where('kategori_id', $kategori_id);
+			})
+			->with('kategori')
+			->with('varian.gambar')
+			->paginate(15);
 		return $this->res($m, 200);
     }
 

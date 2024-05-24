@@ -8,6 +8,9 @@ use App\Http\Controllers\ReactHandlerController;
 use App\Http\Controllers\UlasanController;
 
 
+Route::get("/", [ReactHandlerController::class, "home"]);
+Route::get("/detail/about", [ReactHandlerController::class, "home"]);
+Route::get("/detail/{any}/shop", [ReactHandlerController::class, "home"]);
 Route::get("/login", [ReactHandlerController::class, "login"]);
 Route::get("/register", [ReactHandlerController::class, "register"]);
 Route::any('/admin/{all}', [ReactHandlerController::class, "admin"])->where('all', '^((?!api).)*?');
