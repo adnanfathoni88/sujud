@@ -20,4 +20,19 @@ trait Payment {
 
 		return $response->json();
     }
+
+	protected function apiPaymentCheckStatus(string $pesanan_grup) {
+		$apiKey = config('app.payment_api_key');
+		$merchanCode = config('app.payment_merchant');
+		$signature = md5($merchanCode . $pesanan_grup . $apiKey);
+		$url = "https://sandbox.duitku.com/webapi/api/merchant/transactionStatus";
+
+		$response = Http::post($url, [
+			'signature' => $signature,
+			'merchantCode' => $merchanCode,
+			'merchantOrderId' => $pesanan_grup,
+		]);
+
+		return $response->json();
+	}
 }

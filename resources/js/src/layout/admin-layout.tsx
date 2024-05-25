@@ -23,6 +23,7 @@ const AdminLayout: React.FC<{ children: ReactNode; withSearch: boolean }> = ({
                 <div className="relative flex flex-1 flex-col overflow-y-auto overflow-x-hidden">
                     {/* <!-- ===== Header Start ===== --> */}
                     <Header
+						withSidebar={true}
                         withSearch={withSearch}
                         sidebarOpen={sidebarOpen}
                         setSidebarOpen={setSidebarOpen}

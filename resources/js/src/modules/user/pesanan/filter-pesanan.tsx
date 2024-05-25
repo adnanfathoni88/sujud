@@ -1,10 +1,6 @@
 import { FaCheck } from "react-icons/fa6";
 import { FaFilter } from "react-icons/fa";
-import { IProductList } from "../../../interfaces/product";
 import { Menu, MenuButton, MenuItem, MenuItems, Popover, PopoverButton, PopoverPanel, Transition } from "@headlessui/react";
-import { useGetCategoryList } from "../../../adapters/hooks/useCategory";
-import { ICategoryList } from "../../../interfaces/category";
-import { useMemo, useState } from "react";
 import { useNavigate, useSearch } from "@tanstack/react-router";
 import { twMerge } from "tailwind-merge";
 import { shopRoute } from "../../../routes/user";
@@ -53,7 +49,7 @@ export function FilterPesanan() {
 		<Menu>
 			<MenuButton className="bg-sky-500 text-white px-4 py-2 rounded-md ml-2 border-0 flex items-center gap-2">
 				<FaFilter size={ 16 } />
-				Kategori
+				Status
 			</MenuButton>
 			<Transition
 				enter="transition ease-out duration-200"

@@ -32,7 +32,7 @@ class ApiPesananController extends Controller
 		})();
 
 		$is_confirmed_by_admin = $request->isConfirmed == 'true' ? true : false;
-		$telah_sampai = $request->arrived == 'true' ? true : false;
+		$telah_sampai = $request->isArrived == 'true' ? true : false;
 		
 		if($telah_sampai) {
 			$status = 'dibayar';

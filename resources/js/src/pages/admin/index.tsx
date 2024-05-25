@@ -6,9 +6,7 @@ import { useLocationUrlId } from "../../store/useLocationUrlId";
 export default function CategoryListPage() {
     const set = useLocationUrlId((s) => s.setValue);
 
-    useEffect(() => {
-        set("category");
-    }, []);
+    useEffect(() => { set("admin") }, []);
 
     return (
         <AdminLayout withSearch={false}>

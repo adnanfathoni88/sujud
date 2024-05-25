@@ -12,3 +12,15 @@ export interface ITransaksi {
 	created_at: string
 	updated_at: string
 }
+
+export interface ITransactionStatus {
+	merchantOrderId: string
+	reference: string
+	amount: string
+	fee: string
+	statusCode: string
+	statusMessage: string
+	Message?: string
+}
+
+export interface ITransaksiList extends Array<ITransaksi> {}

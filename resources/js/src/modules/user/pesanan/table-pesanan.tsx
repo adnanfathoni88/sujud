@@ -4,16 +4,16 @@ import { BiSolidDollarCircle } from "react-icons/bi";
 import { PiWarningCircleFill } from "react-icons/pi";
 import { useNavigate, useSearch } from "@tanstack/react-router";
 import Pagination from "../../../components/pagination";
-import { IPesananList } from "../../../interfaces/pesanan";
 import { pesananRoute } from "../../../routes/user";
 import { P, match } from "ts-pattern";
-import { IOngkirList, IOngkirListWithPesanan } from "../../../interfaces/ongkir";
+import { IOngkirListWithPesanan } from "../../../interfaces/ongkir";
 import { twMerge } from "tailwind-merge";
+import ModalMetodeBayar from "./modal-metode-bayar";
 
 export default function TablePesanan({ data, nextUrl }: { nextUrl?: string, data: IOngkirListWithPesanan }) {
 	const navigate = useNavigate({ from: pesananRoute.fullPath })
 	const search = useSearch({ strict: false })
-	
+
 	return (
 		<>
 			<div className="mt-10 flex flex-col gap-10">
@@ -38,7 +38,7 @@ export default function TablePesanan({ data, nextUrl }: { nextUrl?: string, data
 									<span>Pembayaran gagal.</span>
 								</div>
 							))
-							.with([1, null, 0, 'dibayar'], () => (
+							.with([1, P.string, 0, 'dibayar'], () => (
 								<div className="w-full p-5 bg-green-400 text-white flex items-center gap-5">
 									<AiFillInfoCircle size={ 20 } />
 									<span>Telah dibayar, admin akan segera mengemas paketmu</span>
@@ -58,14 +58,7 @@ export default function TablePesanan({ data, nextUrl }: { nextUrl?: string, data
 									<p className="text-black text-sm mt-1">Thus, 21 May 2022</p>
 								</div>
 								{ match([v.is_confirmed_by_admin, v.pesanan?.[0].status])
-									.with([1, 'belum-bayar'], () => (
-										<button
-											className="bg-sky-500 text-white px-4 py-2 rounded-md h-fit mt-2 ml-auto sm:ml-0 sm:mt-0"
-											onClick={ () => navigate({ to: `/pesanan/${v.id}` }) }
-										>
-											Bayar Sekarang
-										</button>
-									))
+									.with([1, 'belum-bayar'], () => <ModalMetodeBayar pesananGrup={ v.pesanan_grup } />)
 									.otherwise(() => null) }
 							</div>
 							<div className="overflow-x-auto mt-5">
@@ -82,6 +75,14 @@ export default function TablePesanan({ data, nextUrl }: { nextUrl?: string, data
 											</tr>
 											<tr>
 												<td className="pt-3">
+													<p className="text-black">Ekspedisi</p>
+												</td>
+												<td className="pt-3 pl-5">
+													<p className="text-black">{ v.ekspedisi }</p>
+												</td>
+											</tr>
+											<tr>
+												<td className="pt-3">
 													<p className="text-black">Resi</p>
 												</td>
 												<td className="pt-3 pl-5">
@@ -90,10 +91,21 @@ export default function TablePesanan({ data, nextUrl }: { nextUrl?: string, data
 											</tr>
 											<tr>
 												<td className="pt-3">
-													<p className="text-black">Ekspedisi</p>
+													<p className="text-black">Ongkir</p>
 												</td>
 												<td className="pt-3 pl-5">
-													<p className="text-black">{ v.ekspedisi }</p>
+													<p className="text-black">{ `Rp. ${v.ongkir.toLocaleString()}` }</p>
+												</td>
+											</tr>
+											<tr>
+												<td className="pt-8">
+													<p className="text-black font-black">TOTAL</p>
+												</td>
+												<td className="pt-8 pl-5">
+													<p className="text-black font-black">{ Array.isArray(v?.pesanan) 
+														? `Rp. ${((v?.ongkir ?? 0) + v.pesanan.reduce((a,c) => (a += c.total), 0) ).toLocaleString()}`
+														: "-" 
+													}</p>
 												</td>
 											</tr>
 										</tbody>
@@ -173,7 +185,7 @@ export default function TablePesanan({ data, nextUrl }: { nextUrl?: string, data
 							</div>
 						</>
 					))
-					.otherwise(() => <Pagination navigate={ navigate } nextUrl={ nextUrl } />)}
+					.otherwise(() => <Pagination navigate={ navigate } nextUrl={ nextUrl } />) }
 			</div>
 		</>
 	)

@@ -26,7 +26,7 @@ class ApiAuthController extends Controller
 			"nomor" => "required|string|unique:users,nomor|max:255",
 		]);
 		
-		if ($validator->fails()) return $this->res($validator->messages(), 401);
+		if ($validator->fails()) return $this->res($validator->messages(), 400);
 
 		$toSave = $validator->validated();
 		$toSave['password'] = Hash::make($toSave['password']);
@@ -59,15 +59,15 @@ class ApiAuthController extends Controller
 			"password" => "required|max:255",
 		]);
 		
-		if ($validator->fails()) return $this->res($validator->messages(), 401);
+		if ($validator->fails()) return $this->res($validator->messages(), 400);
 
 		$m = User::where('email', $req->email)->first();
-		if (!$m) return $this->res("invalid credentials", 401);
-		if (!Hash::check($req->password, $m->password)) return $this->res("invalid credentials", 401);
+		if (!$m) return $this->res("invalid credentials", 400);
+		if (!Hash::check($req->password, $m->password)) return $this->res("invalid credentials", 400);
 
 		$encrypted = $this->setUserCookie($m->id);
 
-		return $this->res("Success", 201)->withCookie('token', $encrypted, 24 * 60, '/', null, false, true, 'strict');
+		return $this->res(['role' => $m->role_id], 201)->withCookie('token', $encrypted, 24 * 60, '/', null, false, true, 'strict');
 	}
 
 	function logout(Request $req) {

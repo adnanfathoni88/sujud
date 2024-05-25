@@ -30,9 +30,9 @@ export default function KonfirmasiPesanan({ ongkir, berat, ekspedisi, ongkirId }
 			{
 				onSuccess: () => {
 					setOpen(false);
-					toastSuccess("Varian berhasil diupdate");
+					toastSuccess("Ongkir berhasil diupdate");
 				},
-				onError: () => toastError("Gagal mengupdate varian"),
+				onError: () => toastError("Gagal mengupdate ongkir"),
 			}
 		);
 	});

@@ -146,6 +146,11 @@ Route::prefix("/pesanan")->group(function () {
 	Route::post('/{pesanan_group}/transaksi/callback', [ApiTransaksiController::class, 'callbackAction']);
 });
 
+Route::prefix("/transaksi")->middleware('auth.stateless')->group(function () {
+	Route::get("/", [ApiTransaksiController::class, 'index'])->middleware('guard.admin');
+	Route::get("/{pesanan_grup}/status", [ApiTransaksiController::class, 'check_status']);
+});
+
 Route::prefix("/ongkir")->middleware('auth.stateless')->middleware('guard.admin')->group(function () {
 	Route::get('/', [ApiOngkirController::class, 'index']);
 	Route::get('/{id}', [ApiOngkirController::class, 'show']);

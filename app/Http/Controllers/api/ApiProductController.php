@@ -117,7 +117,7 @@ class ApiProductController extends Controller
 			'kategori_id' => 'required|exists:kategoris,id'
 		]);
 
-		if ($validator->fails()) return $this->res($validator->messages(), 401);
+		if ($validator->fails()) return $this->res($validator->messages(), 400);
 
 		$m = Produk::find($id);
 		if(!$m) return $this->res("Produk not found", 404);

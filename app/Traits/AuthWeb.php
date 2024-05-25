@@ -26,9 +26,9 @@ trait AuthWeb {
 		$decrypted = $this->getUserCookie($token);
 		if(!is_numeric($decrypted)) return false;
 
-		$user = User::find($decrypted)->first();
+		$user = User::find($decrypted);
 		if(!$user) return false;
-		
+
 		if($user->role->nama !== $role) return false;
 
         return true;

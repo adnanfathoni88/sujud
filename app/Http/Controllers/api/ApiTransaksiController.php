@@ -19,7 +19,25 @@ class ApiTransaksiController extends Controller
 {
 	use ResponseFormat, UserCookie, Payment;
 
-	function paymentMethod(Request $request, string $pesanan_group)
+	public function index(Request $request) 
+	{
+		$pesanan_group = $request->query('pesanan_grup');
+		if($pesanan_group) {
+			$m = Transaksi::where('pesanan_grup', $pesanan_group)->paginate(15);
+			return $this->res($m, 200);
+		}
+		
+		$status = $request->query('status') === 'FAILED' ? 'FAILED' : 'SUCCESS';
+		$m = Transaksi::where('status', $status)->paginate(15);
+		return $this->res($m, 200);
+	}
+
+	public function check_status(Request $request, string $pesanan_group)
+	{
+		return $this->res($this->apiPaymentCheckStatus($pesanan_group), 200);
+	}
+
+	public function paymentMethod(Request $request, string $pesanan_group)
 	{
 		$userId = $this->getUserCookie($request->cookie('token'));
 		$ongkir = Ongkir::where('pesanan_grup', $pesanan_group)
@@ -38,7 +56,7 @@ class ApiTransaksiController extends Controller
 		return $this->res($response, 200);
 	}
 
-	function transaction(Request $request, string $pesanan_group, string $payment_method)
+	public function transaction(Request $request, string $pesanan_group, string $payment_method)
 	{
 		$userId = $this->getUserCookie($request->cookie('token'));
 		$transaksi = Transaksi::where('pesanan_grup', $pesanan_group)->first();
@@ -64,7 +82,7 @@ class ApiTransaksiController extends Controller
 
 		$customerName = $user->name;
 		$customerEmail = $user->email;
-		$orderId = Str::uuid()->toString();
+		$orderId = $pesanan_group;
 		$merchant = config('app.payment_merchant');
 		$productDetail = "Pembayaran pesanan kepada SUJUD COMPANY";
 		$returnUrl = $request->getSchemeAndHttpHost() . "/api/pesanan/{$pesanan_group}/transaksi/return";
@@ -87,7 +105,7 @@ class ApiTransaksiController extends Controller
 		return $this->res($response->json(), 200);
 	}
 
-	function callbackAction(Request $request, string $pesanan_group) 
+	public function callbackAction(Request $request, string $pesanan_group) 
 	{
 		/**
 		 * dalam melakukan callback action, seharusnya dicek apakah request tersebut valid dari payment gateway atau tidak

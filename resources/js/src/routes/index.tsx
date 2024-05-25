@@ -22,6 +22,7 @@ import { profileRoute } from "./profile";
 import { replyUlasanRoute } from "./reply-ulasan-route";
 import { ongkirDetailRoute, ongkirRoute } from "./ongkir-route";
 import { AuthWrapper } from "../services/auth";
+import { transaksiRoute } from "./transaksi-route";
 
 export const rootRoute = createRootRoute({
     component: () => (
@@ -51,5 +52,6 @@ export const routeTree = rootRoute.addChildren([
     ongkirRoute,
     ongkirDetailRoute,
     aboutUsRoute,
+    transaksiRoute,
 ]);
 export const router = createRouter({ routeTree });

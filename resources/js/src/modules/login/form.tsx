@@ -24,8 +24,11 @@ export default function FormLogin() {
 	const onSubmit = async (data: any) => {
 		try {
 			setLoading(true)
-			await api.post('/auth/login', data)
-			window.location.reload()
+			const res = await api.post('/auth/login', data)
+			if(res.data?.response?.role === 1 || res.data?.response?.role === 3) {
+				return window.location.replace('/admin/category')
+			}
+			return window.location.reload()
 		} catch (error) {
 			toastError('Invalid credentials')
 		} finally {

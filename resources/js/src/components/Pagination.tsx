@@ -1,7 +1,7 @@
 import { useNavigate, useSearch } from "@tanstack/react-router"
 import { twMerge } from "tailwind-merge"
 
-export default function Pagination({ withSearch, navigate, nextUrl }: { withSearch?: boolean, navigate: ReturnType<typeof useNavigate>, nextUrl?: string }) {
+export default function Pagination({ searchPlaceholder, withSearch, navigate, nextUrl }: { searchPlaceholder?: string, withSearch?: boolean, navigate: ReturnType<typeof useNavigate>, nextUrl?: string }) {
 	const search = useSearch({ strict: false })
 
 	const onKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
@@ -29,7 +29,7 @@ export default function Pagination({ withSearch, navigate, nextUrl }: { withSear
 					type="text"
 					onKeyDown={ onKeyDown }
 					defaultValue={ search?.q }
-					placeholder="Cari produk (Enter)"
+					placeholder={searchPlaceholder ?? "Cari produk (Enter)"}
 					className={ twMerge(`w-full rounded-md border border-stroke px-4 py-2 text-sm text-black bg-zinc-200 dark:bg-black/40 dark:text-white dark:border-strokedark`) }
 				/>
 			) }

@@ -35,7 +35,7 @@ class ApiUserController extends Controller
 			"nomor" => "required|string|unique:users,nomor|max:255",
 		]);
 		
-		if ($validator->fails()) return $this->res($validator->messages(), 401);
+		if ($validator->fails()) return $this->res($validator->messages(), 400);
 
 		$toSave = $validator->validated();
 		$toSave['password'] = Hash::make($toSave['password']);
@@ -79,7 +79,7 @@ class ApiUserController extends Controller
 		$validator = Validator::make($request->all(), [
 			"role_id" => "required|exists:roles,id",
 		]);
-		if ($validator->fails()) return $this->res($validator->messages(), 401);
+		if ($validator->fails()) return $this->res($validator->messages(), 400);
 
 		$user = User::find($id);
 		if (!$user) return $this->res("User not found", 404);
