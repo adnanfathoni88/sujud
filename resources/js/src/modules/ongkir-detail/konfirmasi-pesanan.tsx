@@ -8,7 +8,7 @@ import TextGroup from "../../components/text-group";
 import { useUpdateOngkir } from "../../adapters/hooks/useOngkir";
 import { toastError, toastSuccess } from "../../utils/toast";
 
-export default function KonfirmasiPesanan({ ongkir, berat, ekspedisi, ongkirId }: { ongkir: number, berat: number, ekspedisi: string, ongkirId: number }) {
+export default function KonfirmasiPesanan({ disabled, ongkir, berat, ekspedisi, ongkirId }: { disabled?: boolean, ongkir: number, berat: number, ekspedisi: string, ongkirId: number }) {
 	const [open, setOpen] = useState(false)
 	const updateOngkir = useUpdateOngkir()
 	const {
@@ -32,7 +32,9 @@ export default function KonfirmasiPesanan({ ongkir, berat, ekspedisi, ongkirId }
 					setOpen(false);
 					toastSuccess("Ongkir berhasil diupdate");
 				},
-				onError: () => toastError("Gagal mengupdate ongkir"),
+				onError: (err: any) => {
+					toastError(err?.response?.data?.response ?? "Gagal mengupdate ongkir")
+				},
 			}
 		);
 	});
@@ -43,7 +45,7 @@ export default function KonfirmasiPesanan({ ongkir, berat, ekspedisi, ongkirId }
 			title="Buat Kategori"
 			onOpen={ () => setOpen(true) }
 			onClose={ () => setOpen(false) }
-			Trigger={ (<button onClick={ () => setOpen(true) } className="bg-first text-white w-[300px] py-3 rounded pb-4 mt-6 ml-auto block">Konfirmasi Pesanan</button>) }
+			Trigger={ (<button disabled={disabled} onClick={ () => setOpen(true) } className="disabled:bg-first/50 disabled:cursor-not-allowed bg-first text-white w-[300px] py-3 rounded pb-4 mt-6 ml-auto block">Konfirmasi Pesanan</button>) }
 		>
 			<DialogPanel className="w-full max-w-md rounded-xl bg-white p-6 dark:bg-boxdark-2">
 				<DialogTitle as="h3" className="text-base/7 mb-5 font-semibold text-black dark:text-white">

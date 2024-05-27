@@ -50,6 +50,7 @@ class ApiCartController extends Controller
 			->first();
 
 		if ($current) {
+			if($v->stok < $current->qty + $request->qty) return $this->res("Out of stock", 400);
 			$current->qty += $request->qty;
 			$current->save();
 		} else {

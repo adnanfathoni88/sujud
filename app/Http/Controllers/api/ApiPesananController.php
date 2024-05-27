@@ -53,6 +53,7 @@ class ApiPesananController extends Controller
 			->where('pelanggan_user_id', $userId)
 			->where('telah_sampai', $telah_sampai)
 			->where('is_confirmed_by_admin', $is_confirmed_by_admin)
+			->orderBy('created_at', 'desc')
 			->paginate(5);
 
 		return $this->res($m, 200);

@@ -8,6 +8,7 @@ import { ChangeEvent, useEffect, useState } from "react";
 import { toastError, toastSuccess } from "../../../utils/toast";
 import { IVariant } from "../../../interfaces/variant";
 import { ICart } from "../../../interfaces/cart";
+import { twMerge } from "tailwind-merge";
 
 let timeout: any;
 
@@ -17,11 +18,11 @@ function QtyUpdate({ varianId, productId, id, qty }) {
 	const deleteCart = useDeleteCart()
 
 	const debounce = (v: number) => {
-		if(timeout) clearTimeout(timeout)
+		if (timeout) clearTimeout(timeout)
 		timeout = setTimeout(() => {
 			updateCart.mutate({ produkId: productId, varianId, id, qty: v }, {
 				onSuccess: () => toastSuccess("Berhasil mengubah kuantitas"),
-				onError: () => toastError("Gagal mengubah kuantitas")
+				onError: (err: any) => toastError(err?.response?.data?.response ?? "Gagal mengubah kuantitas")
 			})
 		}, 1500);
 	}
@@ -31,7 +32,7 @@ function QtyUpdate({ varianId, productId, id, qty }) {
 		setVal(v => v - 1)
 		debounce(val - 1)
 	}
-	
+
 	const handlePlus = () => {
 		setVal(v => v + 1)
 		debounce(val + 1)
@@ -55,17 +56,17 @@ function QtyUpdate({ varianId, productId, id, qty }) {
 		<div className="flex items-center gap-2 border p-2 px-4 rounded-full">
 			{ match(val <= 1)
 				.with(true, () => (
-					<button onClick={handleDelete}>
+					<button onClick={ handleDelete }>
 						<FaRegTrashAlt size={ 14 } className="text-black" />
 					</button>
 				))
 				.otherwise(() => (
-					<button onClick={handleMin}>
+					<button onClick={ handleMin }>
 						<FaMinus size={ 14 } className="text-black" />
 					</button>
 				)) }
-			<input onChange={handleChange} type="text" value={val} className="focus:outline-none text-center text-black w-[40px]" />
-			<button onClick={handlePlus}>
+			<input onChange={ handleChange } type="text" value={ val } className="focus:outline-none text-center text-black w-[40px]" />
+			<button onClick={ handlePlus }>
 				<FaPlus size={ 14 } className="text-black" />
 			</button>
 		</div>
@@ -73,60 +74,68 @@ function QtyUpdate({ varianId, productId, id, qty }) {
 }
 
 type TPropsCartTable = {
-	isSelectAll, 
-	selectedProduct: { 
-		id: number, 
-		qty: number, 
-		harga: number, 
+	isSelectAll,
+	selectedProduct: {
+		id: number,
+		qty: number,
+		harga: number,
 		varian_id: number,
 		harga_diskon: number,
-	}[],       
+	}[],
 	setSelectedProduct: React.Dispatch<React.SetStateAction<{
 		id: number,
 		qty: number,
 		harga: number,
 		varian_id: number,
 		harga_diskon: number,
-	 }[]>>, 
+	}[]>>,
 }
 
 export default function CartTable({ selectedProduct, setSelectedProduct, isSelectAll }: TPropsCartTable) {
 	const { data } = useGetCartList()
 
 	const handleChange = (p: ICart) => (e: ChangeEvent<HTMLInputElement>) => {
-		if(e.target.checked) setSelectedProduct(v => [...v, { 
-			id: p.id, 
+		if (e.target.checked) setSelectedProduct(v => [...v, {
+			id: p.id,
 			qty: p.qty,
-			harga: p.varian?.harga, 
-			varian_id: p.varian?.id, 
-			harga_diskon: p.varian?.harga_diskon 
+			harga: p.varian?.harga,
+			varian_id: p.varian?.id,
+			harga_diskon: p.varian?.harga_diskon
 		}])
 		else setSelectedProduct(v => v.filter(x => x.id !== p.id))
 	}
 
 	useEffect(() => {
-		if(Array.isArray(data?.response)) {
-			if (isSelectAll) setSelectedProduct(data?.response.map(v => ({ 
-				id: v.id,
-				qty: v.qty,
-				harga: v.varian?.harga,
-				varian_id: v.varian?.id,
-				harga_diskon: v.varian?.harga_diskon,
-			})))
+		if (Array.isArray(data?.response)) {
+			if (isSelectAll) setSelectedProduct(() => {
+				const selected = []
+				data?.response.forEach(el => {
+					if (el.varian?.stok >= el.qty) selected.push({
+						id: el.id,
+						qty: el.qty,
+						harga: el.varian?.harga,
+						varian_id: el.varian?.id,
+						harga_diskon: el.varian?.harga_diskon
+					})
+				});
+				return selected
+			})
 			else setSelectedProduct([])
 		}
 	}, [isSelectAll, data?.response])
 
 	return (
-		<div className="flex flex-col gap-4">
+		<div className="flex flex-col gap-4 mt-10 sm:mt-5">
 			{ match(Array.isArray(data?.response))
 				.with(true, () => data.response.map(v => (
-					<div className="flex border-black/10 border shadow-sm rounded p-5 items-start gap-4" key={ v.id }>
-						<input 
-							type="checkbox" 
-							className="h-5 w-5 rounded" 
-							onChange={handleChange(v)} 
-							checked={selectedProduct.some(x => x.id === v.id)}
+					<div className={ twMerge("flex border-black/10 border shadow-sm rounded p-5 items-start gap-4 relative overflow-hidden", v?.qty > v?.varian?.stok && "pt-13") } key={ v.id }>
+						{ v?.qty > v?.varian?.stok && <div className="bg-red-500 py-1 px-3 absolute top-0 left-0 right-0 text-white font-semibold text-right">Stok sisa 5</div> }
+						<input
+							type="checkbox"
+							onChange={ handleChange(v) }
+							className="h-5 w-5 rounded"
+							disabled={ v?.qty > v?.varian?.stok }
+							checked={ selectedProduct.some(x => x.id === v.id) }
 						/>
 						<img src={ `/api/uploaded/${v.varian?.gambar?.nama}` } alt="produk" className="w-[130px] rounded" />
 						<div className="flex flex-col w-full">
@@ -139,9 +148,9 @@ export default function CartTable({ selectedProduct, setSelectedProduct, isSelec
 									</div>
 								))
 								.with([true, false], () => (<p className="text-black text-sm font-semibold mb-3 mt-2">Rp. { v?.varian?.harga.toLocaleString() }</p>))
-								.otherwise(() => null)	}
+								.otherwise(() => null) }
 							<p className="text-sm capitalize">{ v?.varian?.warna }, { v.varian?.ukuran }</p>
-							<div className="flex justify-end items-center gap-4">
+							<div className="flex justify-end sm:items-center items-start mt-5 gap-1 sm:mt-0 sm:gap-4 flex-col sm:flex-row">
 								<p>QTY</p>
 								<QtyUpdate varianId={ v.varian?.id } productId={ v.varian?.produk?.id } id={ v.id } qty={ v.qty } />
 							</div>

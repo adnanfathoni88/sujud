@@ -85,7 +85,7 @@ class ApiTransaksiController extends Controller
 		$orderId = $pesanan_group;
 		$merchant = config('app.payment_merchant');
 		$productDetail = "Pembayaran pesanan kepada SUJUD COMPANY";
-		$returnUrl = $request->getSchemeAndHttpHost() . "/api/pesanan/{$pesanan_group}/transaksi/return";
+		$returnUrl = $request->getSchemeAndHttpHost() . "/payment-status?pesanan_grup={$pesanan_group}";
 		$callbackUrl = $request->getSchemeAndHttpHost() . "/api/pesanan/{$pesanan_group}/transaksi/callback";
 		$signature = md5($merchant . $orderId . $amount . config('app.payment_api_key'));
 		$response = Http::post("https://sandbox.duitku.com/webapi/api/merchant/v2/inquiry", [

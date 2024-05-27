@@ -16,4 +16,5 @@ api.interceptors.response.use((res) => res, (err) => {
 	
 	if(status === 401 && url.pathname !== '/api/profile') return window.location.reload()
 	if(status === 403) return window.location.replace('/login');
+	throw err
 })

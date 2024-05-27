@@ -31,6 +31,7 @@ class ApiProductController extends Controller
 				})
 				->with('kategori')
 				->with('varian.gambar')
+				->orderBy('created_at', 'desc')
 				->paginate(15);
 			return $this->res($m, 200);
 		}
@@ -39,6 +40,7 @@ class ApiProductController extends Controller
 			})
 			->with('kategori')
 			->with('varian.gambar')
+			->orderBy('created_at', 'desc')
 			->paginate(15);
 		return $this->res($m, 200);
     }

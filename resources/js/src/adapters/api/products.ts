@@ -17,7 +17,7 @@ export async function addProduct({
     nama,
     deskripsi,
     harga,
-    // warna,
+    warna,
     image,
     stok,
     ukuran,
@@ -28,7 +28,7 @@ export async function addProduct({
     formData.append("nama", nama);
     formData.append("deskripsi", deskripsi);
     formData.append("harga", harga.toString());
-    // formData.append("warna", warna);
+    formData.append("warna", warna);
     formData.append("stok", stok.toString());
     formData.append("image", image[0]);
     formData.append("ukuran", ukuran);

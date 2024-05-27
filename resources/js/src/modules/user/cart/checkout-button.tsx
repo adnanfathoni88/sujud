@@ -66,7 +66,7 @@ export default function CheckoutButton({ selectedProduct }: {
 
 	return (
 		<>
-			<button onClick={ open } className="bg-primary text-white px-5 py-2 rounded-full flex items-center gap-2">
+			<button onClick={ open } disabled={!selectedProduct.length} className="disabled:bg-primary/50 disabled:cursor-not-allowed bg-primary text-white px-5 py-2 rounded-full flex items-center gap-2">
 				<span>Checkout</span>
 			</button>
 

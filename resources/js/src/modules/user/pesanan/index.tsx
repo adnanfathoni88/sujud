@@ -19,7 +19,7 @@ const PesananModule: React.FC = () => {
 			.otherwise(() => 'belum-bayar')
 	}, [search?.status])
 	
-	useEffect(() => { navigate({ to: '/pesanan?page=1&status=belum-bayar&isConfirmed=true' }) }, [])
+	useEffect(() => { if(!search?.fromReturn) navigate({ to: '/pesanan?page=1&status=belum-bayar&isConfirmed=true' }) }, [])
 
 	const { data } = useGetPesanan({ 
 		status,

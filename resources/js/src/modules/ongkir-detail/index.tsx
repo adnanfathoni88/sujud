@@ -6,12 +6,27 @@ import { match } from "ts-pattern"
 import Loader from "../../components/loader"
 import { useGetOngkirDetail, useGetOngkirList } from "../../adapters/hooks/useOngkir";
 import KonfirmasiPesanan from "./konfirmasi-pesanan";
+import { useMemo } from "react";
+import { twMerge } from "tailwind-merge";
 
 export default function OngkirListModule() {
 	const navigate = useNavigate()
 	const { ongkirId } = useParams({ strict: false })
 	const { data } = useGetOngkirDetail({ id: Number(ongkirId) })
+	const hasOutOfStock = useMemo(() => {
 
+		let outOfStock = false
+
+		if(!Array.isArray(data?.response?.pesanan)) return outOfStock
+		for (let i = 0; i < data.response.pesanan.length; i++) {
+			outOfStock = data.response.pesanan[i].varian.stok < data.response.pesanan[i].qty
+			if(outOfStock) break
+		}
+
+		return outOfStock
+
+	}, [data?.response?.pesanan])
+	
 	return (
 		<div className="rounded-sm border border-stroke bg-white px-5 pt-6 pb-2.5 shadow-default dark:border-strokedark dark:bg-boxdark sm:px-7.5 xl:pb-5">
 			<div className="flex items-center justify-between mb-6 flex-col sm:flex-row">
@@ -96,6 +111,7 @@ export default function OngkirListModule() {
 								<th className="border bg-zinc-200 dark:bg-black/50 p-4 whitespace-nowrap text-left">Ukuran</th>
 								<th className="border bg-zinc-200 dark:bg-black/50 p-4 whitespace-nowrap text-left">Warna</th>
 								<th className="border bg-zinc-200 dark:bg-black/50 p-4 whitespace-nowrap text-left">QTY</th>
+								<th className="border bg-zinc-200 dark:bg-black/50 p-4 whitespace-nowrap text-left">Stok</th>
 								<th className="border bg-zinc-200 dark:bg-black/50 p-4 whitespace-nowrap text-left">Harga Total</th>
 								<th className="border bg-zinc-200 dark:bg-black/50 p-4 whitespace-nowrap text-left">Harga Potongan</th>
 							</tr>
@@ -108,14 +124,15 @@ export default function OngkirListModule() {
 									<td className="border py-3 px-4 whitespace-nowrap">{ c?.varian?.ukuran }</td>
 									<td className="border py-3 px-4 whitespace-nowrap">{ c?.varian?.warna }</td>
 									<td className="border py-3 px-4 whitespace-nowrap">{ c?.qty }</td>
+									<td className={twMerge("border border-black py-3 px-4 whitespace-nowrap", c?.qty > c?.varian?.stok && "text-red-600 font-semibold bg-red-100")}>{ c?.varian?.stok }</td>
 									<td className="border py-3 px-4 whitespace-nowrap">Rp. { c?.total?.toLocaleString() }</td>
 									<td className="border py-3 px-4 whitespace-nowrap">Rp. { c?.diskon?.toLocaleString() }</td>
 								</tr>
 							)) }
 							{ Array.isArray(data?.response?.pesanan) && (
 								<tr>
-									<td colSpan={ 5 } className="border py-3 px-4 whitespace-nowrap">Total</td>
-									<td colSpan={ 2 } className="border py-3 px-4 whitespace-nowrap">Rp. { data?.response?.pesanan.reduce((acc, curr) => {
+									<td colSpan={ 7 } className="border py-3 px-4 whitespace-nowrap">Total</td>
+									<td colSpan={ 1 } className="border py-3 px-4 whitespace-nowrap">Rp. { data?.response?.pesanan.reduce((acc, curr) => {
 										return acc + (curr.total - curr.diskon)
 									}, 0).toLocaleString() }</td>
 								</tr>
@@ -126,10 +143,11 @@ export default function OngkirListModule() {
 			</div>
 			{ Boolean(data?.response) && !data?.response?.is_confirmed_by_admin && (
 				<KonfirmasiPesanan 
-					berat={ data.response.berat }
-					ongkirId={ data.response.id }
-					ongkir={ data.response.ongkir }
-					ekspedisi={ data.response.ekspedisi }
+					berat={ data?.response.berat }
+					ongkirId={ data?.response.id }
+					ongkir={ data?.response.ongkir }
+					ekspedisi={ data?.response.ekspedisi }
+					disabled={ hasOutOfStock }
 				/>
 			) }
 		</div>

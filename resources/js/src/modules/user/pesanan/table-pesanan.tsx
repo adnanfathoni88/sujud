@@ -57,8 +57,16 @@ export default function TablePesanan({ data, nextUrl }: { nextUrl?: string, data
 									<h1 className="text-black font-semibold">Belanja</h1>
 									<p className="text-black text-sm mt-1">Thus, 21 May 2022</p>
 								</div>
-								{ match([v.is_confirmed_by_admin, v.pesanan?.[0].status])
-									.with([1, 'belum-bayar'], () => <ModalMetodeBayar pesananGrup={ v.pesanan_grup } />)
+								{ match([v?.resi, v.is_confirmed_by_admin, v.pesanan?.[0].status])
+									.with([null, 1, 'belum-bayar'], () => <ModalMetodeBayar pesananGrup={ v.pesanan_grup } />)
+									.with([null, 1, 'dibayar'], () => (
+										<a 
+											href={`/payment-status?pesanan_grup=${v.pesanan_grup}`} 
+											className="bg-sky-500 text-white px-3 py-2 rounded-md shadow-md text-sm hover:shadow-none transition-all"
+										>
+											Status Pembayaran
+										</a>
+									))
 									.otherwise(() => null) }
 							</div>
 							<div className="overflow-x-auto mt-5">

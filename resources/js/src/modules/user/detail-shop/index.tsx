@@ -50,7 +50,7 @@ const DetailShopPageModule: React.FC = () => {
 		if (addToCart.isPending) return
 		addToCart.mutate({ varianId: varian.id, produkId: data?.response?.id, qty: 1 }, {
 			onSuccess: () => toastSuccess("Berhasil menambahkan"),
-			onError: () => toastError("Gagal menambahkan")
+			onError: (err: any) => toastError(err?.response?.data?.response ?? "Gagal menambahkan")
 		})
 	}
 
