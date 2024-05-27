@@ -41,7 +41,7 @@ export default function TablePesanan({ data, nextUrl }: { nextUrl?: string, data
 							.with([1, P.string, 0, 'dibayar'], () => (
 								<div className="w-full p-5 bg-green-400 text-white flex items-center gap-5">
 									<AiFillInfoCircle size={ 20 } />
-									<span>Telah dibayar, admin akan segera mengemas paketmu</span>
+									<span>Telah dibayar, pesananmu dalam perjalanan</span>
 								</div>
 							))
 							.with([1, P.string, 1, 'dibayar'], () => (
