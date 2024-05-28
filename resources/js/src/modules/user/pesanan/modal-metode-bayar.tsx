@@ -21,7 +21,7 @@ export default function ModalMetodeBayar({ pesananGrup }: { pesananGrup: string 
 				onClose={ onClose }
 				Trigger={ (
 					<button
-						className="bg-sky-500 text-white px-4 py-2 rounded-md h-fit mt-2 ml-auto sm:ml-0 sm:mt-0"
+						className="text-xs bg-sky-500 text-white px-4 py-2 rounded-md h-fit mt-2 ml-auto sm:ml-0 sm:mt-0"
 						onClick={ () => setOpen(true) }
 					>
 						Pilih Pembayaran
