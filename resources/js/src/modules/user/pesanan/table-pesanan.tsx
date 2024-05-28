@@ -9,11 +9,31 @@ import { P, match } from "ts-pattern";
 import { IOngkirListWithPesanan } from "../../../interfaces/ongkir";
 import { twMerge } from "tailwind-merge";
 import ModalMetodeBayar from "./modal-metode-bayar";
+import { useSetPesananTelahSampai } from "../../../adapters/hooks/usePesanan";
+import { toastError, toastSuccess } from "../../../utils/toast";
+import GiveRating from "./give-rating";
 
 export default function TablePesanan({ data, nextUrl }: { nextUrl?: string, data: IOngkirListWithPesanan }) {
 	const navigate = useNavigate({ from: pesananRoute.fullPath })
 	const search = useSearch({ strict: false })
+	const changeStatus = useSetPesananTelahSampai()
 
+	const handleSetTelahSampai = (id: number) => () => {
+		if (changeStatus.isPending) return
+
+		const data = {
+			id,
+			page: search?.page,
+			status: search?.status,
+			isArrived: search?.isArrived,
+			isConfirmed: search?.isConfirmed,
+		}
+
+		changeStatus.mutate(data, {
+			onSuccess: () => toastSuccess('Berhasil mengubah pesanan'),
+			onError: (e: any) => toastError(e?.response?.data?.message ?? 'Gagal mengubah pesanan')
+		})
+	}
 	return (
 		<>
 			<div className="mt-10 flex flex-col gap-10">
@@ -57,15 +77,24 @@ export default function TablePesanan({ data, nextUrl }: { nextUrl?: string, data
 									<h1 className="text-black font-semibold">Belanja</h1>
 									<p className="text-black text-sm mt-1">Thus, 21 May 2022</p>
 								</div>
-								{ match([v?.resi, v.is_confirmed_by_admin, v.pesanan?.[0].status])
-									.with([null, 1, 'belum-bayar'], () => <ModalMetodeBayar pesananGrup={ v.pesanan_grup } />)
-									.with([null, 1, 'dibayar'], () => (
-										<a 
-											href={`/payment-status?pesanan_grup=${v.pesanan_grup}`} 
+								{ match([v?.resi, v.is_confirmed_by_admin, v.pesanan?.[0].status, v.telah_sampai])
+									.with([null, 1, 'belum-bayar', 0], () => <ModalMetodeBayar pesananGrup={ v.pesanan_grup } />)
+									.with([null, 1, 'dibayar', 0], () => (
+										<a
+											href={ `/payment-status?pesanan_grup=${v.pesanan_grup}` }
 											className="bg-sky-500 text-white px-3 py-2 rounded-md shadow-md text-sm hover:shadow-none transition-all"
 										>
 											Status Pembayaran
 										</a>
+									))
+									.with([P.string, 1, 'dibayar', 0], () => (
+										<button
+											disabled={ changeStatus.isPending }
+											onClick={ handleSetTelahSampai(v.id) }
+											className="bg-sky-500 text-white px-3 py-2 rounded-md shadow-md text-sm hover:shadow-none transition-all disabled:bg-sky-300 disabled:cursor-not-allowed"
+										>
+											Pesanan telah sampai
+										</button>
 									))
 									.otherwise(() => null) }
 							</div>
@@ -110,9 +139,9 @@ export default function TablePesanan({ data, nextUrl }: { nextUrl?: string, data
 													<p className="text-black font-black">TOTAL</p>
 												</td>
 												<td className="pt-8 pl-5">
-													<p className="text-black font-black">{ Array.isArray(v?.pesanan) 
-														? `Rp. ${((v?.ongkir ?? 0) + v.pesanan.reduce((a,c) => (a += c.total), 0) ).toLocaleString()}`
-														: "-" 
+													<p className="text-black font-black">{ Array.isArray(v?.pesanan)
+														? `Rp. ${((v?.ongkir ?? 0) + v.pesanan.reduce((a, c) => (a += c.total), 0)).toLocaleString()}`
+														: "-"
 													}</p>
 												</td>
 											</tr>
@@ -132,6 +161,9 @@ export default function TablePesanan({ data, nextUrl }: { nextUrl?: string, data
 												<th className="p-4 whitespace-nowrap text-left">Diskon</th>
 												<th className="p-4 whitespace-nowrap text-left">Total</th>
 												<th className="p-4 whitespace-nowrap text-left">Status</th>
+												{ match([v?.resi, v.is_confirmed_by_admin, v.pesanan?.[0].status, v.telah_sampai])
+													.with([P.string, 1, 'dibayar', 1], () => <th className="p-4 whitespace-nowrap text-left">Ulasan</th>)
+													.otherwise(() => null) }
 											</tr>
 										</thead>
 										<tbody>
@@ -168,6 +200,13 @@ export default function TablePesanan({ data, nextUrl }: { nextUrl?: string, data
 															{ p.status }
 														</p>
 													</td>
+													{ match([v?.resi, v.is_confirmed_by_admin, p.status, v.telah_sampai])
+														.with([P.string, 1, 'dibayar', 1], () => (
+															<td className="p-4 whitespace-nowrap text-left">
+																<GiveRating varianId={ p?.varian?.id } />
+															</td>
+														))
+														.otherwise(() => null) }
 												</tr>
 											)) }
 										</tbody>

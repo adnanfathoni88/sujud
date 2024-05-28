@@ -19,6 +19,15 @@ use Illuminate\Support\Str;
 class ApiPesananController extends Controller
 {
 	use ResponseFormat, UserCookie, Payment;
+
+	public function set_telah_sampai(Request $request, string $id) {
+		Ongkir::where('id', $id)
+			->whereNotNull('resi')
+			->where('is_confirmed_by_admin', 1)
+			->update(['telah_sampai' => true]);
+		return $this->res("Success", 201);
+	}
+
     /**
      * Display a listing of the resource.
      */

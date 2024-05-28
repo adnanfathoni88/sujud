@@ -8,15 +8,24 @@ use App\Traits\ResponseFormat;
 use App\Traits\UserCookie;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
-use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
 
 class ApiUlasanController extends Controller
 {
 	use ResponseFormat, UserCookie;
 
-	function ulasan_by_produk(string $id_produk) 
+	function ulasan_by_varian(Request $request, string $id_varian) 
 	{
+		$userId = $this->getUserCookie($request->cookie('token'));
+		$m = Ulasan::where('varian_id', $id_varian)
+			->where('user_id', $userId)
+			->first();
+		return $this->res($m, 200);
+	}
+
+	function ulasan_by_produk(Request $request) 
+	{
+		$id_produk = $request->query('id_produk');
 		$varians = Varian::select('id')->where('produk_id', $id_produk)->get();
 		$ulasan = Ulasan::whereIn('varian_id', $varians->pluck('id'))->orderBy('rating', 'DESC')
 			->where('parent_id', null)
@@ -26,23 +35,14 @@ class ApiUlasanController extends Controller
 	}
 
     /**
-     * Display a listing of the resource.
-     */
-    public function index(string $id_produk, string $id_varian)
-    {
-		$m = Ulasan::where('varian_id', $id_varian)->where("parent_id", null)->orderBy('rating', 'DESC')->paginate(15);
-		return $this->res($m, 200);
-    }
-
-    /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request, string $id_produk, string $id_varian)
+    public function store_by_varian(Request $request, string $id_varian)
     {
 		$userId = $this->getUserCookie($request->cookie('token'));
 		$validator = Validator::make(array_merge(["varian_id" => $id_varian], $request->all()), [
 			// ulasan
-			'konten' => 'required|max:255',
+			'konten' => 'string|max:255',
 			'rating' => 'required|numeric|min:1|max:5',
 			// varian
 			'varian_id' => 'required|exists:varians,id',
@@ -60,26 +60,16 @@ class ApiUlasanController extends Controller
 		return $this->res("Success", 201);
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id_produk, string $id_varian, string $id)
-    {
-		$m = Ulasan::find($id);
-		if(!$m) return $this->res("Not Found", 404);
-
-		return $this->res($m, 200);
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, string $id_produk, string $id_varian, string $id)
+    // /**
+    //  * Update the specified resource in storage.
+    //  */
+    public function update(Request $request, string $id)
     {
         $userId = $this->getUserCookie($request->cookie('token'));
+
 		$validator = Validator::make($request->all(), [
 			// ulasan
-			'konten' => 'required|max:255',
+			'konten' => 'string|max:255',
 			'rating' => 'required|numeric|min:1|max:5',
 		]);
 
@@ -95,10 +85,10 @@ class ApiUlasanController extends Controller
 		return $this->res("Success", 201);
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(Request $request, string $id_produk, string $id_varian, string $id)
+    // /**
+    //  * Remove the specified resource from storage.
+    //  */
+    public function destroy(Request $request, string $id)
     {	
 		$userId = $this->getUserCookie($request->cookie('token'));
 		Ulasan::where('id', $id)->where('user_id', $userId)->delete();

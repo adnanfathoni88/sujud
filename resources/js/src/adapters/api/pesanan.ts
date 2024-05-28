@@ -15,3 +15,8 @@ export async function getPesanan({ page, status, isConfirmed, isArrived }: { isA
 	const res = await api.get(`/pesanan?${searchParams.toString()}`);
 	return res.data as { response: { data: IOngkirListWithPesanan, next_page_url?: string } };
 }
+
+export async function setPesananTelahSampai(id: number) {
+	const res = await api.put(`/pesanan/${id}/set-telah-sampai`);
+	return res.data;
+}

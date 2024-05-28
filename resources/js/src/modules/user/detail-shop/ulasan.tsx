@@ -16,7 +16,7 @@ function UlasanReply({ ulasanId }: { ulasanId: number }) {
 
 export default function Ulasan({ productId }: { productId: number }) {
 	const { data } = useGetUlasanListByProdukId(productId)
-
+	
 	return (
 		<>
 			{Array.isArray(data?.response?.data) && data.response.data.length > 0 && (

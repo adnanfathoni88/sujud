@@ -8,6 +8,7 @@ export interface IBaseUlasan {
     created_at: string;
     updated_at: string;
 	is_replied: boolean | 0 | 1;
+	varian_id: number;
 	user?: IProfile
 }
 
