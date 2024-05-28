@@ -17,6 +17,42 @@ use Illuminate\Support\Str;
 class ApiProductController extends Controller
 {
 	use ResponseFormat;
+
+
+	public function top_sale(Request $req) 
+	{
+		$r2 = DB::table("transaksis")
+			->join("pesanans", "pesanans.pesanan_grup", "=", "transaksis.pesanan_grup")
+			->join("varians", "varians.id", "=", "pesanans.varian_id")
+			->join("produks", "produks.id", "=", "varians.produk_id")
+			->select(DB::raw("count(pesanans.id) as total_pembelian"), "produks.id")
+			->groupBy("pesanans.varian_id", "produks.id")
+			->where('transaksis.status', 'SUCCESS')
+			->limit(2)
+			->get();
+
+		$r3 = Produk::whereIn('id', $r2->pluck('id'))
+			->select("id", "nama", "kategori_id")
+			->with('kategori:id,nama', 'varian:id,produk_id,gambar_id','varian.gambar:nama,id')->get();
+
+		$r4 = DB::table('ulasans')
+			->join('varians', 'varians.id', '=', 'ulasans.varian_id')
+			->join('produks', 'produks.id', '=', 'varians.produk_id')
+			->select(DB::raw("avg(ulasans.rating) as rating"), "produks.id")
+			->groupBy("produks.id")
+			->get();
+
+		$r3->map(function($item) use($r2, $r4) {
+			$item->total_pembelian = $r2->where('id', $item->id)->first()->total_pembelian;
+			$item->rating = $r4->where('id', $item->id)->first()->rating;
+			return $item;
+		});
+
+
+		return $this->res($r3, 200);
+	}
+
+
     /**
      * Display a listing of the resource.
      */

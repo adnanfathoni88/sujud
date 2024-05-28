@@ -56,7 +56,7 @@ export default function ProductList({ product, setProduct }: { product: IProduct
 				<div className="bg-white mb-4 w-full rounded-lg relative" key={ p.id }>
 					<div className="h-56 mb-2 md:h-64">
 						<img
-							className="h-full object-cover w-full object-top-0 rounded-md"
+							className="h-full object-cover w-full object-top rounded-md"
 							src={ `/api/uploaded/${p.varian.gambar.nama}` }
 							alt=""
 						/>

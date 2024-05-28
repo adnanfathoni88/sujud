@@ -1,7 +1,9 @@
+import { Link } from "@tanstack/react-router";
 import Footer from "../../../components/footer";
 import Icon from "../../../components/icon";
 import Navbar from "../../../components/navbar";
 import ProductLanding from "./product";
+import TopSale from "./top-sale";
 
 const LandingPageModule: React.FC = () => {
     return (
@@ -20,9 +22,9 @@ const LandingPageModule: React.FC = () => {
                             sit doloremque.
                         </p>
                         <div className="w-full">
-                            <button className="bg-custom-yellow px-2 py-3 rounded-full w-36 hover:bg-yellow-500">
+                            <Link to="/shop?page=1" className="bg-custom-yellow px-6 mt-5 py-3 rounded-full w-36 hover:bg-yellow-500">
                                 Shop Now
-                            </button>
+                            </Link>
                         </div>
                     </div>
                     <div className="w-full h-full bg-sky-300 hidden sm:hidden md:flex md:justify-center items-end">
@@ -35,47 +37,7 @@ const LandingPageModule: React.FC = () => {
                 </div>
                 <div className="flex-col relative bg-white">
                     <div className="absolute w-full flex justify-center top-[-100px]">
-                        <div className="bg-white w-[90%] lg:w-[80%] p-4 rounded-xl h-fit shadow-md lg:py-8">
-                            <h2 className="font-bold text-center text-sky-600 text-2xl mb-6 lg:text-4xl">
-                                Top Sale
-                            </h2>
-                            <div className="flex flex-col sm:flex-row gap-2 px-2 md:gap-4 lg:px-10 lg:gap-5">
-                                <div className="shadow-sm border-2 border-slate-100 w-full sm:w-34 flex-auto rounded-sm p-4 flex justify-center mb-4 py-4">
-                                    <div>
-                                        <img
-                                            className="h-24 md:h-36"
-                                            src="img/produk/cordoba.png"
-                                            alt=""
-                                        />
-                                    </div>
-                                    <div className="text-start flex flex-col justify-center">
-                                        <h5 className="text-custom-yellow md:text-xl">
-                                            Sajadah
-                                        </h5>
-                                        <h2 className="text-sky-600 text-xl font-semibold md:text-3xl">
-                                            Cordoba
-                                        </h2>
-                                    </div>
-                                </div>
-                                <div className="shadow-sm border-2 border-slate-100 w-full sm:w-34 flex-auto rounded-sm p-4 flex justify-center mb-4 py-4">
-                                    <div>
-                                        <img
-                                            className="h-24 md:h-36"
-                                            src="img/produk/cordoba.png"
-                                            alt=""
-                                        />
-                                    </div>
-                                    <div className="text-start flex flex-col justify-center">
-                                        <h5 className="text-custom-yellow md:text-xl">
-                                            Sajadah
-                                        </h5>
-                                        <h2 className="text-sky-600 text-xl font-semibold md:text-3xl">
-                                            Cordoba
-                                        </h2>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                        <TopSale />
                     </div>
                     <div className="pt-[350px] text-center pb-20 p-4 mx-4 sm:pt-[180px] md:pt-[300px]">
                         <h2 className="text-sky-600 text-2xl font-semibold mb-4 lg:text-4xl">

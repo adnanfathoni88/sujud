@@ -137,7 +137,7 @@ export default function CartTable({ selectedProduct, setSelectedProduct, isSelec
 							disabled={ v?.qty > v?.varian?.stok }
 							checked={ selectedProduct.some(x => x.id === v.id) }
 						/>
-						<img src={ `/api/uploaded/${v.varian?.gambar?.nama}` } alt="produk" className="w-[130px] rounded" />
+						<img src={ `/api/uploaded/${v.varian?.gambar?.nama}` } alt="produk" className="w-[100px] rounded h-[150px] object-cover object-top" />
 						<div className="flex flex-col w-full">
 							<p className="text-sm capitalize">{ v?.varian?.produk?.nama }</p>
 							{ match([Boolean(v?.varian?.harga), v?.varian?.harga_diskon > 0])

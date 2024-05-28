@@ -178,7 +178,7 @@ export default function CardPesanan({ data }: { data: IOngkir }) {
 									<tr key={ p.id } className="align-top">
 										<td className="p-4 whitespace-nowrap text-left">
 											<div className="flex gap-3 items-start">
-												{ p?.varian?.gambar?.nama && <img src={ `/api/uploaded/${p?.varian?.gambar?.nama}` } className="max-w-[100px]" /> }
+												{ p?.varian?.gambar?.nama && <img src={ `/api/uploaded/${p?.varian?.gambar?.nama}` } className="max-w-[100px] h-[150px] object-cover object-top" /> }
 												<div className="flex flex-col gap-1">
 													<p className="capitalize font-semibold text-sm text-black">{ p?.varian?.produk?.nama }</p>
 													<p className="text-xs text-zinc-400">{ p?.varian?.warna }, { p?.varian?.ukuran }</p>

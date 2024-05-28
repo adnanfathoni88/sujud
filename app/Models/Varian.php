@@ -33,6 +33,6 @@ class Varian extends Model
 
 	public function ulasan()
 	{
-		return $this->hasMany(Ulasan::class, 'id', 'ulasan_id');
+		return $this->hasMany(Ulasan::class, 'varian_id', 'id');
 	}
 }
