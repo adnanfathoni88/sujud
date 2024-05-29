@@ -63,6 +63,7 @@ Route::prefix("/kategori")->middleware('auth.stateless')->group(function () {
 
 Route::prefix("/produk")->group(function () {
 	Route::get('/', [ApiProductController::class, 'index']);
+	Route::get("/top-sale", [ApiProductController::class, 'top_sale']);
 	Route::get('/{id}', [ApiProductController::class, 'show']);
 	// Route::get('/{id_produk}/ulasan', [ApiUlasanController::class, 'ulasan_by_produk']);
 

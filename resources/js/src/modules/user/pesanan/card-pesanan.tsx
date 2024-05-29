@@ -90,6 +90,7 @@ export default function CardPesanan({ data }: { data: IOngkir }) {
                     <div className="flex flex-col">
                         <h1 className="text-black font-semibold">Belanja</h1>
                         <p className="text-black text-sm mt-1">
+                            {" "}
                             {convertISODateToCustomFormat(data.created_at)}
                         </p>
                     </div>
@@ -257,7 +258,7 @@ export default function CardPesanan({ data }: { data: IOngkir }) {
                                                         ?.nama && (
                                                         <img
                                                             src={`/api/uploaded/${p?.varian?.gambar?.nama}`}
-                                                            className="max-w-[100px]"
+                                                            className="max-w-[100px] h-[150px] object-cover object-top"
                                                         />
                                                     )}
                                                     <div className="flex flex-col gap-1">

@@ -4,6 +4,7 @@ import {
 	deleteProductById,
 	getProductById,
 	getProductList,
+	getProdutTopSale,
 	updateProduct,
 } from "../api/products";
 import { queryClient } from "../../main";
@@ -65,5 +66,12 @@ export function useDeleteProductById() {
 				queryFn: () => getProductList(),
 			});
 		},
+	});
+}
+
+export function useGetProductTopSale() {
+	return useQuery({
+		queryKey: ["useGetProductTopSale"],
+		queryFn: () => getProdutTopSale(),
 	});
 }

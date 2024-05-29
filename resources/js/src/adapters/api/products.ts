@@ -1,5 +1,5 @@
 import { api } from "../../services/api";
-import { IProduct, IProductList } from "../../interfaces/product";
+import { IProduct, IProductList, IProductTopSaleList } from "../../interfaces/product";
 import { TUpdateProductSchema } from "../../modules/product-list/schema";
 import { TAddProductSchema } from "../../modules/product-add/schema";
 
@@ -52,4 +52,9 @@ export async function getProductById(id: number) {
 export async function deleteProductById(id: number) {
     const res = await api.delete(`/produk/${id}`);
     return res.data;
+}
+
+export async function getProdutTopSale() {
+	const res = await api.get(`/produk/top-sale`);
+	return res.data as { response: IProductTopSaleList };
 }
