@@ -22,7 +22,10 @@ const LandingPageModule: React.FC = () => {
                             sit doloremque.
                         </p>
                         <div className="w-full">
-                            <Link to="/shop?page=1" className="bg-custom-yellow px-6 mt-5 py-3 rounded-full w-36 hover:bg-yellow-500">
+                            <Link
+                                to="/shop?page=1"
+                                className="bg-custom-yellow px-6 mt-5 py-3 rounded-full w-36 hover:bg-yellow-500"
+                            >
                                 Shop Now
                             </Link>
                         </div>
@@ -121,10 +124,10 @@ const LandingPageModule: React.FC = () => {
                         </p>
                     </div>
                 </div>
-				<ProductLanding />
+                <ProductLanding />
                 <div className="px-12 py-10 lg:px-40 bg-white pb-30">
                     <h2 className="font-bold text-center text-sky-600 text-2xl mb-4 lg:text-3xl">
-                        Telah diliput oleh:
+                        Telah diliput oleh
                     </h2>
                     <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-12 lg:gap-16">
                         <div>
