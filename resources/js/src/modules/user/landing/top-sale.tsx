@@ -1,6 +1,7 @@
 import { match } from "ts-pattern";
 import { useGetProductTopSale } from "../../../adapters/hooks/useProducts";
 import Loader from "../../../components/loader";
+import { Link } from "@tanstack/react-router";
 
 export default function TopSale() {
 	const { data, isLoading } = useGetProductTopSale();
@@ -13,7 +14,7 @@ export default function TopSale() {
 			<div className="flex flex-col sm:flex-row gap-2 px-2 md:gap-4 lg:px-10 lg:gap-5 justify-center">
 				{ match([isLoading, Array.isArray(data?.response)])
 					.with([false, true], () => data?.response.map((product) => (
-						<div key={ product.id } className="shadow-sm border-2 border-slate-100 w-full sm:w-34 gap-4 flex-auto rounded-sm p-4 flex justify-center mb-4 py-4">
+						<Link to={`/detail/${product.id}/shop`} key={ product.id } className="shadow-sm border-2 border-slate-100 w-full sm:w-34 gap-4 flex-auto rounded-sm p-4 flex justify-center mb-4 py-4">
 							<div>
 								<img
 									className="h-24 md:h-36"
@@ -29,7 +30,7 @@ export default function TopSale() {
 									{ product?.nama }
 								</h2>
 							</div>
-						</div>
+						</Link>
 					)))
 					.otherwise(() => <Loader />) }
 			</div>

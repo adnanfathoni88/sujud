@@ -160,10 +160,10 @@ function Navbar() {
                             .otherwise(() => (
                                 <li>
                                     <Link
-                                        to="/register"
+                                        to="/login"
                                         className="px-6 py-2 font-semibold rounded-full bg-white text-sky-600 hover:bg-sky-500/25 hover:text-white transition-all "
                                     >
-                                        Register{" "}
+                                        Login{" "}
                                     </Link>
                                 </li>
                             ))}

@@ -1,34 +1,29 @@
+import { twMerge } from "tailwind-merge";
 import { useEffect, useMemo, useState } from "react";
 import { IVariantList } from "../../../interfaces/variant";
-import { twMerge } from "tailwind-merge";
 import { useSelectedProductVarian } from "../../../store/useSelectedProductVarian";
 
 export default function SelectVarian({ varians }: { varians: IVariantList }) {
 	const selectedVarian = useSelectedProductVarian(v => v)
 	const [selected, setSelected] = useState({ size: '', color: '' });
-	const sizes = useMemo(() => Array.from(new Set(varians.map((v) => v.ukuran.toUpperCase()))), [varians]);
 	const colors = useMemo(() => Array.from(new Set(varians.map((v) => v.warna.toUpperCase()))), [varians]);
+	const sizes = useMemo(() => Array.from(new Set(varians.filter(v => v.warna.toUpperCase() === selectedVarian.warna.toUpperCase()).map((v) => v.ukuran.toUpperCase()))), [varians, selectedVarian]);
 
 	const onClickSize = (size: string) => () => {
-		setSelected(s => ({ ...s, size }))
-		if(selected.color) {
+		if(selected.color && size) {
 			const varian = varians.find(v => v.ukuran.toUpperCase() === size && v.warna.toUpperCase() === selected.color)
 			if(varian) {
-				useSelectedProductVarian.setState({ ...varian })
+				useSelectedProductVarian.setState(varian)
 			}
-		
 		}
 	}
 	const onClickColor = (color: string) => () => {
-		setSelected(s => ({ ...s, color }))
-		if(selected.size) {
-			const varian = varians.find(v => v.ukuran.toUpperCase() === selected.size && v.warna.toUpperCase() === color)
-			if(varian) {
-				useSelectedProductVarian.setState({ ...varian })
-			}
+		const varian = varians.find(v => v.warna.toUpperCase() === color)
+		if(varian) {
+			useSelectedProductVarian.setState(varian)
 		}
 	}
-
+	
 	useEffect(() => {
 
 		if(selectedVarian) {
