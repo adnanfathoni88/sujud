@@ -15,6 +15,7 @@ function Select(
         label: string;
         options: { nama: string; id: number | string }[];
         defaultValue?: number | string;
+		onChange?: (e: any) => void;
     },
     ref
 ) {

@@ -19,14 +19,14 @@ class ApiTransaksiController extends Controller
 {
 	use ResponseFormat, UserCookie, Payment;
 
-	public function index(Request $request) 
+	public function index(Request $request)
 	{
 		$pesanan_group = $request->query('pesanan_grup');
-		if($pesanan_group) {
+		if ($pesanan_group) {
 			$m = Transaksi::where('pesanan_grup', $pesanan_group)->paginate(15);
 			return $this->res($m, 200);
 		}
-		
+
 		$status = $request->query('status') === 'FAILED' ? 'FAILED' : 'SUCCESS';
 		$m = Transaksi::where('status', $status)->paginate(15);
 		return $this->res($m, 200);
@@ -34,7 +34,33 @@ class ApiTransaksiController extends Controller
 
 	public function check_status(Request $request, string $pesanan_group)
 	{
-		return $this->res($this->apiPaymentCheckStatus($pesanan_group), 200);
+		$res = $this->apiPaymentCheckStatus($pesanan_group);
+		if (isset($res['statusCode']) && isset($res['statusMessage']) && isset($res['amount'])) {
+			if ($res['statusCode'] === '00' && $res['statusMessage'] === 'SUCCESS') {
+				$found = Transaksi::where("pesanan_grup", $pesanan_group)->where('status', 'SUCCESS')->first();
+				if (!$found) {
+					DB::transaction(function () use ($pesanan_group, $res) {
+						$date = date('Y-m-d');
+						$amount = $res['amount'];
+						$merchantOrderId = $pesanan_group;
+						$reference = $res['reference'];
+
+						Pesanan::where('pesanan_grup', $pesanan_group)->update(['status' => 'dibayar']);
+						Transaksi::insert([
+							'status' => 'SUCCESS',
+							'created_at' => now(),
+							'updated_at' => now(),
+							'total' => $amount,
+							'tgl_bayar' => $date,
+							'reference' => $reference,
+							'order_id' => $merchantOrderId,
+							'pesanan_grup' => $pesanan_group,
+						]);
+					});
+				}
+			}
+		}
+		return $this->res($res, 200);
 	}
 
 	public function paymentMethod(Request $request, string $pesanan_group)
@@ -43,7 +69,7 @@ class ApiTransaksiController extends Controller
 		$ongkir = Ongkir::where('pesanan_grup', $pesanan_group)
 			->where('is_confirmed_by_admin', true)
 			->first();
-		if(!$ongkir) return $this->res("Pesanan belum dikonfirmasi", 404);
+		if (!$ongkir) return $this->res("Pesanan belum dikonfirmasi", 404);
 
 		$amount = Pesanan::selectRaw("SUM(total) as total")
 			->where('pesanan_grup', $pesanan_group)
@@ -51,7 +77,7 @@ class ApiTransaksiController extends Controller
 			->first()
 			->total;
 		$amount += $ongkir->ongkir;
-		
+
 		$response = $this->apiPaymentMethod($amount);
 		return $this->res($response, 200);
 	}
@@ -60,12 +86,12 @@ class ApiTransaksiController extends Controller
 	{
 		$userId = $this->getUserCookie($request->cookie('token'));
 		$transaksi = Transaksi::where('pesanan_grup', $pesanan_group)->first();
-		if($transaksi) return $this->res("Pesanan sudah dibayar", 400);
+		if ($transaksi) return $this->res("Pesanan sudah dibayar", 400);
 
 		$ongkir = Ongkir::where('pesanan_grup', $pesanan_group)
 			->where('is_confirmed_by_admin', true)
 			->first();
-		if(!$ongkir) return $this->res("Pesanan belum dikonfirmasi", 404);
+		if (!$ongkir) return $this->res("Pesanan belum dikonfirmasi", 404);
 
 		$amount = Pesanan::selectRaw("SUM(total) as total")
 			->where('pesanan_grup', $pesanan_group)
@@ -74,11 +100,11 @@ class ApiTransaksiController extends Controller
 			->first()
 			->total;
 		$amount += $ongkir->ongkir;
-		
-		if(!$amount) return $this->res("Not Found", 404);
-		
+
+		if (!$amount) return $this->res("Not Found", 404);
+
 		$user = User::find($userId);
-		if(!$user) return $this->res("Not Found", 404);
+		if (!$user) return $this->res("Not Found", 404);
 
 		$customerName = $user->name;
 		$customerEmail = $user->email;
@@ -105,7 +131,7 @@ class ApiTransaksiController extends Controller
 		return $this->res($response->json(), 200);
 	}
 
-	public function callbackAction(Request $request, string $pesanan_group) 
+	public function callbackAction(Request $request, string $pesanan_group)
 	{
 		/**
 		 * dalam melakukan callback action, seharusnya dicek apakah request tersebut valid dari payment gateway atau tidak
@@ -122,8 +148,8 @@ class ApiTransaksiController extends Controller
 		 */
 		$status = $request->resultCode; // '00' is success || '01' is failed;
 		error_log("CALLBACK CALLED!!");
-		if($status === '00') {
-			DB::transaction(function() use($pesanan_group, $request) {
+		if ($status === '00') {
+			DB::transaction(function () use ($pesanan_group, $request) {
 				$amount = $request->amount;
 				$signature = $request->signature;
 				$paymentMethod = $request->paymentCode;
@@ -133,7 +159,7 @@ class ApiTransaksiController extends Controller
 				$publisherOrderId = $request->publisherOrderId;
 				$date = $request->settlementDate;
 
-				Pesanan::where('pesanan_grup', $pesanan_group)->update([ 'status' => 'dibayar' ]);
+				Pesanan::where('pesanan_grup', $pesanan_group)->update(['status' => 'dibayar']);
 				Transaksi::insert([
 					'tgl_bayar' => $date,
 					'metode' => $paymentMethod,
@@ -159,7 +185,7 @@ class ApiTransaksiController extends Controller
 			$publisherOrderId = $request->publisherOrderId;
 			$date = $request->settlementDate;
 
-			Pesanan::where('pesanan_grup', $pesanan_group)->update([ 'status' => 'failed' ]);
+			Pesanan::where('pesanan_grup', $pesanan_group)->update(['status' => 'failed']);
 			Transaksi::insert([
 				'tgl_bayar' => $date,
 				'metode' => $paymentMethod,

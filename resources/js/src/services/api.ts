@@ -5,6 +5,9 @@ export const apiJSONPlaceholder = axios.create({
 	baseURL: 'https://jsonplaceholder.typicode.com',
 });
 
+export const apiRegion = axios.create({
+	baseURL: 'https://indoregion.bakunya-dev.workers.dev',
+})
 
 export const api = axios.create({
 	baseURL: '/api',
