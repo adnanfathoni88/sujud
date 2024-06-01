@@ -24,7 +24,10 @@ const TransaksiListModule: React.FC = () => {
 			<div className="rounded-sm border border-stroke bg-white px-5 pt-6 pb-2.5 shadow-default dark:border-strokedark dark:bg-boxdark sm:px-7.5 xl:pb-1">
 				<div className="flex items-start justify-between mb-10 flex-col sm:flex-row">
 					<h4 className="text-xl font-semibold text-black dark:text-white me-auto sm:me-0">Daftar Transaksi</h4>
-					<ModalCheckTransaction />
+					<div className="flex gap-2 items-center">
+						<a href="/admin/laporan-transaksi" target="_blank" rel="noopener noreferrer" className="border px-5 py-[7px] text-sm rounded">Laporan</a>
+						<ModalCheckTransaction />
+					</div>
 				</div>
 				{/* search bar */}
 				<Pagination searchPlaceholder="INVOICE" withSearch={true} navigate={navigate} nextUrl={ data?.response?.next_page_url } />
