@@ -6,6 +6,7 @@ import { useEffect, useRef, useState } from "react";
 import { shopRoute } from "../../../routes/user";
 import { useGetUlasanListByProdukId } from "../../../adapters/hooks/useUlasan";
 import ProductWithUlasan from "./produk-ulasan";
+import { queryClient } from "../../../main";
 
 export default function ProductList({
     product,
@@ -18,24 +19,25 @@ export default function ProductList({
     const navigate = useNavigate({ from: shopRoute.fullPath });
     const observerRef = useRef<HTMLDivElement>(null);
     const { data, isLoading } = useGetProductList({
-        page: search?.page ?? 1,
         q: search?.q,
+        page: search?.page ?? 1,
         kategori_id: search?.kategori_id,
     });
-
     const observer = new IntersectionObserver(
         (entries) => {
             if (entries[0].isIntersecting) {
                 if (data?.response?.next_page_url) {
+                    const nextPage = new URLSearchParams(
+                        new URL(data?.response?.next_page_url).search
+                    ).get("page");
                     const searchParam = new URLSearchParams(search);
-                    searchParam.set(
-                        "page",
-                        (parseInt(search.page ?? "1") + 1).toString()
-                    );
+                    searchParam.set("page", parseInt(nextPage).toString());
                     if (search?.q) searchParam.set("q", search.q);
                     if (search?.kategori_id)
                         searchParam.set("kategori_id", search.kategori_id);
                     navigate({ to: `/shop?${searchParam.toString()}` });
+                } else {
+                    observer.disconnect();
                 }
             }
         },
@@ -63,6 +65,11 @@ export default function ProductList({
         if (search?.kategori_id)
             searchParam.set("kategori_id", search.kategori_id);
         navigate({ to: `/shop?${searchParam.toString()}` });
+
+        return () => {
+            setProduct([]);
+            queryClient.clear();
+        };
     }, []);
 
     return (

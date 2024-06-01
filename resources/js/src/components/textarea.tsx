@@ -1,6 +1,6 @@
 import { forwardRef } from "react"
 
-function TextArea({ name, label, defaultValue, required, error, ...rest }: { required?: boolean, error?: string, name: string, label?: string, defaultValue?: string }, ref) {
+function TextArea({ name, label, defaultValue, required, error, ...rest }: { required?: boolean, error?: string, name: string, label?: string, defaultValue?: string, disabled?: boolean }, ref) {
 	return (
 		<>
 			{ label && (

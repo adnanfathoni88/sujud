@@ -45,6 +45,8 @@ const ShopPageModule: React.FC = () => {
         };
     }, [selectedBanner]);
 
+	useEffect(() => { window.scrollTo(0, 0) }, [])
+
     return (
         <>
             <div>
