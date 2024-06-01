@@ -20,7 +20,7 @@ export default function MetodeBayar({ pesananGrup, setDisableClose }: { setDisab
 			})
 			.catch((e) => {
 				console.log(e)
-				toastError(e?.response?.data?.response ?? "Gagal melakukan pembayaran, silahkan coba lagi")
+				toastError(e?.response?.data?.response ?? e?.response?.data?.response?.Message ?? "Gagal melakukan pembayaran, silahkan coba lagi")
 			})
 			.finally(() => setDisableClose(false))
 	}
