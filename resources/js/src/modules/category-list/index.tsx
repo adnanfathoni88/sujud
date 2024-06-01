@@ -9,20 +9,32 @@ import Loader from "../../components/loader";
 import { toastError, toastSuccess } from "../../utils/toast";
 import NewCategory from "./new-category";
 import UpdateCategory from "./update-category";
+import Swal from "sweetalert2";
 
 const CategoryListModule: React.FC = () => {
     const { data } = useGetCategoryList();
     const deleteCategory = useDeleteCategoryById();
 
-    const handleDelete = (id: number) => () =>
-        deleteCategory.mutate(
-            { id },
-            {
-                onSuccess: () => toastSuccess("Kategori berhasil dihapus"),
-                onError: () => toastError("Gagal menghapus kategori"),
+    const handleDelete = (id: number, nama: string) => () =>
+        Swal.fire({
+            text: `Apa anda ingin menghapus ${nama}?`,
+            icon: "warning",
+            showCancelButton: true,
+            cancelButtonColor: "#3085d6",
+            confirmButtonColor: "#d33",
+            confirmButtonText: "Yes, delete it!",
+        }).then((result) => {
+            if (result.isConfirmed) {
+                deleteCategory.mutate(
+                    { id },
+                    {
+                        onSuccess: () =>
+                            toastSuccess("Kategori berhasil dihapus"),
+                        onError: () => toastError("Gagal menghapus kategori"),
+                    }
+                );
             }
-        );
-
+        });
     return (
         <>
             <div className="rounded-sm border border-stroke bg-white px-5 pt-6 pb-2.5 shadow-default dark:border-strokedark dark:bg-boxdark sm:px-7.5 xl:pb-1">
@@ -31,8 +43,8 @@ const CategoryListModule: React.FC = () => {
                         Daftar Kategori
                     </h4>
                     <div className="sm:mt-0 ml-auto mt-4">
-						<NewCategory />
-					</div>
+                        <NewCategory />
+                    </div>
                 </div>
                 <div className="flex flex-col">
                     <div className="grid grid-cols-3 rounded-sm bg-gray-2 dark:bg-meta-4 sm:grid-cols-5">
@@ -80,7 +92,7 @@ const CategoryListModule: React.FC = () => {
                                         />
                                         <button
                                             className="hover:text-primary"
-                                            onClick={handleDelete(c.id)}
+                                            onClick={handleDelete(c.id, c.nama)}
                                         >
                                             <CiTrash size={20} />
                                         </button>

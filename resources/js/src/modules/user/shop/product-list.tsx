@@ -4,6 +4,8 @@ import { Link, useNavigate, useSearch } from "@tanstack/react-router";
 import { IProductList } from "../../../interfaces/product";
 import { useEffect, useRef, useState } from "react";
 import { shopRoute } from "../../../routes/user";
+import { useGetUlasanListByProdukId } from "../../../adapters/hooks/useUlasan";
+import ProductWithUlasan from "./produk-ulasan";
 
 export default function ProductList({
     product,
@@ -80,7 +82,10 @@ export default function ProductList({
                                 />
                             </div>
                         </div>
-                        <h3 className="text-slate-600 capitalize mt-5 text-md px-1">
+                        <div className="py-1">
+                            <ProductWithUlasan produkId={p.id} />
+                        </div>
+                        <h3 className="text-slate-600 capitalize text-md px-1">
                             {p.kategori.nama} {p.nama}
                         </h3>
                         <p className="text-black text-md px-1 font-semibold">

@@ -8,7 +8,9 @@ export async function getUlasanByProdukId({ produkId, page }: { produkId: number
     if (page) query.append("page", page.toString());
 	query.set('id_produk', produkId.toString());
 	const res = await api.get(`/ulasan/ulasan-by-product?${query.toString()}`);
-	return res.data as { response: { data: IUlasanList, next_page_url?: string } };
+	return res.data as {
+        map(arg0: (ulasan: any) => import("react/jsx-runtime").JSX.Element): import("react").ReactNode; response: { data: IUlasanList, next_page_url?: string } 
+};
 }
 
 export async function getUlasanByVarian({ varianId }: { varianId: number }) {

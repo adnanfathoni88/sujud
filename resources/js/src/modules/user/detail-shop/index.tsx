@@ -25,6 +25,7 @@ const DetailShopPageModule: React.FC = () => {
     const setVarian = useSelectedProductVarian((s) => s.setValue);
     const [ulasan, setUlasan] = useState(0);
 
+    // get ulasan by produk id
     useEffect(() => {
         const fetchUlasan = async () => {
             try {
@@ -59,6 +60,7 @@ const DetailShopPageModule: React.FC = () => {
         if (varian) setVarian(varian);
     }, [data?.response]);
 
+    // rating
     const renderStars = (rating) => {
         const stars = [];
         for (let i = 0; i < Math.floor(rating); i++) {

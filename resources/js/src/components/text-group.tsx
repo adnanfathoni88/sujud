@@ -2,16 +2,16 @@ import { forwardRef, useId } from "react";
 import { twMerge as twm } from "tailwind-merge";
 
 export type TPropsTextGroup = {
-	type: 'number' | 'text' | 'email' | 'password' | 'tel',
-	name: string;
-	title: string,
-	required?: boolean,
-	errorMessage?: string,
-	placeholder?: string,
-	defaultValue?: string | number,
-	onBlur?: (e: React.FocusEvent<HTMLInputElement>) => void,
-	onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void,
-}
+    type: "number" | "text" | "email" | "password" | "tel";
+    name: string;
+    title: string;
+    required?: boolean;
+    errorMessage?: string;
+    placeholder?: string;
+    defaultValue?: string | number;
+    onBlur?: (e: React.FocusEvent<HTMLInputElement>) => void;
+    onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
+};
 
 const TextGroup = forwardRef(
     (
@@ -53,7 +53,7 @@ const TextGroup = forwardRef(
                             "text-medium block w-full outline-none rounded-md border-0 px-2 py-1.5 shadow-sm ring-1 ring-inset focus:ring-2 focus:ring-inset sm:text-sm sm:leading-6 dark:bg-white/10 dark:text-zinc-400 dark:border-bodydark dark:shadow-[none]",
                             errorMessage
                                 ? " text-red-600 ring-red-300 focus:ring-red-600"
-                                : " text-gray-900 ring-gray-300 focus:ring-indigo-600"
+                                : " text-gray-900 ring-gray-300 focus:ring-sky-700"
                         )}
                         {...rest}
                     />
