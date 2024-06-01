@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Payment Success</title>
+    <title>Payment Status</title>
     <link rel="shortcut icon" href="{{ asset('favicon.ico') }}" />
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat">
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
@@ -32,7 +32,7 @@
                         <p>{{ $message }}</p>
                     </div>
                     <a href="/pesanan?status=dibayar&page=1&isConfirmed=true&fromReturn=true" class="block bg-sky-400 text-white mt-6 py-2 px-6 rounded-lg w-fit mx-auto">
-                        Ke Home
+                        Kembali
                     </a>
                 </div>
             @else
