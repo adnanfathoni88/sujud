@@ -13,7 +13,6 @@ use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Http;
-use Illuminate\Support\Str;
 
 class ApiTransaksiController extends Controller
 {
@@ -149,31 +148,49 @@ class ApiTransaksiController extends Controller
 		$status = $request->resultCode; // '00' is success || '01' is failed;
 		error_log("CALLBACK CALLED!!");
 		if ($status === '00') {
-			DB::transaction(function () use ($pesanan_group, $request) {
-				$amount = $request->amount;
-				$signature = $request->signature;
-				$paymentMethod = $request->paymentCode;
-				$merchantOrderId = $request->merchantOrderId;
-				// required to save for mitigation
-				$reference = $request->reference;
-				$publisherOrderId = $request->publisherOrderId;
-				$date = $request->settlementDate;
-
-				Pesanan::where('pesanan_grup', $pesanan_group)->update(['status' => 'dibayar']);
-				Transaksi::insert([
-					'tgl_bayar' => $date,
-					'metode' => $paymentMethod,
-					'status' => 'SUCCESS',
-					'total' => $amount,
-					'pesanan_grup' => $pesanan_group,
-					'reference' => $reference,
-					'publisher_order_id' => $publisherOrderId,
-					'order_id' => $merchantOrderId,
-					'signature' => $signature,
-					'created_at' => now(),
-					'updated_at' => now(),
-				]);
-			});
+			$found = Transaksi::where("pesanan_grup", $pesanan_group)->where('status', 'SUCCESS')->first();
+			if ($found) {
+				DB::transaction(function () use ($pesanan_group, $request) {
+					$signature = $request->signature;
+					$paymentMethod = $request->paymentCode;
+					// required to save for mitigation
+					$publisherOrderId = $request->publisherOrderId;
+	
+					Pesanan::where('pesanan_grup', $pesanan_group)->update(['status' => 'dibayar']);
+					Transaksi::where('pesanan_grup', $pesanan_group)->update([
+						'sttus' => 'SUCCESS',
+						'metode' => $paymentMethod,
+						'signature' => $signature,
+						'publisher_order_id' => $publisherOrderId,
+					]);
+				});
+			} else {
+				DB::transaction(function () use ($pesanan_group, $request) {
+					$amount = $request->amount;
+					$signature = $request->signature;
+					$paymentMethod = $request->paymentCode;
+					$merchantOrderId = $request->merchantOrderId;
+					// required to save for mitigation
+					$reference = $request->reference;
+					$publisherOrderId = $request->publisherOrderId;
+					$date = $request->settlementDate;
+	
+					Pesanan::where('pesanan_grup', $pesanan_group)->update(['status' => 'dibayar']);
+					Transaksi::insert([
+						'tgl_bayar' => $date,
+						'metode' => $paymentMethod,
+						'status' => 'SUCCESS',
+						'total' => $amount,
+						'pesanan_grup' => $pesanan_group,
+						'reference' => $reference,
+						'publisher_order_id' => $publisherOrderId,
+						'order_id' => $merchantOrderId,
+						'signature' => $signature,
+						'created_at' => now(),
+						'updated_at' => now(),
+					]);
+				});
+			}
 			return $this->res("Success", 200);
 		} else {
 			$amount = $request->amount;
