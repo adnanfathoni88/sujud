@@ -126,8 +126,10 @@ class ApiTransaksiController extends Controller
 			"paymentMethod" => $payment_method,
 			"merchantOrderId" => $orderId,
 		]);
+		$resJson = $response->json();
 
-		return $this->res($response->json(), 200);
+		if(isset($resJson['paymentUrl'])) return $this->res($resJson, 200);
+		return $this->res($resJson, 500);
 	}
 
 	public function callbackAction(Request $request, string $pesanan_group)
