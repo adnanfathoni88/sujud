@@ -45,6 +45,7 @@ Route::prefix("/auth")->group(function () {
 	Route::post("/register", [ApiAuthController::class, 'register']);
 	Route::post("/login", [ApiAuthController::class, 'login']);
 	Route::post("/logout", [ApiAuthController::class, 'logout']);
+	Route::post("/update-password", [ApiAuthController::class, 'update_password'])->middleware('auth.stateless');
 });
 
 Route::prefix("/profile")->middleware('auth.stateless')->group(function () {

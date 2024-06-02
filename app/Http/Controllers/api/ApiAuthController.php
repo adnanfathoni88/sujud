@@ -73,5 +73,23 @@ class ApiAuthController extends Controller
 	function logout(Request $req) {
 		return $this->res("Success", 201)->withCookie(Cookie::forget('token'));
 	}
+
+	public function update_password(Request $req) {
+		$validator = Validator::make($req->all(), [
+			"old_password" => "required|max:255",
+			"new_password" => "required|max:255",
+		]);
+		
+		if ($validator->fails()) return $this->res($validator->messages(), 400);
+
+		$m = User::where('id', $this->getUserCookie($req->cookie('token')))->first();
+		if (!$m) return $this->res("invalid credentials", 400);
+		if (!Hash::check($req->old_password, $m->password)) return $this->res("Password salah", 400);
+
+		$m->password = Hash::make($req->new_password);
+		$m->save();
+		
+		return $this->res("Success", 201)->withCookie(Cookie::forget('token'));
+	}
 }
 

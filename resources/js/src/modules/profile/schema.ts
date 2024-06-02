@@ -9,6 +9,11 @@ export const UpdateProfile = z.object({
 		})
 });
 
+export const UpdatePassword = z.object({
+	oldPassword: z.string().min(8).max(255),
+	newPassword: z.string().min(8).max(255),
+})
+
 export const UpdateProfilePicture = z.object({
 	image: z.any()
 		.refine((file) => file?.[0], "Image is required.")
@@ -22,4 +27,5 @@ export const UpdateProfilePicture = z.object({
 });
 
 export type TUpdateProfile = z.infer<typeof UpdateProfile>;
+export type TUpdatePassword = z.infer<typeof UpdatePassword>;
 export type TUpdateProfilePicture = z.infer<typeof UpdateProfilePicture>;

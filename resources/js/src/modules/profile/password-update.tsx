@@ -4,37 +4,35 @@ import { useState } from "react";
 import TextGroup from '../../components/text-group';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { UpdateProfile } from './schema';
+import { UpdatePassword, UpdateProfile } from './schema';
 import { toastError, toastSuccess } from '../../utils/toast';
 import { IProfile } from '../../interfaces/profile';
 import Textarea from '../../components/textarea';
 import { useUpdateProfile } from '../../adapters/hooks/useProfile';
+import { api } from '../../services/api';
 
-export default function ProfileUpdate({ profile }: { profile: IProfile }) {
+export default function PasswordUpdate({ profile }: { profile: IProfile }) {
 	const [open, setOpen] = useState(false)
 	const addVarian = useUpdateProfile()
 	const {
 		register,
 		handleSubmit,
 		formState: { errors },
-	} = useForm({
-		resolver: zodResolver(UpdateProfile),
+	} = useForm({ 
+		resolver: zodResolver(UpdatePassword),
 		defaultValues: {
-			nama: profile.nama,
-			email: profile.email,
-			nomor: profile.nomor,
-		},
+			oldPassword: '',
+			newPassword: ''
+		}
 	})
 
 	const onSubmit = handleSubmit((data) => {
-		addVarian.mutate({ ...data, alamat: profile.alamat }, {
-			onSuccess: () => {
-				setOpen(false)
-				toastSuccess("Profile berhasil diupdate")
-			},
-			onError: () => toastError("Gagal mengupdate profile")
-		})
+		api.post('/auth/update-password', { old_password: data.oldPassword, new_password: data.newPassword })
+			.then(() => window.location.reload())
+			.catch((e) => toastError(e?.response?.data?.response ?? "Gagal mengubah password"))
 	})
+
+	console.log(errors)
 
 	return (
 		<Modal
@@ -42,37 +40,27 @@ export default function ProfileUpdate({ profile }: { profile: IProfile }) {
 			title="Buat Kategori"
 			onOpen={ () => setOpen(true) }
 			onClose={ () => setOpen(false) }
-			Trigger={ <button onClick={ () => setOpen(true) } className="rounded-md bg-first py-2 px-4 text-sm font-medium text-white w-fit mt-7">Ubah profile</button> }
+			Trigger={ <button onClick={ () => setOpen(true) } className="rounded-md border border-first text-first py-2 px-4 text-sm font-medium w-fit mt-7">Ubah Password</button> }
 		>
 			<DialogPanel className="w-full max-w-md rounded-xl bg-white p-6 dark:bg-boxdark-2">
 				<DialogTitle as="h3" className="text-base/7 mb-5 font-semibold text-black dark:text-white">
-					Ubah Profile
+					Ubah Password
 				</DialogTitle>
 				<form onSubmit={ onSubmit }>
 					<TextGroup
 						required
-						type="text"
-						title="Nama lengkap"
-						errorMessage={ errors.nama?.message }
-						{ ...register('nama') }
+						type="password"
+						title="Password lama"
+						errorMessage={ errors.oldPassword?.message }
+						{ ...register('oldPassword') }
 					/>
 					<div className="mt-4">
 						<TextGroup
 							required
-							type="tel"
-							title="Nomor whatsapp"
-							placeholder='+62'
-							errorMessage={ errors.nomor?.message }
-							{ ...register('nomor') }
-						/>
-					</div>
-					<div className="mt-4">
-						<TextGroup
-							required
-							type="email"
-							title="Alamat email"
-							errorMessage={ errors.email?.message }
-							{ ...register('email') }
+							type="password"
+							title="Password baru"
+							errorMessage={ errors.newPassword?.message }
+							{ ...register('newPassword') }
 						/>
 					</div>
 					<button
