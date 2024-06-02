@@ -2,7 +2,6 @@ import { z } from "zod";
 
 export const UpdateProfile = z.object({
 	nama: z.string().max(255),
-	alamat: z.string().max(255),
 	email: z.string().email().max(255),
 	nomor: z.string().min(10).max(15)
 		.refine((v) => v.startsWith('+62'), {

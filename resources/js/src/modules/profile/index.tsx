@@ -1,3 +1,4 @@
+import { GoPencil } from "react-icons/go";
 import { Link } from "@tanstack/react-router"
 import FormLogin from "./form"
 import Header from "../../components/template/Header"
@@ -8,6 +9,7 @@ import ProfileUpdate from "./profile-update"
 import ProfilePictureUpdate from "./profile-picture-update"
 import Navbar from "../../components/navbar"
 import { twMerge } from "tailwind-merge"
+import ModalChangeAddress from "./modal-change-address";
 
 export default function ProfileModule() {
 	const { data } = useGetProfile()
@@ -34,16 +36,19 @@ export default function ProfileModule() {
 									<dd className="mt-1 text-sm leading-6 text-gray-700 dark:text-zinc-300 sm:col-span-2 sm:mt-0">{data?.response.nama}</dd>
 								</div>
 								<div className="py-6 sm:grid sm:grid-cols-3 sm:gap-4">
-									<dt className="text-sm font-medium leading-6 text-gray-900 dark:text-zinc-100">Alamat</dt>
-									<dd className="mt-1 text-sm leading-6 text-gray-700 dark:text-zinc-300 sm:col-span-2 sm:mt-0">{data?.response.alamat}</dd>
-								</div>
-								<div className="py-6 sm:grid sm:grid-cols-3 sm:gap-4">
 									<dt className="text-sm font-medium leading-6 text-gray-900 dark:text-zinc-100">Nomor whatsapp</dt>
 									<dd className="mt-1 text-sm leading-6 text-gray-700 dark:text-zinc-300 sm:col-span-2 sm:mt-0">{data?.response.nomor}</dd>
 								</div>
 								<div className="py-6 sm:grid sm:grid-cols-3 sm:gap-4">
 									<dt className="text-sm font-medium leading-6 text-gray-900 dark:text-zinc-100">Alamat email</dt>
 									<dd className="mt-1 text-sm leading-6 text-gray-700 dark:text-zinc-300 sm:col-span-2 sm:mt-0">{data?.response.email}</dd>
+								</div>
+								<div className="py-6 sm:grid sm:grid-cols-3 sm:gap-4">
+									<dt className="text-sm font-medium leading-6 text-gray-900 dark:text-zinc-100">Alamat</dt>
+									<dd className="mt-1 text-sm leading-6 text-gray-700 dark:text-zinc-300 sm:col-span-2 sm:mt-0 flex gap-3 items-top capitalize">
+										<span>{data?.response.alamat}</span>
+										<ModalChangeAddress profile={data?.response} />
+									</dd>
 								</div>
 								<div className="py-6 sm:grid sm:grid-cols-3 sm:gap-4">
 									<dt className="text-sm font-medium leading-6 text-gray-900 dark:text-zinc-100">Foto profile</dt>

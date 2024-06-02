@@ -21,14 +21,13 @@ export default function ProfileUpdate({ profile }: { profile: IProfile }) {
 		resolver: zodResolver(UpdateProfile),
 		defaultValues: {
 			nama: profile.nama,
-			alamat: profile.alamat,
 			email: profile.email,
 			nomor: profile.nomor,
 		},
 	})
 
 	const onSubmit = handleSubmit((data) => {
-		addVarian.mutate(data, {
+		addVarian.mutate({ ...data, alamat: profile.alamat }, {
 			onSuccess: () => {
 				setOpen(false)
 				toastSuccess("Profile berhasil diupdate")
@@ -57,14 +56,6 @@ export default function ProfileUpdate({ profile }: { profile: IProfile }) {
 						errorMessage={ errors.nama?.message }
 						{ ...register('nama') }
 					/>
-					<div className="mt-4">
-						<Textarea
-							required
-							label="Alamat lengkap"
-							error={ errors.alamat?.message }
-							{ ...register('alamat') }
-						/>
-					</div>
 					<div className="mt-4">
 						<TextGroup
 							required

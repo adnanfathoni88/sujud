@@ -7,7 +7,7 @@ export async function getProfile() {
 	return res.data as { response: IProfile };
 }
 
-export async function editProfile(body: TUpdateProfile) {
+export async function editProfile(body: TUpdateProfile & { alamat: string }) {
 	const res = await api.put(`/profile`, body);
 	return res.data;
 }
