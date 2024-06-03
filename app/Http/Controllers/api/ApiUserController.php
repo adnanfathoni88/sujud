@@ -19,7 +19,7 @@ class ApiUserController extends Controller
      */
     public function index()
     {
-        $users = User::paginate(15);
+        $users = User::where('role_id', 1)->paginate(15);
 		return $this->res($users, 200);
     }
 
@@ -94,7 +94,7 @@ class ApiUserController extends Controller
      */
     public function destroy(string $id)
     {
-        $user = User::find($id);
+        $user = User::where("role_id", 1)->where('id', $id)->first();
 		if (!$user) return $this->res("User not found", 404);
 
 		$user->delete();

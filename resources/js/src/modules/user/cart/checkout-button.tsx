@@ -53,8 +53,8 @@ export default function CheckoutButton({
 
 	function handlePesan(e: FormEvent<HTMLFormElement>) {
 		e.preventDefault();
+		if(!isCurrentAddress && (!customAddress.prov || !customAddress.rege || !customAddress.dist || !customAddress.vill)) return toastError("Lengkapi alamat terlebih dahulu")
 		if (pesanan.isPending) return;
-		if (!customAddress.prov || !customAddress.rege || !customAddress.dist || !customAddress.vill) return toastError("Lengkapi alamat terlebih dahulu")
 		if (!selectedProduct.length) {
 			setIsOpen(false);
 			return toastError("Tidak ada produk yang dipilih");

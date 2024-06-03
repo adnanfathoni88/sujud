@@ -18,7 +18,7 @@ const CategoryListModule: React.FC = () => {
 
     const handleDelete = (id: number) => {
         Swal.fire({
-            text: "Apa anda ingin menghapus ulasan ini?",
+            text: "Apa anda ingin menghapus admin ini?",
             icon: "warning",
             showCancelButton: true,
             cancelButtonColor: "#3085d6",
@@ -107,7 +107,7 @@ const CategoryListModule: React.FC = () => {
                                                 </td>
                                                 <td className="py-3 px-4 whitespace-nowrap">
                                                     <div className="flex justify-start items-center gap-3 cursor-pointer">
-                                                        <EditAdmin admin={c} />
+                                                        {/* <EditAdmin admin={c} /> */}
                                                         <button
                                                             onClick={() =>
                                                                 handleDelete(
