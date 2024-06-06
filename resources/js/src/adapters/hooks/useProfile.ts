@@ -15,7 +15,7 @@ export function useGetProfile() {
 export function useUpdateProfile() {
     return useMutation({
         mutationKey: ["useUpdateProfile"],
-        mutationFn: (body: TUpdateProfile) => editProfile(body),
+        mutationFn: (body: TUpdateProfile & { alamat: string }) => editProfile(body),
 		onSuccess: () => {
 			queryClient.prefetchQuery({
 				queryKey: ["useGetProfile"],

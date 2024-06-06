@@ -44,15 +44,17 @@ export default function OngkirListModule() {
             </div>
             <div className="mt-6">
                 <dl className="">
-                    <div className="px-4 py-2 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
+                    <div className="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
                         <dt className="text-sm font-medium leading-6 text-gray-900">
                             Alamat Pembeli
                         </dt>
-                        <dd className="mt-1 text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0">
-                            {data?.response?.pelanggan?.alamat ?? "-"}
+                        <dd className="mt-1 text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0 capitalize">
+                            {data?.response?.pesanan[0]?.alamat ??
+                                data?.response?.pelanggan?.alamat ??
+                                "-"}
                         </dd>
                     </div>
-                    <div className="px-4 py-2 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
+                    <div className="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
                         <dt className="text-sm font-medium leading-6 text-gray-900">
                             No. Whatsapp
                         </dt>
@@ -60,7 +62,7 @@ export default function OngkirListModule() {
                             {data?.response?.pelanggan?.nomor}
                         </dd>
                     </div>
-                    <div className="px-4 py-2 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
+                    <div className="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
                         <dt className="text-sm font-medium leading-6 text-gray-900">
                             Alamat Email
                         </dt>
@@ -69,7 +71,7 @@ export default function OngkirListModule() {
                         </dd>
                     </div>
                     <hr className="my-3" />
-                    <div className="px-4 py-2 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
+                    <div className="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
                         <dt className="text-sm font-medium leading-6 text-gray-900">
                             Invoice
                         </dt>
@@ -77,7 +79,7 @@ export default function OngkirListModule() {
                             {data?.response?.pesanan_grup}
                         </dd>
                     </div>
-                    <div className="px-4 py-2 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
+                    <div className="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
                         <dt className="text-sm font-medium leading-6 text-gray-900">
                             Resi
                         </dt>
@@ -85,7 +87,7 @@ export default function OngkirListModule() {
                             {data?.response?.resi ?? "-"}
                         </dd>
                     </div>
-                    <div className="px-4 py-2 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
+                    <div className="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
                         <dt className="text-sm font-medium leading-6 text-gray-900">
                             Ongkir
                         </dt>
@@ -93,7 +95,7 @@ export default function OngkirListModule() {
                             {data?.response?.ongkir ?? "-"}
                         </dd>
                     </div>
-                    <div className="px-4 py-2 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
+                    <div className="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
                         <dt className="text-sm font-medium leading-6 text-gray-900">
                             Berat Barang
                         </dt>
@@ -101,7 +103,7 @@ export default function OngkirListModule() {
                             {data?.response?.berat ?? "-"}
                         </dd>
                     </div>
-                    <div className="px-4 py-2 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
+                    <div className="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
                         <dt className="text-sm font-medium leading-6 text-gray-900">
                             Ekspedisi
                         </dt>

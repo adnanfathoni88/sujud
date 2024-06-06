@@ -7,12 +7,14 @@ function Select(
         label,
         options,
         defaultValue,
+		withEmpty,
         error,
         ...rest
     }: {
         error?: string;
         name: string;
         label: string;
+		withEmpty?: boolean;
         options: { nama: string; id: number | string }[];
         defaultValue?: number | string;
 		onChange?: (e: any) => void;
@@ -45,6 +47,9 @@ function Select(
                             {v.nama}
                         </option>
                     ))}
+					{ withEmpty && (
+						<option value={0}>-- Pilih {label} --</option>
+					) }
                 </select>
             </div>
             {error && (

@@ -21,6 +21,13 @@ class ApiOngkirController extends Controller
 	 */
 	public function index(Request $request)
 	{
+		if ($request->status === "all") {
+			$data = Ongkir::with('pelanggan:id,nama', 'pesanan_single:pesanan_grup,status,id')
+				->orderBy('created_at', 'DESC')
+				->paginate(15);
+			return $this->res($data, 200);
+		}
+
 		$with_resi_exists = null;
 		$status_pesanan = '';
 		$telah_sampai = null;

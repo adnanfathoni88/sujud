@@ -14,6 +14,7 @@ Route::get("/register", [ReactHandlerController::class, "register"]);
 Route::get("/payment-status", [ReactHandlerController::class, "payment_success"]);
 Route::get("/detail/about", [ReactHandlerController::class, "home"]);
 Route::get("/detail/{any}/shop", [ReactHandlerController::class, "home"]);
+Route::any('/admin/laporan-transaksi', [ReactHandlerController::class, "laporan_transaksi"]);
 Route::any('/admin/{all}', [ReactHandlerController::class, "admin"])->where('all', '^((?!api).)*?');
 Route::any('{all}', [ReactHandlerController::class, "index"])->where('all', '^((?!api).)*?');
 

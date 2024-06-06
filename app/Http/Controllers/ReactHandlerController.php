@@ -14,6 +14,38 @@ class ReactHandlerController extends Controller
 {
 	use AuthWeb, Payment;
 
+	public function laporan_transaksi(Request $request)
+	{
+		$months = [
+			'01' => 'Januari',
+			'02' => 'Februari',
+			'03' => 'Maret',
+			'04' => 'April',
+			'05' => 'Mei',
+			'06' => 'Juni',
+			'07' => 'Juli',
+			'08' => 'Agustus',
+			'09' => 'September',
+			'10' => 'Oktober',
+			'11' => 'November',
+			'12' => 'Desember',
+		];
+
+		$token = $request->cookie('token');
+		if (!$this->webAuthenticate($token)) return redirect('/login');
+		if(!$this->webAuthorization($token, 'admin')) return "Unauthorized Access";
+
+		$year = $request->query('year') ?? date('Y');
+		$month = $request->query('month') ?? date('m');
+
+		$transaksi = Transaksi::whereYear('created_at', $year)->whereMonth('created_at', $month)->get();
+		$readable_month = $months[$month];
+		$total = $transaksi->sum('total');
+
+		return view('laporan-transaksi', compact('transaksi', 'total', 'year', 'month', 'readable_month'));
+	}
+
+
 	public function payment_success(Request $request) 
 	{
 		$pesanan_grup = $request->query('pesanan_grup');

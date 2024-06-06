@@ -15,10 +15,8 @@ import { useCreatePesanan } from "../../../adapters/hooks/usePesanan";
 import Swal from "sweetalert2";
 import { cartRoute } from "../../../routes/user";
 import { toastError } from "../../../utils/toast";
-import Select from "../../../components/select";
-import TextGroup from "../../../components/text-group";
 import { P, match } from "ts-pattern";
-import NewAddress from "./new-address";
+import SelectAddress from "../../../components/select-address";
 import { twMerge } from "tailwind-merge";
 
 export default function CheckoutButton({
@@ -55,6 +53,7 @@ export default function CheckoutButton({
 
 	function handlePesan(e: FormEvent<HTMLFormElement>) {
 		e.preventDefault();
+		if(!isCurrentAddress && (!customAddress.prov || !customAddress.rege || !customAddress.dist || !customAddress.vill)) return toastError("Lengkapi alamat terlebih dahulu")
 		if (pesanan.isPending) return;
 		if (!selectedProduct.length) {
 			setIsOpen(false);
@@ -178,13 +177,13 @@ export default function CheckoutButton({
 															/>
 														)
 														: (
-															<NewAddress setAddress={ setCustomAddress } />
+															<SelectAddress setAddress={ setCustomAddress } />
 														)
 													}
 												</>
 											))
 											.otherwise(() => (
-												<NewAddress setAddress={ setCustomAddress } />
+												<SelectAddress setAddress={ setCustomAddress } />
 											)) }
 										<div className="mt-4">
 											<Button

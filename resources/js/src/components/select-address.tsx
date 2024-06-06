@@ -1,11 +1,11 @@
 import { ChangeEvent, useEffect, useState } from "react";
-import { useGetDistrict, useGetProvince, useGetRegency, useGetVillage } from "../../../adapters/hooks/useRegion";
-import Select from "../../../components/select";
-import TextGroup from "../../../components/text-group";
-import Textarea from "../../../components/textarea";
+import { useGetDistrict, useGetProvince, useGetRegency, useGetVillage } from "../adapters/hooks/useRegion";
+import Select from "./select";
+import TextGroup from "./text-group";
+import Textarea from "./textarea";
 import { P, match } from "ts-pattern";
 
-export default function NewAddress({ setAddress }: {
+export default function SelectAddress({ setAddress }: {
 	setAddress: React.Dispatch<React.SetStateAction<{
 		prov: any;
 		rege: any;
@@ -79,6 +79,7 @@ export default function NewAddress({ setAddress }: {
 				{ Array.isArray(prov?.data?.data) && (
 					<Select
 						name="prov"
+						withEmpty={true}
 						label="Provinsi"
 						defaultValue={ 0 }
 						options={ prov.data.data.map((v) => ({ id: v.id, nama: v.name })) }
@@ -90,6 +91,7 @@ export default function NewAddress({ setAddress }: {
 				{ Array.isArray(rege?.data?.data) && rege?.data?.data?.length > 0 && (
 					<Select
 						name="rege"
+						withEmpty={true}
 						label="Kabupaten/Kota"
 						defaultValue={ 0 }
 						options={ rege.data.data.map((v) => ({ id: v.id, nama: v.name })) }
@@ -101,6 +103,7 @@ export default function NewAddress({ setAddress }: {
 				{ Array.isArray(dist?.data?.data) && dist?.data?.data?.length > 0 && (
 					<Select
 						name="dist"
+						withEmpty={true}
 						label="Kecamatan"
 						defaultValue={ 0 }
 						options={ dist.data.data.map((v) => ({ id: v.id, nama: v.name })) }
@@ -112,6 +115,7 @@ export default function NewAddress({ setAddress }: {
 				{ Array.isArray(vill?.data?.data) && vill?.data?.data?.length > 0 && (
 					<Select
 						name="vill"
+						withEmpty={true}
 						label="Desa/Kelurahan"
 						defaultValue={ 0 }
 						options={ vill.data.data.map((v) => ({ id: v.id, nama: v.name })) }
@@ -124,7 +128,7 @@ export default function NewAddress({ setAddress }: {
 					<>
 						<div className="mb-2">
 							<TextGroup
-								type="text"
+								type="number"
 								name="postal"
 								title="Kode Pos"
 							/>
