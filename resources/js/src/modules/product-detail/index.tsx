@@ -108,11 +108,11 @@ export default function ProductDetailModule() {
                             varians.data.response.map((varian) => (
                                 <div
                                     key={varian.id}
-                                    className="overflow-hidden bg-black rounded-md bg-body/5 border border-body/15 shadow-sm shadow-body/5"
+                                    className="p-4 overflow-hidden bg-black rounded-md bg-body/5 border border-body/15 shadow-sm shadow-body/5"
                                 >
                                     <img
                                         src={`/api/uploaded/${varian?.gambar?.nama}`}
-                                        className="object-contain w-full h-80"
+                                        className="object-contain w-full h-60"
                                     />
                                     <div className="p-4">
                                         <p className="text-lg font-semibold text-black">

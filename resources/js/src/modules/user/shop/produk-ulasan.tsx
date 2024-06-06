@@ -20,19 +20,28 @@ const ProductWithUlasan = ({ produkId }) => {
     });
 
     // render star
-    const renderStars = (rating) => {
+    const renderStars = (avgRating) => {
         const stars = [];
-        for (let i = 0; i < Math.floor(rating); i++) {
+        for (let i = 0; i < Math.floor(avgRating); i++) {
             stars.push(
-                <div className="text-yellow-300">
-                    <Icon key={i} nama="star" />
+                <div>
+                    <div className="text-yellow-300">
+                        <Icon key={i} nama="star" />
+                    </div>
                 </div>
             );
         }
         return stars;
     };
 
-    return <div className="flex gap-1">{renderStars(avgRating)}</div>;
+    return (
+        <div className="flex gap-2">
+            <div className="flex gap-1">{renderStars(avgRating)}</div>
+            {rating > 0 && (
+                <span className="text-slate-400">({rating} ulasan)</span>
+            )}
+        </div>
+    );
 };
 
 export default ProductWithUlasan;
