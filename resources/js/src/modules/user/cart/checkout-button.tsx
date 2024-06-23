@@ -53,6 +53,7 @@ export default function CheckoutButton({
 
 	function handlePesan(e: FormEvent<HTMLFormElement>) {
 		e.preventDefault();
+		console.log(isCurrentAddress)
 		if(!isCurrentAddress && (!customAddress.prov || !customAddress.rege || !customAddress.dist || !customAddress.vill)) return toastError("Lengkapi alamat terlebih dahulu")
 		if (pesanan.isPending) return;
 		if (!selectedProduct.length) {
@@ -105,6 +106,12 @@ export default function CheckoutButton({
 		}
 
 	}, [isOpen])
+
+	useEffect(() => {
+
+		setIsCurrentAddress(Boolean(alamat))
+
+	}, [alamat])
 
 	return (
 		<>

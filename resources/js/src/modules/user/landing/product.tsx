@@ -33,8 +33,9 @@ export default function ProductLanding() {
                                     />
                                 </div>
                             </div>
-                            <h3 className="text-slate-600 capitalize mt-5 text-md px-1">
-                                {p.kategori.nama} {p.nama}
+                            <h3 className="text-slate-600 capitalize my-5 text-md px-1 flex gap-2">
+                                {p.nama}
+								<span className="badge text-xs bg-sky-500 w-fit p-1 rounded text-white">{p?.kategori?.nama}</span>
                             </h3>
                             <p className="text-black text-md px-1 font-semibold">
                                 Rp {p.varian.harga.toLocaleString()}
